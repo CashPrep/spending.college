@@ -39,7 +39,7 @@
         font-size: 0.98rem;
       }
       .card-tight p {
-        font-size: 0.78rem;
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -92,6 +92,7 @@
 
       <div class="space-y-3 pt-3 border-t border-slate-700/60">
         <p class="text-[0.72rem] text-slate-400 font-semibold uppercase tracking-wider">Job details</p>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label class="block text-[0.75rem] text-slate-300 mb-1">Hourly wage ($/hr)</label>
@@ -112,12 +113,35 @@
           </div>
           <input id="hoursSlider" type="range" min="5" max="40" step="1" class="w-full" />
         </div>
+
+        <!-- Example presets to make it easier -->
+        <div class="flex flex-wrap gap-2 text-[0.7rem]">
+          <button type="button"
+                  class="px-2.5 py-1.5 rounded-2xl bg-slate-900/70 border border-slate-700/80 text-slate-200 hover:border-cyan-400/60"
+                  onclick="applyPreset('campus')">
+            Campus job · $15/hr · 12 hrs/wk · 32 wks
+          </button>
+          <button type="button"
+                  class="px-2.5 py-1.5 rounded-2xl bg-slate-900/70 border border-slate-700/80 text-slate-200 hover:border-cyan-400/60"
+                  onclick="applyPreset('summer')">
+            Summer job · $18/hr · 30 hrs/wk · 10 wks
+          </button>
+        </div>
       </div>
 
-      <div class="pt-3 border-t border-slate-700/60 space-y-1">
+      <!-- Results -->
+      <div class="pt-3 border-t border-slate-700/60 space-y-2">
         <p class="text-[0.8rem] text-slate-300 font-semibold">Result</p>
+
+        <!-- Simple summary line -->
+        <div id="statusBadge" class="inline-flex items-center gap-2 rounded-2xl px-3 py-1.5 bg-slate-900/80 border border-slate-700/80">
+          <span id="statusDot" class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
+          <span id="statusText" class="text-[0.78rem] text-slate-200">Enter numbers to see if you cover your target.</span>
+        </div>
+
+        <!-- Detailed explanation -->
         <p id="resultLine" class="text-[0.82rem] text-slate-200"></p>
-        <p id="shortfallLine" class="text-[0.76rem] text-slate-400"></p>
+        <p id="shortfallLine" class="text-[0.78rem] text-slate-400"></p>
         <p id="warningLine" class="text-[0.74rem] text-amber-300"></p>
         <p class="text-[0.72rem] text-slate-400">
           Note: This calculator uses gross pay (before taxes and deductions). Your actual
@@ -216,6 +240,8 @@
     const shortfallLine = document.getElementById("shortfallLine");
     const monthlyHint = document.getElementById("monthlyHint");
     const warningLine = document.getElementById("warningLine");
+    const statusDot = document.getElementById("statusDot");
+    const statusText = document.getElementById("statusText");
 
     function getMonthlyFromQuery() {
       const url = new URL(window.location.href);
@@ -239,6 +265,19 @@
       hoursPerWeekLabel.textContent = `${hoursSlider.value} hrs/week`;
     }
 
+    function applyPreset(type) {
+      if (type === "campus") {
+        wageInput.value = 15;
+        hoursSlider.value = 12;
+        weeksInput.value = 32;
+      } else if (type === "summer") {
+        wageInput.value = 18;
+        hoursSlider.value = 30;
+        weeksInput.value = 10;
+      }
+      recalc();
+    }
+
     function recalc() {
       const monthly = Number(monthlyInput.value) || 0;
       const wage = Number(wageInput.value) || 0;
@@ -247,14 +286,15 @@
 
       hoursPerWeekLabel.textContent = `${hoursPerWeek} hrs/week`;
       warningLine.textContent = "";
+      resultLine.textContent = "";
+      shortfallLine.textContent = "";
 
       if (monthly <= 0 || wage <= 0 || weeks <= 0 || hoursPerWeek <= 0) {
-        resultLine.textContent = "Enter positive values to see how the math works out.";
-        shortfallLine.textContent = "";
+        statusDot.className = "w-2.5 h-2.5 rounded-full bg-slate-500";
+        statusText.textContent = "Enter positive values to see if you cover your target.";
         return;
       }
 
-      // Soft warning for extreme assumptions (does not change math)
       if (hoursPerWeek > 40 || wage > 60 || weeks > 52) {
         warningLine.textContent =
           "Heads up: those job assumptions are higher than what most college students work in real life.";
@@ -264,18 +304,22 @@
       const yearlyEarn = wage * hoursPerWeek * weeks;
 
       const diff = yearlyEarn - yearlyNeed;
-      const symbol = diff >= 0 ? "cover" : "fall short by";
       const absDiff = Math.abs(diff);
       const monthlyDiff = absDiff / 12;
 
       resultLine.textContent =
         `At $${wage.toFixed(2)}/hr for ${hoursPerWeek} hrs/week over ${weeks} weeks, you earn about $${yearlyEarn.toLocaleString()} per year.`;
+
       if (diff >= 0) {
+        statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
+        statusText.textContent = "You cover your target with this job setup.";
         shortfallLine.textContent =
-          `You ${symbol} your ~$${yearlyNeed.toLocaleString()}/year target by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month) extra.`;
+          `Your target is ~$${yearlyNeed.toLocaleString()}/year, so you’re ahead by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month) extra.`;
       } else {
+        statusDot.className = "w-2.5 h-2.5 rounded-full bg-rose-400";
+        statusText.textContent = "You don’t fully cover your target yet.";
         shortfallLine.textContent =
-          `You ${symbol} your ~$${yearlyNeed.toLocaleString()}/year target by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
+          `Your target is ~$${yearlyNeed.toLocaleString()}/year, so you fall short by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
       }
     }
 
