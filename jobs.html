@@ -4,9 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>College Job Hours · spending.college</title>
-  <meta name="description" content="College Job Hours: see how many hours you need to work each week to cover your college spending money target." />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225" crossorigin="anonymous"></script>
+  <meta name="description"
+        content="College Job Hours: see how many hours you need to work each week to cover your college spending money target." />
+
+  <!-- AdSense -->
+  <script async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225"
+          crossorigin="anonymous"></script>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
     :root{
       --bg1:#020617;
@@ -27,7 +35,6 @@
     input[type=range]{accent-color:#22d3ee;}
     details summary::-webkit-details-marker{display:none;}
     details summary::marker{display:none;}
-
     @media (max-width: 640px) {
       body {
         padding-bottom: 2.5rem;
@@ -52,19 +59,41 @@
 
     <!-- Nav -->
     <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
-      <span class="font-black text-[1rem] text-cyan-300 tracking-tight">spending.college</span>
+      <span class="font-black text-[1rem] text-cyan-300 tracking-tight">
+        spending.college
+      </span>
       <div class="flex gap-2">
-        <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-600/60 text-slate-200 text-[0.8rem] font-semibold hover:border-cyan-400/50 transition">College Cash</a>
-        <a href="jobs.html" class="px-3 py-1.5 rounded-xl bg-cyan-400/20 border border-cyan-400/50 text-cyan-100 text-[0.8rem] font-semibold">Job Hours</a>
+        <a href="index.html"
+           class="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-600/60 text-slate-200 text-[0.8rem] font-semibold hover:border-cyan-400/50 transition">
+          College Cash
+        </a>
+        <a href="jobs.html"
+           class="px-3 py-1.5 rounded-xl bg-cyan-400/20 border border-cyan-400/50 text-cyan-100 text-[0.8rem] font-semibold">
+          Job Hours
+        </a>
+        <a href="guides.html"
+           class="hidden sm:inline-block px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-cyan-400/60 transition">
+          Guides
+        </a>
       </div>
     </nav>
 
+    <!-- Mobile Guides link -->
+    <a href="guides.html"
+       class="sm:hidden block text-[0.75rem] text-cyan-300 underline text-right">
+      Money guides & tips →
+    </a>
+
     <!-- Header -->
     <header class="space-y-2 header-tight">
-      <p class="uppercase tracking-[0.22em] text-cyan-300 text-[0.7rem]">spending.college</p>
-      <h1 class="font-black text-[clamp(2rem,5vw,2.6rem)] leading-tight">College Job Hours</h1>
+      <p class="uppercase tracking-[0.22em] text-cyan-300 text-[0.7rem]">
+        spending.college
+      </p>
+      <h1 class="font-black text-[clamp(2rem,5vw,2.6rem)] leading-tight">
+        College Job Hours
+      </h1>
       <p class="text-slate-200 text-[0.9rem] leading-relaxed">
-        Take your monthly spending target and see if a job can cover it.
+        Take your monthly spending target and see if a job can cover it. You can paste a number or send it straight from College Cash.
       </p>
     </header>
 
@@ -81,8 +110,9 @@
       </div>
 
       <div class="space-y-3 pt-3 border-t border-slate-700/60">
-        <p class="text-[0.85rem] text-slate-300 font-semibold uppercase tracking-wider">Job setup</p>
-
+        <p class="text-[0.85rem] text-slate-300 font-semibold uppercase tracking-wider">
+          Job setup
+        </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label class="block text-[0.8rem] text-slate-200 mb-1">Hourly pay</label>
@@ -122,19 +152,18 @@
       <!-- Results -->
       <div class="pt-3 border-t border-slate-700/60 space-y-2">
         <p class="text-[0.9rem] text-slate-200 font-semibold">Result</p>
-
-        <div id="statusBadge" class="inline-flex items-center gap-2 rounded-2xl px-3 py-1.5 bg-slate-900/80 border border-slate-700/80">
+        <div id="statusBadge"
+             class="inline-flex items-center gap-2 rounded-2xl px-3 py-1.5 bg-slate-900/80 border border-slate-700/80">
           <span id="statusDot" class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
           <span id="statusText" class="text-[0.85rem] text-slate-100">
             Enter numbers to see if your job covers it.
           </span>
         </div>
-
         <p id="resultLine" class="text-[0.9rem] text-slate-100"></p>
         <p id="shortfallLine" class="text-[0.85rem] text-slate-300"></p>
         <p id="warningLine" class="text-[0.8rem] text-amber-300"></p>
         <p class="text-[0.78rem] text-slate-300">
-          Note: this uses gross pay (before taxes and deductions). Take‑home pay will be lower. [web:23]
+          Note: this uses gross pay (before taxes and deductions). Take‑home pay will be lower.
         </p>
       </div>
     </div>
@@ -160,17 +189,15 @@
       </summary>
       <div class="pt-3 text-[0.85rem] text-slate-200 space-y-2">
         <p>
-          College Job Hours pairs with College Cash. It compares your yearly spending target to what you’d earn from a job. [web:23][web:27]
+          College Job Hours pairs with College Cash. It compares your yearly spending target to what you might earn from a job.
+          It is a planning tool only, not a promise of any specific job or income.
         </p>
         <p>
-          Math: yearly earnings = hourly pay × hours per week × paid weeks.
-          Yearly target = monthly target × 12. [web:23]
+          The math is simple: yearly earnings = hourly pay × hours per week × paid weeks. Yearly target = monthly target × 12.
         </p>
         <p>
-          Typical student jobs range from minimum wage to higher, with 10–20 hours per week during the school year. [web:24][web:27]
-        </p>
-        <p>
-          This is a planning tool, not a promise of any specific job or schedule.
+          Many students work part‑time during the school year and more during breaks, but the right schedule depends on your
+          classes, health, and local job options.
         </p>
       </div>
     </details>
@@ -183,13 +210,15 @@
       </summary>
       <div class="pt-3 text-[0.85rem] text-slate-200 space-y-2">
         <p>
-          This is a static calculator. Inputs stay in your browser and are not stored on a server.
+          This is a static calculator. Inputs stay in your browser and are not stored on a server or tied to your identity.
         </p>
         <p>
-          Google AdSense may collect device and usage data to show and measure ads under Google’s policies. [web:23]
+          Google AdSense may collect device and usage data to show and measure ads under Google’s own policies.
+          You can manage ad settings in your Google account.
         </p>
         <p>
-          We don’t sell or share personal info. If you email us, we only use it to reply.
+          We do not sell or share personal information because we do not collect it. If you email us, we only use your message
+          to respond.
         </p>
         <p>
           Contact: <a href="mailto:unbanked123@gmail.com" class="text-cyan-300 underline">unbanked123@gmail.com</a>
@@ -287,7 +316,6 @@
 
       const yearlyNeed = monthly * 12;
       const yearlyEarn = wage * hoursPerWeek * weeks;
-
       const diff = yearlyEarn - yearlyNeed;
       const absDiff = Math.abs(diff);
       const monthlyDiff = absDiff / 12;
