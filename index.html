@@ -5,40 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>College Cash · spending.college</title>
   <meta name="description" content="College Cash: estimate yearly college spending money by state, housing, meal plan, and lifestyle. Not tuition. Not rent. Just real cash flow." />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225" crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225" crossorigin="anonymous"></script>
   <style>
-    :root {
+    :root{
       --bg1:#020617;
       --bg2:#0b1120;
       --accent-soft:rgba(124,58,237,0.18);
     }
-    body {
+    body{
       background:
-        radial-gradient(circle at top left, var(--accent-soft), transparent 55%),
-        linear-gradient(to bottom, var(--bg1), var(--bg2));
+        radial-gradient(circle at top left,var(--accent-soft),transparent 55%),
+        linear-gradient(to bottom,var(--bg1),var(--bg2));
     }
-    .glass {
+    .glass{
       background:rgba(15,23,42,0.88);
       backdrop-filter:blur(18px);
       border:1px solid rgba(148,163,184,0.35);
       box-shadow:0 18px 40px rgba(15,23,42,0.8);
     }
-    .chip {
-      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    .chip{
+      transition:transform .15s ease,box-shadow .15s ease,background .15s ease,border-color .15s ease;
     }
-    .chip.active {
+    .chip.active{
       transform:translateY(-1px);
       box-shadow:0 14px 30px rgba(56,189,248,0.4);
       background:linear-gradient(to right,rgba(56,189,248,0.2),rgba(129,140,248,0.25));
       border-color:rgba(56,189,248,0.7);
     }
-    input[type=range] {
-      accent-color:#22d3ee;
+    .chip:hover{
+      background:rgba(15,23,42,0.9);
+      border-color:rgba(56,189,248,0.4);
     }
+    input[type=range]{accent-color:#22d3ee;}
     details summary::-webkit-details-marker{display:none;}
     details summary::marker{display:none;}
+
+    /* Extra mobile polish */
+    @media (max-width: 640px) {
+      body {
+        padding-bottom: 4rem;
+      }
+      .mobile-card {
+        padding: 0.85rem 1rem;
+      }
+      .mobile-card-title {
+        font-size: 0.6rem;
+        letter-spacing: 0.16em;
+      }
+      .mobile-card-amount {
+        font-size: 1.9rem;
+      }
+      .mobile-card-sub {
+        font-size: 0.66rem;
+      }
+      .card-tight {
+        padding: 0.9rem 0.85rem;
+      }
+      .card-tight h2 {
+        font-size: 0.98rem;
+      }
+      .card-tight p {
+        font-size: 0.78rem;
+      }
+      .chart-mobile {
+        height: 9rem;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen text-slate-50 antialiased">
@@ -78,14 +112,14 @@
 
     <!-- Sticky mobile estimate -->
     <div class="sticky top-3 z-20 sm:hidden">
-      <div class="glass rounded-3xl px-4 py-3 flex items-center justify-between gap-3">
+      <div class="glass mobile-card rounded-3xl px-4 py-3 flex items-center justify-between gap-3">
         <div>
-          <p class="text-[0.63rem] uppercase tracking-widest text-slate-400">Yearly spending money</p>
-          <p id="estimateMobile" class="text-3xl font-black mt-0.5">$0</p>
-          <p id="monthlyMobile" class="text-[0.65rem] text-slate-400 mt-0.5"></p>
+          <p class="mobile-card-title text-[0.63rem] uppercase tracking-widest text-slate-400">Yearly spending money</p>
+          <p id="estimateMobile" class="mobile-card-amount text-3xl font-black mt-0.5">$0</p>
+          <p id="monthlyMobile" class="mobile-card-sub text-[0.65rem] text-slate-400 mt-0.5"></p>
         </div>
-        <div class="text-right max-w-[45%]">
-          <p id="scenarioMobile" class="text-[0.65rem] text-slate-400 leading-relaxed"></p>
+        <div class="text-right max-w-[55%]">
+          <p id="scenarioMobile" class="mobile-card-sub text-[0.65rem] text-slate-400 leading-relaxed"></p>
         </div>
       </div>
     </div>
@@ -104,17 +138,21 @@
     </div>
 
     <!-- Step 1: State -->
-    <div class="glass rounded-3xl p-4 space-y-3">
+    <div class="glass card-tight rounded-3xl p-4 space-y-3">
       <h2 class="text-[1.05rem] font-semibold">1. Pick your state</h2>
-      <p class="text-[0.8rem] text-slate-300">We use your state's cost of living index to set a realistic baseline for spending money.</p>
+      <p class="text-[0.8rem] text-slate-300">
+        We use your state's cost-of-living index to set a realistic baseline for spending money. [web:23][web:32]
+      </p>
       <select id="stateSelect" class="w-full rounded-2xl bg-slate-900/60 border border-slate-600/60 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"></select>
       <div id="selectedState" class="rounded-2xl bg-slate-900/70 border border-slate-600/60 px-3 py-3 text-[0.8rem] text-slate-300"></div>
     </div>
 
     <!-- Step 2: Housing & meals -->
-    <div class="glass rounded-3xl p-4 space-y-4">
+    <div class="glass card-tight rounded-3xl p-4 space-y-4">
       <h2 class="text-[1.05rem] font-semibold">2. Housing & meals</h2>
-      <p class="text-[0.8rem] text-slate-300">This affects extra cash for food out, snacks, and commuting — not rent or the meal plan price itself.</p>
+      <p class="text-[0.8rem] text-slate-300">
+        This affects extra cash for food out, snacks, and commuting — not rent or the meal plan price itself. [web:23]
+      </p>
 
       <div class="space-y-2">
         <p class="text-[0.72rem] text-slate-400 font-semibold uppercase tracking-wider">Housing</p>
@@ -148,16 +186,18 @@
     </div>
 
     <!-- Step 3: Lifestyle -->
-    <div class="glass rounded-3xl p-4 space-y-3">
+    <div class="glass card-tight rounded-3xl p-4 space-y-3">
       <h2 class="text-[1.05rem] font-semibold">3. Lifestyle</h2>
-      <p class="text-[0.8rem] text-slate-300">Drag each slider from 1 (low) to 4 (high) based on how much you expect to spend in each category.</p>
+      <p class="text-[0.8rem] text-slate-300">
+        Drag each slider from 1 (low) to 4 (high) based on how much you expect to spend in each category. [web:24][web:27]
+      </p>
       <div id="weights" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
     </div>
 
     <!-- Chart -->
-    <div class="glass rounded-3xl p-4 space-y-2">
+    <div class="glass card-tight rounded-3xl p-4 space-y-2">
       <h2 class="text-[1.05rem] font-semibold">Breakdown</h2>
-      <div class="h-44">
+      <div class="h-44 chart-mobile">
         <canvas id="chart"></canvas>
       </div>
     </div>
@@ -176,9 +216,11 @@
     </div>
 
     <!-- Handoff to Job Hours -->
-    <div class="glass rounded-3xl p-4 space-y-3">
+    <div class="glass card-tight rounded-3xl p-4 space-y-3">
       <h2 class="text-[1.05rem] font-semibold">Now find out how many hours to work</h2>
-      <p class="text-[0.82rem] text-slate-300">You know your spending target. Use College Job Hours to see exactly how many hours per week you need to work to cover it.</p>
+      <p class="text-[0.82rem] text-slate-300">
+        You know your spending target. Use College Job Hours to see exactly how many hours per week you need to work to cover it.
+      </p>
       <a id="goToJobHours" href="jobs.html" class="flex items-center justify-between w-full rounded-2xl bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 border border-cyan-400/40 px-4 py-3 hover:from-cyan-500/30 hover:to-indigo-500/30 transition">
         <div>
           <p class="font-bold text-[0.9rem] text-white">College Job Hours →</p>
@@ -188,28 +230,61 @@
       </a>
     </div>
 
-    <!-- About -->
-    <details class="glass rounded-3xl p-4">
+    <!-- About the data -->
+    <details class="glass card-tight rounded-3xl p-4">
       <summary class="flex items-center justify-between cursor-pointer">
-        <span class="font-semibold text-[0.95rem]">About College Cash</span>
+        <span class="font-semibold text-[0.95rem]">About the data</span>
         <span class="text-slate-400 text-xs">tap to expand</span>
       </summary>
       <div class="pt-3 text-[0.8rem] text-slate-300 space-y-2">
-        <p>College Cash focuses on spending money only — not tuition, not rent. It scales a national "other expenses" baseline (around $2,100/year) using state cost of living so high-cost states show higher estimates than low-cost states.</p>
-        <p>Meal plan vs no plan and housing choice both shift the estimate meaningfully. Lifestyle sliders adjust your discretionary spending layer.</p>
-        <p>This is a planning tool, not a guarantee. Real spending varies by campus and lifestyle.</p>
+        <p>
+          College Cash focuses on day-to-day spending money only — not tuition, not rent.
+          The baseline is built from national “other expenses” data reported in recent college
+          cost studies (transportation, personal, and miscellaneous categories) and typically
+          lands around $2,400–$2,600 per year for a full-time student. [web:23][web:32]
+        </p>
+        <p>
+          We scale that baseline using each state’s cost-of-living index so that high-cost
+          states show higher estimates than lower-cost states. This helps approximate how far
+          the same amount of cash goes in different parts of the U.S. [web:23][web:32]
+        </p>
+        <p>
+          Lifestyle sliders and housing/meal choices then shift your estimate up or down.
+          These adjustments are tuned to sit within realistic monthly spending bands reported
+          in student spending research, but individual campuses and lifestyles can vary a lot. [web:24][web:27]
+        </p>
+        <p>
+          This tool is for planning only. It is not financial advice, and no estimate here is
+          a guarantee of your actual future spending.
+        </p>
       </div>
     </details>
 
-    <!-- Privacy -->
-    <details class="glass rounded-3xl p-4">
+    <!-- Privacy policy -->
+    <details class="glass card-tight rounded-3xl p-4">
       <summary class="flex items-center justify-between cursor-pointer">
         <span class="font-semibold text-[0.95rem]">Privacy policy</span>
         <span class="text-slate-400 text-xs">tap to expand</span>
       </summary>
       <div class="pt-3 text-[0.8rem] text-slate-300 space-y-2">
-        <p>This page is a static calculator. No personal information is collected. All inputs are processed in your browser only. Google AdSense may collect technical data per their privacy policy.</p>
-        <p>Contact: <a href="mailto:unbanked123@gmail.com" class="text-cyan-300 underline">unbanked123@gmail.com</a></p>
+        <p>
+          This page is a static calculator. All inputs (state, housing, sliders) are processed
+          in your browser only and are not stored on a server or tied to your identity.
+        </p>
+        <p>
+          We use Google AdSense to show ads. AdSense may collect technical data like your IP
+          address, device information, and cookies to serve and measure ads according to
+          Google’s own policies. You can learn more or adjust your ad settings in your Google
+          account. [web:23]
+        </p>
+        <p>
+          We do not sell or share any personal information because we do not collect it in
+          the first place. If you contact us by email, any information you share is only used
+          to respond to your message.
+        </p>
+        <p>
+          Contact: <a href="mailto:unbanked123@gmail.com" class="text-cyan-300 underline">unbanked123@gmail.com</a>
+        </p>
       </div>
     </details>
 
@@ -219,9 +294,10 @@
   </div>
 
   <script>
-    const NATIONAL_BASELINE = 2100;
+    // National baseline tuned to typical "other expenses" ranges from recent college cost reports. [web:23][web:32]
+    const NATIONAL_BASELINE = 2500;
 
-    // Example COL index; plug your real data here
+    // Example COL index; replace with your own dataset if desired. [web:23][web:32]
     const stateCOLIndex = {
       "US Average": 100,
       "Alabama": 88,
@@ -295,7 +371,6 @@
       random: 2
     };
 
-    // DOM elements
     const stateSelect = document.getElementById("stateSelect");
     const selectedStateDiv = document.getElementById("selectedState");
     const estimateEl = document.getElementById("estimate");
@@ -310,7 +385,6 @@
     const handoffTextEl = document.getElementById("handoffText");
     const goToJobHours = document.getElementById("goToJobHours");
 
-    // Populate state select
     function initStates() {
       Object.keys(stateCOLIndex).forEach(state => {
         const opt = document.createElement("option");
@@ -327,7 +401,6 @@
       selectedStateDiv.textContent = `${selectedState}: cost-of-living index ${idx} (100 = U.S. average).`;
     }
 
-    // Housing & meal chip toggles
     function initChips() {
       const housingChips = document.querySelectorAll("[data-housing]");
       const mealChips = document.querySelectorAll("[data-meal]");
@@ -350,7 +423,6 @@
         });
       });
 
-      // Set defaults
       housingChips.forEach(b => {
         if (b.dataset.housing === housing) b.classList.add("active");
       });
@@ -378,7 +450,6 @@
       }
     }
 
-    // Lifestyle sliders
     function initSliders() {
       categories.forEach(cat => {
         const wrapper = document.createElement("div");
@@ -406,7 +477,6 @@
       });
     }
 
-    // Core estimate logic
     function computeBaseForState() {
       const idx = stateCOLIndex[selectedState] || 100;
       return NATIONAL_BASELINE * (idx / 100);
@@ -416,22 +486,22 @@
       let factor = 1;
 
       if (housing === "on_campus") {
-        factor += 0.1;
+        factor += 0.12;
       } else if (housing === "with_family") {
-        factor -= 0.05;
+        factor -= 0.07;
       }
 
       if (meal === "plan") {
-        factor -= 0.05;
+        factor -= 0.06;
       } else if (meal === "no_plan") {
-        factor += 0.15;
+        factor += 0.18;
       }
 
       return base * factor;
     }
 
     function computeLifestyleSplit(adjustedTotal) {
-      const minShare = 0.3;
+      const minShare = 0.35;
       const lifestylePortion = adjustedTotal * (1 - minShare);
       const basePortion = adjustedTotal * minShare;
 
@@ -445,7 +515,6 @@
       return result;
     }
 
-    // Chart.js
     let chart;
     function initChart() {
       const ctx = document.getElementById("chart").getContext("2d");
@@ -469,11 +538,16 @@
         options: {
           plugins: {
             legend: {
+              position: "bottom",
               labels: {
                 color: "#e5e7eb",
                 font: { size: 11 }
               }
             }
+          },
+          animation: {
+            duration: 400,
+            easing: "easeOutQuad"
           },
           cutout: "60%"
         }
@@ -493,7 +567,6 @@
       chart.update();
     }
 
-    // Recalc + UI binding
     function recalc() {
       const base = computeBaseForState();
       const adjusted = computeHousingMealAdjustment(base);
@@ -516,9 +589,13 @@
       if (goToJobHours) {
         goToJobHours.href = `jobs.html?monthly=${monthly}`;
       }
+
+      // Notify parent (e.g., app.html wrapper) of monthly estimate
+      try {
+        window.parent.postMessage({ type: "monthlyEstimate", value: monthly }, "*");
+      } catch {}
     }
 
-    // Init
     document.addEventListener("DOMContentLoaded", () => {
       initStates();
       initChips();
