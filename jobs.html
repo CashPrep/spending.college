@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>College Job Hours · spending.college</title>
   <meta name="description"
-        content="College Job Hours: see how many hours you need to work each week to cover your college spending money target." />
+        content="College Job Hours: see if your current job covers your college spending money target, or get suggestions for hours and pay to hit your goal." />
 
   <!-- AdSense -->
   <script async
@@ -93,14 +93,16 @@
         College Job Hours
       </h1>
       <p class="text-slate-200 text-[0.9rem] leading-relaxed">
-        Take your monthly spending target and see if a job can cover it. You can paste a number or send it straight from College Cash.
+        Take your monthly spending target and either check if your current job covers it,
+        or get suggestions for hours and pay that could meet your goal.
       </p>
     </header>
 
     <!-- Main calculator -->
     <div class="glass card-tight rounded-3xl p-4 space-y-4">
+      <!-- Monthly target -->
       <div class="space-y-1">
-        <p class="text-[0.9rem] text-slate-200 font-medium">Monthly target</p>
+        <p class="text-[0.9rem] text-slate-200 font-medium">Monthly spending target</p>
         <div class="flex items-center gap-2">
           <span class="text-slate-300 text-[0.9rem]">$</span>
           <input id="monthlyInput" type="number" min="0" step="10"
@@ -109,20 +111,49 @@
         <p class="text-[0.8rem] text-slate-300" id="monthlyHint"></p>
       </div>
 
-      <div class="space-y-3 pt-3 border-t border-slate-700/60">
+      <!-- Mode toggle -->
+      <div class="pt-3 border-t border-slate-700/60 space-y-2">
         <p class="text-[0.85rem] text-slate-300 font-semibold uppercase tracking-wider">
-          Job setup
+          Choose how to use this tool
+        </p>
+        <div class="flex gap-2 text-[0.8rem]">
+          <button type="button"
+                  id="modeHaveJob"
+                  class="flex-1 px-3 py-1.5 rounded-2xl bg-cyan-400/20 border border-cyan-400/60 text-cyan-100 font-semibold">
+            I already have a job
+          </button>
+          <button type="button"
+                  id="modePlanJob"
+                  class="flex-1 px-3 py-1.5 rounded-2xl bg-slate-900 border border-slate-600/70 text-slate-200 font-semibold hover:border-cyan-400/60">
+            Help me plan a job
+          </button>
+        </div>
+        <p id="modeHint" class="text-[0.78rem] text-slate-300">
+          Enter your monthly target and your job details to see if it covers your spending.
+        </p>
+      </div>
+
+      <!-- Mode 1: have job -->
+      <div id="haveJobSection" class="space-y-3 pt-3 border-t border-slate-700/60">
+        <p class="text-[0.85rem] text-slate-300 font-semibold uppercase tracking-wider">
+          Your job setup
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block text-[0.8rem] text-slate-200 mb-1">Hourly pay</label>
+            <label class="block text-[0.8rem] text-slate-200 mb-1">Hourly pay (before taxes)</label>
             <input id="wageInput" type="number" step="0.5" min="0"
                    class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400" />
+            <p class="text-[0.75rem] text-slate-400 mt-1">
+              Example: $13–$20/hour for many campus and part-time jobs.
+            </p>
           </div>
           <div>
             <label class="block text-[0.8rem] text-slate-200 mb-1">Paid weeks / year</label>
             <input id="weeksInput" type="number" min="1" max="52"
                    class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400" />
+            <p class="text-[0.75rem] text-slate-400 mt-1">
+              Example: ~32 weeks for school-year work, ~10 weeks for summer-only.
+            </p>
           </div>
         </div>
 
@@ -149,6 +180,48 @@
         </div>
       </div>
 
+      <!-- Mode 2: plan job -->
+      <div id="planJobSection" class="space-y-3 pt-3 border-t border-slate-700/60 hidden">
+        <p class="text-[0.85rem] text-slate-300">
+          Use your monthly target and a rough hourly pay to see suggested hours per week that could cover it.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[0.8rem] text-slate-200 mb-1">
+              Typical hourly pay to try
+            </label>
+            <input id="suggestWageInput" type="number" step="0.5" min="0"
+                   class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+                   value="15" />
+            <p class="text-[0.75rem] text-slate-400 mt-1">
+              Example: $13–$20/hour for many campus and part-time roles.
+            </p>
+          </div>
+          <div>
+            <label class="block text-[0.8rem] text-slate-200 mb-1">
+              Paid weeks / year
+            </label>
+            <input id="suggestWeeksInput" type="number" min="1" max="52"
+                   class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+                   value="32" />
+            <p class="text-[0.75rem] text-slate-400 mt-1">
+              Example: ~32 weeks for school year work.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <p class="text-[0.8rem] text-slate-200 font-semibold">
+            Suggested hours per week
+          </p>
+          <ul id="suggestionsList"
+              class="text-[0.84rem] text-slate-200 space-y-1.5">
+            <!-- filled by JS -->
+          </ul>
+        </div>
+      </div>
+
       <!-- Results -->
       <div class="pt-3 border-t border-slate-700/60 space-y-2">
         <p class="text-[0.9rem] text-slate-200 font-semibold">Result</p>
@@ -156,7 +229,7 @@
              class="inline-flex items-center gap-2 rounded-2xl px-3 py-1.5 bg-slate-900/80 border border-slate-700/80">
           <span id="statusDot" class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
           <span id="statusText" class="text-[0.85rem] text-slate-100">
-            Enter numbers to see if your job covers it.
+            Enter numbers to see if your job covers your target or to view suggestions.
           </span>
         </div>
         <p id="resultLine" class="text-[0.9rem] text-slate-100"></p>
@@ -190,7 +263,7 @@
       <div class="pt-3 text-[0.85rem] text-slate-200 space-y-2">
         <p>
           College Job Hours pairs with College Cash. It compares your yearly spending target to what you might earn from a job.
-          It is a planning tool only, not a promise of any specific job or income.
+          It is a planning tool only, not a promise of any specific job, wage, or income.
         </p>
         <p>
           The math is simple: yearly earnings = hourly pay × hours per week × paid weeks. Yearly target = monthly target × 12.
@@ -257,6 +330,18 @@
     const statusDot = document.getElementById("statusDot");
     const statusText = document.getElementById("statusText");
 
+    const modeHaveJobBtn = document.getElementById("modeHaveJob");
+    const modePlanJobBtn = document.getElementById("modePlanJob");
+    const haveJobSection = document.getElementById("haveJobSection");
+    const planJobSection = document.getElementById("planJobSection");
+    const modeHint = document.getElementById("modeHint");
+
+    const suggestWageInput = document.getElementById("suggestWageInput");
+    const suggestWeeksInput = document.getElementById("suggestWeeksInput");
+    const suggestionsList = document.getElementById("suggestionsList");
+
+    let mode = "haveJob";
+
     function getMonthlyFromQuery() {
       const url = new URL(window.location.href);
       const m = url.searchParams.get("monthly");
@@ -277,6 +362,9 @@
       weeksInput.value = 32;
       hoursSlider.value = 15;
       hoursPerWeekLabel.textContent = `${hoursSlider.value} hrs/week`;
+      suggestWageInput.value = 15;
+      suggestWeeksInput.value = 32;
+      setMode("haveJob");
     }
 
     function applyPreset(type) {
@@ -292,7 +380,33 @@
       recalc();
     }
 
-    function recalc() {
+    function setMode(newMode) {
+      mode = newMode;
+      if (mode === "haveJob") {
+        modeHaveJobBtn.classList.add("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
+        modeHaveJobBtn.classList.remove("bg-slate-900", "border-slate-600/70", "text-slate-200");
+
+        modePlanJobBtn.classList.remove("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
+        modePlanJobBtn.classList.add("bg-slate-900", "border-slate-600/70", "text-slate-200");
+
+        haveJobSection.classList.remove("hidden");
+        planJobSection.classList.add("hidden");
+        modeHint.textContent = "Enter your monthly target and your job details to see if it covers your spending.";
+      } else {
+        modePlanJobBtn.classList.add("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
+        modePlanJobBtn.classList.remove("bg-slate-900", "border-slate-600/70", "text-slate-200");
+
+        modeHaveJobBtn.classList.remove("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
+        modeHaveJobBtn.classList.add("bg-slate-900", "border-slate-600/70", "text-slate-200");
+
+        haveJobSection.classList.add("hidden");
+        planJobSection.classList.remove("hidden");
+        modeHint.textContent = "Enter a monthly target and a rough hourly pay to see suggested hours per week.";
+      }
+      recalc();
+    }
+
+    function recalcHaveJob() {
       const monthly = Number(monthlyInput.value) || 0;
       const wage = Number(wageInput.value) || 0;
       const weeks = Number(weeksInput.value) || 0;
@@ -336,11 +450,63 @@
       }
     }
 
+    function recalcPlanJob() {
+      const monthly = Number(monthlyInput.value) || 0;
+      const baseWage = Number(suggestWageInput.value) || 0;
+      const weeks = Number(suggestWeeksInput.value) || 0;
+
+      warningLine.textContent = "";
+      resultLine.textContent = "";
+      shortfallLine.textContent = "";
+      hoursPerWeekLabel.textContent = "";
+      suggestionsList.innerHTML = "";
+
+      if (monthly <= 0 || baseWage <= 0 || weeks <= 0) {
+        statusDot.className = "w-2.5 h-2.5 rounded-full bg-slate-500";
+        statusText.textContent = "Enter a monthly target, hourly pay, and weeks to see suggestions.";
+        return;
+      }
+
+      const yearlyNeed = monthly * 12;
+      const wagesToTry = [baseWage, baseWage + 2, baseWage + 5];
+
+      wagesToTry.forEach(w => {
+        if (w <= 0) return;
+        const hoursPerWeek = yearlyNeed / (w * weeks);
+        if (!Number.isFinite(hoursPerWeek) || hoursPerWeek <= 0) return;
+
+        const li = document.createElement("li");
+        li.textContent =
+          `$${w.toFixed(2)}/hour → about ${hoursPerWeek.toFixed(1)} hours/week for ${weeks} weeks`;
+        suggestionsList.appendChild(li);
+      });
+
+      statusDot.className = "w-2.5 h-2.5 rounded-full bg-cyan-400";
+      statusText.textContent = "Here are some possible job setups to cover your target.";
+      resultLine.textContent =
+        `You need about $${yearlyNeed.toLocaleString()} per year to match your monthly spending target.`;
+    }
+
+    function recalc() {
+      if (mode === "haveJob") {
+        recalcHaveJob();
+      } else {
+        recalcPlanJob();
+      }
+    }
+
     initDefaults();
+
+    modeHaveJobBtn.addEventListener("click", () => setMode("haveJob"));
+    modePlanJobBtn.addEventListener("click", () => setMode("planJob"));
+
     monthlyInput.addEventListener("input", recalc);
     wageInput.addEventListener("input", recalc);
     weeksInput.addEventListener("input", recalc);
     hoursSlider.addEventListener("input", recalc);
+    suggestWageInput.addEventListener("input", recalc);
+    suggestWeeksInput.addEventListener("input", recalc);
+
     recalc();
   </script>
 </body>
