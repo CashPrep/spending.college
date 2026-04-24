@@ -186,8 +186,8 @@
           Suggested hours to hit your target
         </p>
         <p class="text-[0.86rem] text-slate-200">
-          Based on your monthly target, here are hours/week you’d need at different pay rates,
-          assuming about 32 working weeks per year (roughly two semesters).
+          Here are rough hours/week you’d need at common pay rates to hit your monthly target
+          (assuming about 32 working weeks in a year).
         </p>
 
         <!-- Suggested hours list (main focus) -->
@@ -205,8 +205,7 @@
           Try your own hours and pay
         </p>
         <p class="text-[0.82rem] text-slate-300">
-          Adjust the hourly pay and hours/week to see what that job could earn
-          with the same 32-week assumption.
+          Change the pay and hours/week to see what that job could earn with the same 32‑week assumption.
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -454,12 +453,12 @@
 
       if (diff >= 0) {
         statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
-        statusText.textContent = "Your job covers your target.";
+        statusText.textContent = "This setup covers your target.";
         shortfallLine.textContent =
           `Target: ~$${yearlyNeed.toLocaleString()}/year. You’re ahead by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
       } else {
         statusDot.className = "w-2.5 h-2.5 rounded-full bg-rose-400";
-        statusText.textContent = "Your job doesn’t fully cover your target.";
+        statusText.textContent = "This setup doesn’t fully cover your target.";
         shortfallLine.textContent =
           `Target: ~$${yearlyNeed.toLocaleString()}/year. You’re short by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
       }
@@ -480,7 +479,6 @@
 
       const yearlyNeed = monthly * 12;
 
-      // wages to try around typical student jobs
       const wagesToTry = [13, 15, 18];
 
       wagesToTry.forEach(w => {
@@ -488,12 +486,11 @@
         if (!Number.isFinite(hoursPerWeek) || hoursPerWeek <= 0) return;
 
         const li = document.createElement("li");
-        li.textContent =
-          `$${w.toFixed(2)}/hour → about ${hoursPerWeek.toFixed(1)} hours/week for ${PLAN_WEEKS} weeks`;
+        li.innerHTML =
+          `$${w.toFixed(2)}/hour → about <span class="font-semibold text-white">${hoursPerWeek.toFixed(1)} hours/week</span> for ${PLAN_WEEKS} weeks`;
         suggestionsList.appendChild(li);
       });
 
-      // Try-your-own scenario
       const wCustom = Number(planWageInput.value) || 0;
       const hCustom = Number(planHoursInput.value) || 0;
       if (wCustom > 0 && hCustom > 0) {
@@ -504,18 +501,18 @@
         const monthlyDiff = absDiff / 12;
 
         resultLine.textContent =
-          `At $${wCustom.toFixed(2)}/hour for ${hCustom.toFixed(1)} hours/week (${PLAN_WEEKS} weeks), you’d earn about $${yearlyEarn.toLocaleString()} per year (~$${Math.round(monthlyEarn).toLocaleString()}/month).`;
+          `That setup is about $${Math.round(monthlyEarn).toLocaleString()}/month before taxes.`;
 
         if (diff >= 0) {
           statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
-          statusText.textContent = "This job setup would cover your target.";
+          statusText.textContent = "This setup covers your target.";
           shortfallLine.textContent =
-            `Target: ~$${yearlyNeed.toLocaleString()}/year. You’d be ahead by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
+            `You’d be ahead by about $${absDiff.toLocaleString()} per year (≈ $${monthlyDiff.toFixed(0)}/month).`;
         } else {
           statusDot.className = "w-2.5 h-2.5 rounded-full bg-rose-400";
-          statusText.textContent = "This job setup would not fully cover your target.";
+          statusText.textContent = "This setup doesn’t fully cover your target.";
           shortfallLine.textContent =
-            `Target: ~$${yearlyNeed.toLocaleString()}/year. You’d be short by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
+            `You’d be short by about $${absDiff.toLocaleString()} per year (≈ $${monthlyDiff.toFixed(0)}/month).`;
         }
       } else {
         statusDot.className = "w-2.5 h-2.5 rounded-full bg-cyan-400";
