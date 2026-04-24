@@ -12,7 +12,7 @@
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225"
           crossorigin="anonymous"></script>
 
-  <!-- Tailwind (Chart.js removed) -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
@@ -59,7 +59,6 @@
     }
   </style>
 </head>
-
 <body class="min-h-screen text-slate-50 antialiased">
   <div class="max-w-2xl mx-auto px-4 pb-10 pt-3 space-y-4">
 
@@ -77,8 +76,18 @@
            class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-cyan-400/60 transition">
           Job Hours
         </a>
+        <a href="guides.html"
+           class="hidden sm:inline-block px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-cyan-400/60 transition">
+          Guides
+        </a>
       </div>
     </nav>
+
+    <!-- Mobile Guides link under nav -->
+    <a href="guides.html"
+       class="sm:hidden block text-[0.75rem] text-cyan-300 underline text-right">
+      Money guides & tips →
+    </a>
 
     <!-- Header -->
     <header class="space-y-2">
@@ -207,6 +216,18 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
     </div>
+
+    <!-- Guides callout -->
+    <section class="glass rounded-3xl p-4 space-y-2">
+      <h2 class="text-[1.05rem] font-semibold">Need ideas to save or earn?</h2>
+      <p class="text-[0.84rem] text-slate-300">
+        After you get your College Cash estimate, visit the Guides tab for tips on saving money in college and finding flexible jobs.
+      </p>
+      <a href="guides.html"
+         class="inline-flex items-center text-[0.8rem] text-cyan-300 underline">
+        Open College Money Guides →
+      </a>
+    </section>
 
     <!-- Handoff to Job Hours -->
     <section class="glass rounded-3xl p-4 space-y-3">
@@ -379,7 +400,7 @@
       random: 2
     };
 
-    // How strongly lifestyle moves the total (0.2 = ±20%)
+    // How strongly lifestyle moves the total (0.25 ≈ ±25% around neutral)
     const LIFESTYLE_STRENGTH = 0.25;
 
     const stateSelect = document.getElementById("stateSelect");
@@ -517,16 +538,12 @@
       return base * factor;
     }
 
-    // NEW: lifestyle affects the total, not just a breakdown
+    // Lifestyle affects the total, not just a breakdown
     function applyLifestyleToTotal(adjustedBase) {
-      // Average weight is 2 (middle of 1–4), use that as "neutral"
       const neutralWeight = 2;
       const allWeights = Object.values(weights);
       const avgWeight = allWeights.reduce((a, b) => a + b, 0) / allWeights.length;
 
-      // avgWeight 1 → -LIFESTYLE_STRENGTH
-      // avgWeight 2 → 0
-      // avgWeight 4 → +LIFESTYLE_STRENGTH * 2
       const deviation = avgWeight - neutralWeight;
       const lifestyleFactor = 1 + deviation * LIFESTYLE_STRENGTH / neutralWeight;
 
