@@ -12,9 +12,8 @@
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225"
           crossorigin="anonymous"></script>
 
-  <!-- Tailwind + Chart.js -->
+  <!-- Tailwind (Chart.js removed) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     :root {
@@ -191,17 +190,9 @@
     <section class="glass rounded-3xl p-4 space-y-3">
       <h2 class="text-[1.05rem] font-semibold">3. Lifestyle</h2>
       <p class="text-[0.8rem] text-slate-300">
-        Drag each slider from 1 (low) to 4 (high) based on how much you expect to spend in each category.
+        Drag each slider from 1 (low) to 4 (high). Higher lifestyle = higher total spending money needed.
       </p>
       <div id="weights" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
-    </section>
-
-    <!-- Breakdown chart -->
-    <section class="glass rounded-3xl p-4 space-y-2">
-      <h2 class="text-[1.05rem] font-semibold">Breakdown</h2>
-      <div class="h-44">
-        <canvas id="chart"></canvas>
-      </div>
     </section>
 
     <!-- AdSense mid -->
@@ -367,6 +358,7 @@
       "Wyoming": 96
     };
 
+    // Lifestyle categories (weights directly change total)
     const categories = [
       { key: "food_out",  label: "Food & coffee" },
       { key: "rides",     label: "Rides & travel" },
@@ -386,6 +378,9 @@
       shopping: 2,
       random: 2
     };
+
+    // How strongly lifestyle moves the total (0.2 = ±20%)
+    const LIFESTYLE_STRENGTH = 0.25;
 
     const stateSelect = document.getElementById("stateSelect");
     const selectedStateDiv = document.getElementById("selectedState");
@@ -440,7 +435,6 @@
         });
       });
 
-      // default active
       housingChips.forEach(b => {
         if (b.dataset.housing === housing) b.classList.add("active");
       });
@@ -523,87 +517,28 @@
       return base * factor;
     }
 
-    function computeLifestyleSplit(adjustedTotal) {
-      const minShare = 0.35; // always reserved for core / unavoidable stuff
-      const lifestylePortion = adjustedTotal * (1 - minShare);
-      const basePortion = adjustedTotal * minShare;
+    // NEW: lifestyle affects the total, not just a breakdown
+    function applyLifestyleToTotal(adjustedBase) {
+      // Average weight is 2 (middle of 1–4), use that as "neutral"
+      const neutralWeight = 2;
+      const allWeights = Object.values(weights);
+      const avgWeight = allWeights.reduce((a, b) => a + b, 0) / allWeights.length;
 
-      const sumWeights = Object.values(weights)
-        .reduce((a, b) => a + b, 0) || 1;
+      // avgWeight 1 → -LIFESTYLE_STRENGTH
+      // avgWeight 2 → 0
+      // avgWeight 4 → +LIFESTYLE_STRENGTH * 2
+      const deviation = avgWeight - neutralWeight;
+      const lifestyleFactor = 1 + deviation * LIFESTYLE_STRENGTH / neutralWeight;
 
-      const result = {};
-      categories.forEach(cat => {
-        const share = weights[cat.key] / sumWeights;
-        result[cat.key] = lifestylePortion * share;
-      });
-      result.base = basePortion;
-      return result;
-    }
-
-    let chart;
-
-    function initChart() {
-      const ctx = document.getElementById("chart").getContext("2d");
-      chart = new Chart(ctx, {
-        type: "doughnut",
-        data: {
-          labels: [
-            "Base costs",
-            "Food & coffee",
-            "Rides & travel",
-            "Fun & events",
-            "Shopping",
-            "Random stuff"
-          ],
-          datasets: [{
-            data: [0, 0, 0, 0, 0, 0],
-            backgroundColor: [
-              "rgba(148, 163, 184, 0.9)",
-              "rgba(56, 189, 248, 0.9)",
-              "rgba(129, 140, 248, 0.9)",
-              "rgba(248, 113, 113, 0.9)",
-              "rgba(52, 211, 153, 0.9)",
-              "rgba(251, 191, 36, 0.9)"
-            ],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          plugins: {
-            legend: {
-              position: "bottom",
-              labels: {
-                color: "#e5e7eb",
-                font: { size: 11 }
-              }
-            }
-          },
-          animation: {
-            duration: 400,
-            easing: "easeOutQuad"
-          },
-          cutout: "60%"
-        }
-      });
-    }
-
-    function updateChart(split) {
-      if (!chart) return;
-      chart.data.datasets[0].data = [
-        Math.round(split.base),
-        Math.round(split.food_out),
-        Math.round(split.rides),
-        Math.round(split.fun),
-        Math.round(split.shopping),
-        Math.round(split.random)
-      ];
-      chart.update();
+      return adjustedBase * lifestyleFactor;
     }
 
     function recalc() {
       const base = computeBaseForState();
       const adjusted = computeHousingMealAdjustment(base);
-      const yearly = Math.round(adjusted);
+      const lifestyleAdjusted = applyLifestyleToTotal(adjusted);
+
+      const yearly = Math.round(lifestyleAdjusted);
       const monthly = Math.round(yearly / 12);
 
       estimateEl.textContent = `$${yearly.toLocaleString()}`;
@@ -621,9 +556,6 @@
       scenarioLabelEl.textContent = scenarioText;
       scenarioMobileEl.textContent = scenarioText;
 
-      const split = computeLifestyleSplit(adjusted);
-      updateChart(split);
-
       handoffTextEl.textContent =
         `Use your ~$${monthly.toLocaleString()}/month target in College Job Hours.`;
 
@@ -640,7 +572,6 @@
       initStates();
       initChips();
       initSliders();
-      initChart();
 
       stateSelect.addEventListener("change", () => {
         selectedState = stateSelect.value;
