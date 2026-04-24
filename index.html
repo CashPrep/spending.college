@@ -48,7 +48,7 @@
         padding-bottom: 2.5rem;
       }
       .mobile-card {
-        padding: 0.85rem 1rem;
+        padding: 0.75rem 0.9rem;
       }
       .mobile-card-title {
         font-size: 0.6rem;
@@ -61,7 +61,7 @@
         font-size: 0.66rem;
       }
       .card-tight {
-        padding: 0.9rem 0.85rem;
+        padding: 0.8rem 0.8rem;
       }
       .card-tight h2 {
         font-size: 0.98rem;
@@ -72,15 +72,14 @@
       .chart-mobile {
         height: 9rem;
       }
-      /* tighten space between header and sticky card */
       .header-tight {
-        margin-bottom: 0.4rem;
+        margin-bottom: 0.3rem;
       }
     }
   </style>
 </head>
 <body class="min-h-screen text-slate-50 antialiased">
-  <div class="max-w-2xl mx-auto px-4 pb-10 pt-2 space-y-4">
+  <div class="max-w-2xl mx-auto px-4 pb-8 pt-2 space-y-3">
 
     <!-- Nav -->
     <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
@@ -100,19 +99,6 @@
         Not tuition. Not rent. Just real day-to-day cash based on your state, housing, meal plan, and lifestyle.
       </p>
     </header>
-
-    <!-- AdSense top -->
-    <div class="flex justify-center overflow-hidden rounded-2xl">
-      <ins class="adsbygoogle"
-           style="display:block;width:100%;max-width:728px;"
-           data-ad-client="ca-pub-5702568182016225"
-           data-ad-slot="YOUR_SLOT_ID_1"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
 
     <!-- Sticky mobile estimate -->
     <div class="sticky top-1 z-20 sm:hidden">
@@ -206,7 +192,7 @@
       </div>
     </div>
 
-    <!-- AdSense mid -->
+    <!-- AdSense mid (kept) -->
     <div class="flex justify-center overflow-hidden rounded-2xl">
       <ins class="adsbygoogle"
            style="display:block;width:100%;max-width:336px;"
@@ -298,10 +284,8 @@
   </div>
 
   <script>
-    // National baseline tuned to typical "other expenses" ranges from recent college cost reports. [web:23][web:32]
-    const NATIONAL_BASELINE = 2500;
+    const NATIONAL_BASELINE = 2500; [web:23][web:32]
 
-    // State cost-of-living index. [web:23][web:32]
     const stateCOLIndex = {
       "US Average": 100,
       "Alabama": 88,
