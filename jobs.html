@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>College Job Hours · spending.college</title>
   <meta name="description"
-        content="College Job Hours: see if your current job covers your college spending money target, or get suggestions for hours and pay to hit your goal." />
+        content="College Job Hours: see if your current job covers your college spending money target, or see suggested hours and pay to reach your goal." />
 
   <!-- AdSense -->
   <script async
@@ -94,7 +94,7 @@
       </h1>
       <p class="text-slate-200 text-[0.9rem] leading-relaxed">
         Take your monthly spending target and either check if your current job covers it,
-        or get suggestions for hours and pay that could meet your goal.
+        or see suggested hours and pay that could reach your goal.
       </p>
     </header>
 
@@ -182,44 +182,54 @@
 
       <!-- Mode 2: plan job -->
       <div id="planJobSection" class="space-y-3 pt-3 border-t border-slate-700/60 hidden">
-        <p class="text-[0.85rem] text-slate-300">
-          Use your monthly target and a rough hourly pay to see suggested hours per week that could cover it.
+        <p class="text-[0.85rem] text-slate-300 font-semibold uppercase tracking-wider">
+          Suggested hours to hit your target
+        </p>
+        <p class="text-[0.86rem] text-slate-200">
+          Based on your monthly target, here are hours/week you’d need at different pay rates,
+          assuming about 32 working weeks per year (roughly two semesters).
         </p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-[0.8rem] text-slate-200 mb-1">
-              Typical hourly pay to try
-            </label>
-            <input id="suggestWageInput" type="number" step="0.5" min="0"
-                   class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
-                   value="15" />
-            <p class="text-[0.75rem] text-slate-400 mt-1">
-              Example: $13–$20/hour for many campus and part-time roles.
-            </p>
-          </div>
-          <div>
-            <label class="block text-[0.8rem] text-slate-200 mb-1">
-              Paid weeks / year
-            </label>
-            <input id="suggestWeeksInput" type="number" min="1" max="52"
-                   class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
-                   value="32" />
-            <p class="text-[0.75rem] text-slate-400 mt-1">
-              Example: ~32 weeks for school year work.
-            </p>
-          </div>
-        </div>
-
+        <!-- Suggested hours list (main focus) -->
         <div class="space-y-1">
-          <p class="text-[0.8rem] text-slate-200 font-semibold">
-            Suggested hours per week
-          </p>
           <ul id="suggestionsList"
               class="text-[0.84rem] text-slate-200 space-y-1.5">
             <!-- filled by JS -->
           </ul>
         </div>
+
+        <hr class="border-slate-700/70 my-2" />
+
+        <!-- Try your own idea -->
+        <p class="text-[0.85rem] text-slate-300 font-semibold">
+          Try your own hours and pay
+        </p>
+        <p class="text-[0.82rem] text-slate-300">
+          Adjust the hourly pay and hours/week to see what that job could earn
+          with the same 32-week assumption.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[0.8rem] text-slate-200 mb-1">
+              Hourly pay (before taxes)
+            </label>
+            <input id="planWageInput" type="number" step="0.5" min="0"
+                   class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+                   value="15" />
+          </div>
+          <div>
+            <label class="block text-[0.8rem] text-slate-200 mb-1">
+              Hours per week
+            </label>
+            <input id="planHoursInput" type="number" min="1" max="40"
+                   class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+                   value="12" />
+          </div>
+        </div>
+        <p class="text-[0.78rem] text-slate-400">
+          Assumes about 32 working weeks per year (school-year work). Your actual schedule may differ.
+        </p>
       </div>
 
       <!-- Results -->
@@ -229,14 +239,14 @@
              class="inline-flex items-center gap-2 rounded-2xl px-3 py-1.5 bg-slate-900/80 border border-slate-700/80">
           <span id="statusDot" class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
           <span id="statusText" class="text-[0.85rem] text-slate-100">
-            Enter numbers to see if your job covers your target or to view suggestions.
+            Enter numbers to see if a job setup could cover your target.
           </span>
         </div>
         <p id="resultLine" class="text-[0.9rem] text-slate-100"></p>
         <p id="shortfallLine" class="text-[0.85rem] text-slate-300"></p>
         <p id="warningLine" class="text-[0.8rem] text-amber-300"></p>
         <p class="text-[0.78rem] text-slate-300">
-          Note: this uses gross pay (before taxes and deductions). Take‑home pay will be lower.
+          Note: all earnings here are gross pay (before taxes and deductions). Take‑home pay will be lower.
         </p>
       </div>
     </div>
@@ -266,7 +276,8 @@
           It is a planning tool only, not a promise of any specific job, wage, or income.
         </p>
         <p>
-          The math is simple: yearly earnings = hourly pay × hours per week × paid weeks. Yearly target = monthly target × 12.
+          In “I already have a job” mode, yearly earnings are calculated as hourly pay × hours per week × paid weeks.
+          In “Help me plan a job” mode, suggested hours assume about 32 working weeks per year (roughly two semesters).
         </p>
         <p>
           Many students work part‑time during the school year and more during breaks, but the right schedule depends on your
@@ -336,9 +347,11 @@
     const planJobSection = document.getElementById("planJobSection");
     const modeHint = document.getElementById("modeHint");
 
-    const suggestWageInput = document.getElementById("suggestWageInput");
-    const suggestWeeksInput = document.getElementById("suggestWeeksInput");
     const suggestionsList = document.getElementById("suggestionsList");
+    const planWageInput = document.getElementById("planWageInput");
+    const planHoursInput = document.getElementById("planHoursInput");
+
+    const PLAN_WEEKS = 32; // assumed weeks/year for plan mode
 
     let mode = "haveJob";
 
@@ -362,8 +375,8 @@
       weeksInput.value = 32;
       hoursSlider.value = 15;
       hoursPerWeekLabel.textContent = `${hoursSlider.value} hrs/week`;
-      suggestWageInput.value = 15;
-      suggestWeeksInput.value = 32;
+      planWageInput.value = 15;
+      planHoursInput.value = 12;
       setMode("haveJob");
     }
 
@@ -401,7 +414,7 @@
 
         haveJobSection.classList.add("hidden");
         planJobSection.classList.remove("hidden");
-        modeHint.textContent = "Enter a monthly target and a rough hourly pay to see suggested hours per week.";
+        modeHint.textContent = "See suggested hours/week at different pay rates, then try your own numbers.";
       }
       recalc();
     }
@@ -426,6 +439,8 @@
       if (hoursPerWeek > 40 || wage > 60 || weeks > 52) {
         warningLine.textContent =
           "Heads up: these numbers are higher than what most college students work.";
+      } else {
+        warningLine.textContent = "";
       }
 
       const yearlyNeed = monthly * 12;
@@ -435,7 +450,7 @@
       const monthlyDiff = absDiff / 12;
 
       resultLine.textContent =
-        `This setup earns about $${yearlyEarn.toLocaleString()} per year.`;
+        `This setup earns about $${yearlyEarn.toLocaleString()} per year (~$${Math.round(yearlyEarn/12).toLocaleString()}/month).`;
 
       if (diff >= 0) {
         statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
@@ -452,39 +467,60 @@
 
     function recalcPlanJob() {
       const monthly = Number(monthlyInput.value) || 0;
-      const baseWage = Number(suggestWageInput.value) || 0;
-      const weeks = Number(suggestWeeksInput.value) || 0;
-
-      warningLine.textContent = "";
+      suggestionsList.innerHTML = "";
       resultLine.textContent = "";
       shortfallLine.textContent = "";
-      hoursPerWeekLabel.textContent = "";
-      suggestionsList.innerHTML = "";
+      warningLine.textContent = "";
 
-      if (monthly <= 0 || baseWage <= 0 || weeks <= 0) {
+      if (monthly <= 0) {
         statusDot.className = "w-2.5 h-2.5 rounded-full bg-slate-500";
-        statusText.textContent = "Enter a monthly target, hourly pay, and weeks to see suggestions.";
+        statusText.textContent = "Enter a monthly target to see suggested hours.";
         return;
       }
 
       const yearlyNeed = monthly * 12;
-      const wagesToTry = [baseWage, baseWage + 2, baseWage + 5];
+
+      // wages to try around typical student jobs
+      const wagesToTry = [13, 15, 18];
 
       wagesToTry.forEach(w => {
-        if (w <= 0) return;
-        const hoursPerWeek = yearlyNeed / (w * weeks);
+        const hoursPerWeek = yearlyNeed / (w * PLAN_WEEKS);
         if (!Number.isFinite(hoursPerWeek) || hoursPerWeek <= 0) return;
 
         const li = document.createElement("li");
         li.textContent =
-          `$${w.toFixed(2)}/hour → about ${hoursPerWeek.toFixed(1)} hours/week for ${weeks} weeks`;
+          `$${w.toFixed(2)}/hour → about ${hoursPerWeek.toFixed(1)} hours/week for ${PLAN_WEEKS} weeks`;
         suggestionsList.appendChild(li);
       });
 
-      statusDot.className = "w-2.5 h-2.5 rounded-full bg-cyan-400";
-      statusText.textContent = "Here are some possible job setups to cover your target.";
-      resultLine.textContent =
-        `You need about $${yearlyNeed.toLocaleString()} per year to match your monthly spending target.`;
+      // Try-your-own scenario
+      const wCustom = Number(planWageInput.value) || 0;
+      const hCustom = Number(planHoursInput.value) || 0;
+      if (wCustom > 0 && hCustom > 0) {
+        const yearlyEarn = wCustom * hCustom * PLAN_WEEKS;
+        const monthlyEarn = yearlyEarn / 12;
+        const diff = yearlyEarn - yearlyNeed;
+        const absDiff = Math.abs(diff);
+        const monthlyDiff = absDiff / 12;
+
+        resultLine.textContent =
+          `At $${wCustom.toFixed(2)}/hour for ${hCustom.toFixed(1)} hours/week (${PLAN_WEEKS} weeks), you’d earn about $${yearlyEarn.toLocaleString()} per year (~$${Math.round(monthlyEarn).toLocaleString()}/month).`;
+
+        if (diff >= 0) {
+          statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
+          statusText.textContent = "This job setup would cover your target.";
+          shortfallLine.textContent =
+            `Target: ~$${yearlyNeed.toLocaleString()}/year. You’d be ahead by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
+        } else {
+          statusDot.className = "w-2.5 h-2.5 rounded-full bg-rose-400";
+          statusText.textContent = "This job setup would not fully cover your target.";
+          shortfallLine.textContent =
+            `Target: ~$${yearlyNeed.toLocaleString()}/year. You’d be short by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
+        }
+      } else {
+        statusDot.className = "w-2.5 h-2.5 rounded-full bg-cyan-400";
+        statusText.textContent = "Here are some possible job setups to cover your target.";
+      }
     }
 
     function recalc() {
@@ -504,8 +540,8 @@
     wageInput.addEventListener("input", recalc);
     weeksInput.addEventListener("input", recalc);
     hoursSlider.addEventListener("input", recalc);
-    suggestWageInput.addEventListener("input", recalc);
-    suggestWeeksInput.addEventListener("input", recalc);
+    planWageInput.addEventListener("input", recalc);
+    planHoursInput.addEventListener("input", recalc);
 
     recalc();
   </script>
