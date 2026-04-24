@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>College Job Hours · spending.college</title>
+  <meta name="description" content="College Job Hours: see how many hours you need to work each week to cover your college spending money target." />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --bg1:#020617;
+      --bg2:#0b1120;
+      --accent-soft:rgba(56,189,248,0.18);
+    }
+    body{
+      background:
+        radial-gradient(circle at bottom right,var(--accent-soft),transparent 55%),
+        linear-gradient(to bottom,var(--bg1),var(--bg2));
+    }
+    .glass{
+      background:rgba(15,23,42,0.9);
+      backdrop-filter:blur(18px);
+      border:1px solid rgba(148,163,184,0.35);
+      box-shadow:0 18px 40px rgba(15,23,42,0.8);
+    }
+    input[type=range]{accent-color:#22d3ee;}
+    details summary::-webkit-details-marker{display:none;}
+    details summary::marker{display:none;}
+
+    @media (max-width: 640px) {
+      body {
+        padding-bottom: 4rem;
+      }
+      .card-tight {
+        padding: 0.9rem 0.85rem;
+      }
+      .card-tight h2 {
+        font-size: 0.98rem;
+      }
+      .card-tight p {
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-50 antialiased">
+  <div class="max-w-2xl mx-auto px-4 pb-12 pt-6 space-y-5">
+
+    <!-- Nav -->
+    <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
+      <span class="font-black text-[0.95rem] text-cyan-300 tracking-tight">spending.college</span>
+      <div class="flex gap-2">
+        <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-600/60 text-slate-300 text-[0.72rem] font-semibold hover:border-cyan-400/50 transition">College Cash</a>
+        <a href="jobs.html" class="px-3 py-1.5 rounded-xl bg-cyan-400/20 border border-cyan-400/50 text-cyan-200 text-[0.72rem] font-semibold">Job Hours</a>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="space-y-2">
+      <p class="uppercase tracking-[0.25em] text-cyan-300 text-[0.65rem]">spending.college</p>
+      <h1 class="font-black text-[clamp(1.9rem,5vw,2.5rem)] leading-tight">College Job Hours</h1>
+      <p class="text-slate-300 text-[0.88rem] leading-relaxed">
+        Plug in your monthly spending target and see how many hours per week you need to work at different wage rates.
+      </p>
+    </header>
+
+    <!-- AdSense top -->
+    <div class="flex justify-center overflow-hidden rounded-2xl">
+      <ins class="adsbygoogle"
+           style="display:block;width:100%;max-width:728px;"
+           data-ad-client="ca-pub-5702568182016225"
+           data-ad-slot="YOUR_SLOT_ID_3"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- Main calculator -->
+    <div class="glass card-tight rounded-3xl p-4 space-y-4">
+      <div class="space-y-1">
+        <p class="text-[0.8rem] text-slate-300">Monthly spending target</p>
+        <div class="flex items-center gap-2">
+          <span class="text-slate-400 text-sm">$</span>
+          <input id="monthlyInput" type="number" min="0" step="10"
+                 class="flex-1 rounded-2xl bg-slate-900/60 border border-slate-600/60 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400" />
+        </div>
+        <p class="text-[0.7rem] text-slate-400" id="monthlyHint"></p>
+      </div>
+
+      <div class="space-y-3 pt-3 border-t border-slate-700/60">
+        <p class="text-[0.72rem] text-slate-400 font-semibold uppercase tracking-wider">Job details</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[0.75rem] text-slate-300 mb-1">Hourly wage ($/hr)</label>
+            <input id="wageInput" type="number" step="0.5" min="0"
+                   class="w-full rounded-2xl bg-slate-900/60 border border-slate-600/60 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400" />
+          </div>
+          <div>
+            <label class="block text-[0.75rem] text-slate-300 mb-1">Paid weeks per year</label>
+            <input id="weeksInput" type="number" min="1" max="52"
+                   class="w-full rounded-2xl bg-slate-900/60 border border-slate-600/60 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400" />
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[0.75rem] text-slate-300">Hours per week target</span>
+            <span id="hoursPerWeekLabel" class="text-[0.75rem] text-slate-400"></span>
+          </div>
+          <input id="hoursSlider" type="range" min="5" max="40" step="1" class="w-full" />
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-700/60 space-y-1">
+        <p class="text-[0.8rem] text-slate-300 font-semibold">Result</p>
+        <p id="resultLine" class="text-[0.82rem] text-slate-200"></p>
+        <p id="shortfallLine" class="text-[0.76rem] text-slate-400"></p>
+      </div>
+    </div>
+
+    <!-- AdSense mid -->
+    <div class="flex justify-center overflow-hidden rounded-2xl">
+      <ins class="adsbygoogle"
+           style="display:block;width:100%;max-width:336px;"
+           data-ad-client="ca-pub-5702568182016225"
+           data-ad-slot="YOUR_SLOT_ID_4"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- About the data -->
+    <details class="glass card-tight rounded-3xl p-4">
+      <summary class="flex items-center justify-between cursor-pointer">
+        <span class="font-semibold text-[0.95rem]">About the data</span>
+        <span class="text-slate-400 text-xs">tap to expand</span>
+      </summary>
+      <div class="pt-3 text-[0.8rem] text-slate-300 space-y-2">
+        <p>
+          College Job Hours is designed to pair with College Cash. It takes your monthly
+          spending target and turns it into yearly dollars, then compares that to what you’d
+          earn at a given hourly wage, hours per week, and number of paid weeks. [web:23][web:27]
+        </p>
+        <p>
+          The math is straightforward: yearly earnings = wage × hours per week × paid weeks.
+          Yearly target = monthly spending × 12. This shows whether you cover your target or
+          fall short, and by how much. [web:23]
+        </p>
+        <p>
+          Typical student jobs pay anywhere from minimum wage to well above it, and weekly
+          hours vary a lot by campus and semester. Use this as a planning tool, not a
+          guarantee that you’ll get a specific job or schedule. [web:24][web:27]
+        </p>
+        <p>
+          This is not financial advice. It’s a simple calculator to help you think about
+          how work hours and pay line up with your spending goals.
+        </p>
+      </div>
+    </details>
+
+    <!-- Privacy policy -->
+    <details class="glass card-tight rounded-3xl p-4">
+      <summary class="flex items-center justify-between cursor-pointer">
+        <span class="font-semibold text-[0.95rem]">Privacy policy</span>
+        <span class="text-slate-400 text-xs">tap to expand</span>
+      </summary>
+      <div class="pt-3 text-[0.8rem] text-slate-300 space-y-2">
+        <p>
+          This page is a static calculator. All inputs (wage, hours, weeks, spending target)
+          are processed in your browser only and are not stored on a server or tied to your
+          identity.
+        </p>
+        <p>
+          We use Google AdSense to show ads. AdSense may collect technical data like your IP
+          address, device information, and cookies to serve and measure ads according to
+          Google’s own policies. You can learn more or adjust your ad settings in your Google
+          account. [web:23]
+        </p>
+        <p>
+          We do not sell or share any personal information because we do not collect it in
+          the first place. If you contact us by email, any information you share is only used
+          to respond to your message.
+        </p>
+        <p>
+          Contact: <a href="mailto:unbanked123@gmail.com" class="text-cyan-300 underline">unbanked123@gmail.com</a>
+        </p>
+      </div>
+    </details>
+
+    <footer class="text-center text-[0.7rem] text-slate-500 pt-2">
+      spending.college · College Job Hours · Not financial advice · Estimates only
+    </footer>
+  </div>
+
+  <script>
+    const monthlyInput = document.getElementById("monthlyInput");
+    const wageInput = document.getElementById("wageInput");
+    const weeksInput = document.getElementById("weeksInput");
+    const hoursSlider = document.getElementById("hoursSlider");
+    const hoursPerWeekLabel = document.getElementById("hoursPerWeekLabel");
+    const resultLine = document.getElementById("resultLine");
+    const shortfallLine = document.getElementById("shortfallLine");
+    const monthlyHint = document.getElementById("monthlyHint");
+
+    function getMonthlyFromQuery() {
+      const url = new URL(window.location.href);
+      const m = url.searchParams.get("monthly");
+      const num = m ? Number(m) : NaN;
+      return Number.isFinite(num) && num > 0 ? num : null;
+    }
+
+    function initDefaults() {
+      const qMonthly = getMonthlyFromQuery();
+      if (qMonthly) {
+        monthlyInput.value = qMonthly;
+        monthlyHint.textContent = "Loaded from your College Cash estimate.";
+      } else {
+        monthlyInput.value = 400;
+        monthlyHint.textContent = "Hint: plug in your monthly spending from College Cash.";
+      }
+      wageInput.value = 15;
+      weeksInput.value = 32;
+      hoursSlider.value = 15;
+      hoursPerWeekLabel.textContent = `${hoursSlider.value} hrs/week`;
+    }
+
+    function recalc() {
+      const monthly = Number(monthlyInput.value) || 0;
+      const wage = Number(wageInput.value) || 0;
+      const weeks = Number(weeksInput.value) || 0;
+      const hoursPerWeek = Number(hoursSlider.value) || 0;
+
+      hoursPerWeekLabel.textContent = `${hoursPerWeek} hrs/week`;
+
+      if (monthly <= 0 || wage <= 0 || weeks <= 0 || hoursPerWeek <= 0) {
+        resultLine.textContent = "Enter positive values to see how the math works out.";
+        shortfallLine.textContent = "";
+        return;
+      }
+
+      const yearlyNeed = monthly * 12;
+      const yearlyEarn = wage * hoursPerWeek * weeks;
+
+      const diff = yearlyEarn - yearlyNeed;
+      const symbol = diff >= 0 ? "cover" : "fall short by";
+      const absDiff = Math.abs(diff);
+      const monthlyDiff = absDiff / 12;
+
+      resultLine.textContent =
+        `At $${wage.toFixed(2)}/hr for ${hoursPerWeek} hrs/week over ${weeks} weeks, you earn about $${yearlyEarn.toLocaleString()} per year.`;
+      if (diff >= 0) {
+        shortfallLine.textContent =
+          `You ${symbol} your ~$${yearlyNeed.toLocaleString()}/year target by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month) extra.`;
+      } else {
+        shortfallLine.textContent =
+          `You ${symbol} your ~$${yearlyNeed.toLocaleString()}/year target by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
+      }
+    }
+
+    initDefaults();
+    monthlyInput.addEventListener("input", recalc);
+    wageInput.addEventListener("input", recalc);
+    weeksInput.addEventListener("input", recalc);
+    hoursSlider.addEventListener("input", recalc);
+
+    recalc();
+  </script>
+</body>
+</html>
