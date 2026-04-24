@@ -42,10 +42,10 @@
     details summary::-webkit-details-marker{display:none;}
     details summary::marker{display:none;}
 
-    /* Extra mobile polish */
+    /* Mobile polish, reduced bottom padding to avoid huge blank space */
     @media (max-width: 640px) {
       body {
-        padding-bottom: 4rem;
+        padding-bottom: 2.5rem;
       }
       .mobile-card {
         padding: 0.85rem 1rem;
@@ -76,7 +76,7 @@
   </style>
 </head>
 <body class="min-h-screen text-slate-50 antialiased">
-  <div class="max-w-2xl mx-auto px-4 pb-12 pt-6 space-y-5">
+  <div class="max-w-2xl mx-auto px-4 pb-10 pt-6 space-y-5">
 
     <!-- Nav -->
     <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
@@ -112,14 +112,14 @@
 
     <!-- Sticky mobile estimate -->
     <div class="sticky top-3 z-20 sm:hidden">
-      <div class="glass mobile-card rounded-3xl px-4 py-3 flex items-center justify-between gap-3">
+      <div class="glass mobile-card rounded-3xl flex items-center justify-between gap-3">
         <div>
-          <p class="mobile-card-title text-[0.63rem] uppercase tracking-widest text-slate-400">Yearly spending money</p>
-          <p id="estimateMobile" class="mobile-card-amount text-3xl font-black mt-0.5">$0</p>
-          <p id="monthlyMobile" class="mobile-card-sub text-[0.65rem] text-slate-400 mt-0.5"></p>
+          <p class="mobile-card-title uppercase tracking-widest text-slate-400">Yearly spending money</p>
+          <p id="estimateMobile" class="mobile-card-amount font-black mt-0.5">$0</p>
+          <p id="monthlyMobile" class="mobile-card-sub text-slate-400 mt-0.5"></p>
         </div>
         <div class="text-right max-w-[55%]">
-          <p id="scenarioMobile" class="mobile-card-sub text-[0.65rem] text-slate-400 leading-relaxed"></p>
+          <p id="scenarioMobile" class="mobile-card-sub text-slate-400 leading-relaxed"></p>
         </div>
       </div>
     </div>
@@ -297,7 +297,7 @@
     // National baseline tuned to typical "other expenses" ranges from recent college cost reports. [web:23][web:32]
     const NATIONAL_BASELINE = 2500;
 
-    // Example COL index; replace with your own dataset if desired. [web:23][web:32]
+    // State cost-of-living index. [web:23][web:32]
     const stateCOLIndex = {
       "US Average": 100,
       "Alabama": 88,
@@ -590,7 +590,6 @@
         goToJobHours.href = `jobs.html?monthly=${monthly}`;
       }
 
-      // Notify parent (e.g., app.html wrapper) of monthly estimate
       try {
         window.parent.postMessage({ type: "monthlyEstimate", value: monthly }, "*");
       } catch {}
