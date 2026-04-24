@@ -30,7 +30,7 @@
 
     @media (max-width: 640px) {
       body {
-        padding-bottom: 4rem;
+        padding-bottom: 2.5rem; /* match index so no huge empty space */
       }
       .card-tight {
         padding: 0.9rem 0.85rem;
@@ -118,6 +118,11 @@
         <p class="text-[0.8rem] text-slate-300 font-semibold">Result</p>
         <p id="resultLine" class="text-[0.82rem] text-slate-200"></p>
         <p id="shortfallLine" class="text-[0.76rem] text-slate-400"></p>
+        <p id="warningLine" class="text-[0.74rem] text-amber-300"></p>
+        <p class="text-[0.72rem] text-slate-400">
+          Note: This calculator uses gross pay (before taxes and deductions). Your actual
+          take‑home pay will be lower depending on taxes, withholdings, and any benefits. [web:23]
+        </p>
       </div>
     </div>
 
@@ -155,6 +160,10 @@
           Typical student jobs pay anywhere from minimum wage to well above it, and weekly
           hours vary a lot by campus and semester. Use this as a planning tool, not a
           guarantee that you’ll get a specific job or schedule. [web:24][web:27]
+        </p>
+        <p>
+          This calculator uses gross pay (before taxes). Your actual take‑home pay will be
+          lower after federal, state, and local taxes and any other deductions.
         </p>
         <p>
           This is not financial advice. It’s a simple calculator to help you think about
@@ -206,6 +215,7 @@
     const resultLine = document.getElementById("resultLine");
     const shortfallLine = document.getElementById("shortfallLine");
     const monthlyHint = document.getElementById("monthlyHint");
+    const warningLine = document.getElementById("warningLine");
 
     function getMonthlyFromQuery() {
       const url = new URL(window.location.href);
@@ -236,11 +246,18 @@
       const hoursPerWeek = Number(hoursSlider.value) || 0;
 
       hoursPerWeekLabel.textContent = `${hoursPerWeek} hrs/week`;
+      warningLine.textContent = "";
 
       if (monthly <= 0 || wage <= 0 || weeks <= 0 || hoursPerWeek <= 0) {
         resultLine.textContent = "Enter positive values to see how the math works out.";
         shortfallLine.textContent = "";
         return;
+      }
+
+      // Soft warning for extreme assumptions (does not change math)
+      if (hoursPerWeek > 40 || wage > 60 || weeks > 52) {
+        warningLine.textContent =
+          "Heads up: those job assumptions are higher than what most college students work in real life.";
       }
 
       const yearlyNeed = monthly * 12;
