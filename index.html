@@ -155,7 +155,7 @@
       <p class="text-[0.8rem] text-slate-300">
         We use your state's cost‑of‑living index to set a realistic baseline for spending money.
       </p>
-      <input id="stateSelect" list="stateList" autocomplete="off" placeholder="Type a state…"
+      <select id="stateSelect"
               class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/60 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"></select>
       <div id="selectedState"
            class="rounded-2xl bg-slate-900/80 border border-slate-600/70 px-3 py-3 text-[0.8rem] text-slate-300">
@@ -431,7 +431,7 @@
         const opt = document.createElement("option");
         opt.value = state;
         opt.textContent = state;
-        document.getElementById('stateList').appendChild(opt);
+        stateSelect.appendChild(opt);
       });
       stateSelect.value = selectedState;
       updateSelectedStateCopy();
@@ -599,15 +599,11 @@
       initChips();
       initSliders();
 
-stateSelect.addEventListener("input", () => {
-              const val = stateSelect.value.trim();
-        if (stateCOLIndex[val]) {
-          selectedState = val;
-          updateSelectedStateCopy();
-          recalc();
-        }
-        });
-        
+      stateSelect.addEventListener("change", () => {
+        selectedState = stateSelect.value;
+        updateSelectedStateCopy();
+        recalc();
+      });
 
       recalc();
     });
