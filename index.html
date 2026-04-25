@@ -35,9 +35,12 @@
         radial-gradient(circle at top left, var(--accent-soft), transparent 55%),
         linear-gradient(to bottom, var(--bg1), var(--bg2));
     }
-.glass-no-shadow {
-  box-shadow: none;
-}
+    .glass {
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
+    }
     .chip {
       transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
     }
@@ -266,7 +269,7 @@
 
   <div class="grid gap-3 sm:grid-cols-2">
     <!-- SoFi Checking & Savings -->
-  <div class="glass glass-no-shadow rounded-2xl p-3 space-y-2">
+    <div class="glass rounded-2xl p-3 space-y-2">
       <div class="flex items-center justify-between gap-2">
         <h3 class="text-[0.9rem] font-semibold text-sky-100">
           SoFi Checking &amp; Savings
@@ -299,7 +302,7 @@
     </div>
 
     <!-- SoFi Invest -->
-    <div class="glass glass-no-shadow rounded-2xl p-3 space-y-2">
+    <div class="glass rounded-2xl p-3 space-y-2">
       <div class="flex items-center justify-between gap-2">
         <h3 class="text-[0.9rem] font-semibold text-sky-100">
           SoFi Invest
