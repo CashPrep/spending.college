@@ -3,16 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Find College Jobs · spending.college</title>
+  <title>Find College Jobs · Step 3 · spending.college</title>
   <meta
     name="description"
     content="Find flexible jobs near your college that can help you hit your weekly spending money goal."
   />
-  <!-- AdSense (optional – match other pages if needed) -->
   <script async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225"
     crossorigin="anonymous"></script>
-  <!-- Tailwind (same as other pages) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
@@ -31,34 +29,30 @@
       border: 1px solid rgba(148, 163, 184, 0.4);
       box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
     }
-    a {
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
-    }
   </style>
 </head>
 <body class="min-h-screen text-slate-50 antialiased">
   <div class="max-w-2xl mx-auto px-4 pb-10 pt-3 space-y-4">
-    <!-- Nav (same style as guides.html, but Find Jobs active) -->
+    <!-- Nav -->
     <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
       <span class="font-black text-[0.95rem] text-emerald-300 tracking-tight">
         spending.college
       </span>
       <div class="flex gap-2">
         <a href="index.html"
-           class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-emerald-400/60 transition">
+          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-emerald-400/60 transition">
           College Cash
         </a>
         <a href="jobs.html"
-           class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-emerald-400/60 transition">
+          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-emerald-400/60 transition">
           Job Hours
         </a>
         <a href="find-jobs.html"
-           class="px-3 py-1.5 rounded-xl bg-emerald-400/20 border border-emerald-400/60 text-emerald-200 text-[0.72rem] font-semibold">
+          class="px-3 py-1.5 rounded-xl bg-emerald-400/20 border border-emerald-400/60 text-emerald-200 text-[0.72rem] font-semibold">
           Find Jobs
         </a>
         <a href="guides.html"
-           class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-emerald-400/60 transition">
+          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-emerald-400/60 transition">
           Guides
         </a>
       </div>
@@ -67,15 +61,14 @@
     <!-- Header -->
     <header class="space-y-2">
       <p class="uppercase tracking-[0.25em] text-emerald-300 text-[0.65rem]">
-        Step 3 · Find a job
+        Step 3
       </p>
       <h1 class="font-black text-[clamp(1.9rem,5vw,2.4rem)] leading-tight">
         Find jobs that can actually fund your weekly spending
       </h1>
       <p class="text-slate-300 text-[0.9rem] leading-relaxed">
-        Search for part-time jobs near your college and quickly see which ones are likely to cover your weekly
-        spending money goal.
-        This is information only, not personal financial advice.
+        Search for part-time jobs near your college and quickly see which ones are likely to cover
+        your weekly spending money goal. This is information only, not personal financial advice.
       </p>
     </header>
 
@@ -187,14 +180,12 @@
       </div>
     </section>
 
-    <!-- Footer -->
     <footer class="text-center text-[0.7rem] text-slate-500 pt-2">
-      spending.college · Find Jobs · Information only, not financial advice
+      spending.college · Step 3 · Information only, not financial advice
     </footer>
   </div>
 
   <script>
-    // Pre-fill weekly target from URL (?weekly_min=...)
     function getWeeklyMinFromQuery() {
       const url = new URL(window.location.href);
       const w = url.searchParams.get("weekly_min");
@@ -238,16 +229,12 @@
         });
 
         try {
-          // If find-jobs.html is on the same Vercel project, this relative URL works.
-          // If not, change to your full Vercel URL.
           const response = await fetch(`/api/jobs?${params.toString()}`);
-
           if (!response.ok) {
             jobResults.innerHTML =
               '<p class="text-red-400">Could not load jobs right now. Please try again later.</p>';
             return;
           }
-
           const data = await response.json();
           renderJobs(jobResults, data, data.hourlyTarget || null);
         } catch (err) {
