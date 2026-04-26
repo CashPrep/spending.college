@@ -186,6 +186,7 @@
   </div>
 
   <script>
+    // Read weekly_min from query string if present
     function getWeeklyMinFromQuery() {
       const url = new URL(window.location.href);
       const w = url.searchParams.get("weekly_min");
@@ -229,12 +230,16 @@
         });
 
         try {
+          // If this page is on the same Vercel project as api/jobs.js, this relative URL is correct.
+          // If your API is on a different domain, replace `/api/jobs` with the full URL.
           const response = await fetch(`/api/jobs?${params.toString()}`);
+
           if (!response.ok) {
             jobResults.innerHTML =
               '<p class="text-red-400">Could not load jobs right now. Please try again later.</p>';
             return;
           }
+
           const data = await response.json();
           renderJobs(jobResults, data, data.hourlyTarget || null);
         } catch (err) {
