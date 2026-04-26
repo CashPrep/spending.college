@@ -13,10 +13,9 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Match index.html background + glass style */
     :root {
       --bg-main: #020617;
-      --accent-soft: rgba(16, 185, 129, 0.18); /* emerald-ish glow */
+      --accent-soft: rgba(16, 185, 129, 0.18);
     }
     body {
       background:
@@ -33,7 +32,7 @@
 </head>
 <body class="min-h-screen text-slate-50 antialiased">
   <div class="max-w-2xl mx-auto px-4 pb-10 pt-3 space-y-4">
-    <!-- Nav: same style as index, no Guides tab -->
+    <!-- Nav: Guides tab only on desktop (sm and up) -->
     <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
       <span class="font-black text-[0.95rem] text-emerald-300 tracking-tight">
         spending.college
@@ -51,10 +50,15 @@
           class="px-3 py-1.5 rounded-xl bg-emerald-400/20 border border-emerald-400/60 text-emerald-200 text-[0.8rem] font-semibold">
           Find Jobs
         </a>
+        <!-- Guides: desktop only -->
+        <a href="guides.html"
+          class="hidden sm:inline-block px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-200 text-[0.8rem] font-semibold hover:border-emerald-400/60 transition">
+          Guides
+        </a>
       </div>
     </nav>
 
-    <!-- Mobile Guides link under nav, matching index pattern -->
+    <!-- Mobile Guides link under nav -->
     <a href="guides.html"
       class="sm:hidden block text-[0.75rem] text-emerald-300 underline text-right">
       Money guides &amp; tips →
@@ -188,7 +192,6 @@
   </div>
 
   <script>
-    // Pre-fill weekly_min from query string if present
     function getWeeklyMinFromQuery() {
       const url = new URL(window.location.href);
       const w = url.searchParams.get("weekly_min");
@@ -232,10 +235,7 @@
         });
 
         try {
-          // If this page is on the same Vercel project as api/jobs.js, this relative URL is correct.
-          // If your API is on a different domain, replace `/api/jobs` with the full URL.
           const response = await fetch(`/api/jobs?${params.toString()}`);
-
           if (!response.ok) {
             jobResults.innerHTML =
               '<p class="text-red-400">Could not load jobs right now. Please try again later.</p>';
@@ -274,7 +274,7 @@
               : "Company"
           );
           const location = escapeHtml(
-            job.location && job.location.display_name
+            job.location and job.location.display_name
               ? job.location.display_name
               : ""
           );
@@ -337,7 +337,7 @@
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
-        .replace(/'/g, "&apos;");
+        .replace(/'/g, "&#039;");
     }
   </script>
 </body>
