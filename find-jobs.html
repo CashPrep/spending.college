@@ -32,12 +32,11 @@
 </head>
 <body class="min-h-screen text-slate-50 antialiased">
   <div class="max-w-2xl mx-auto px-4 pb-10 pt-3 space-y-4">
-    <!-- Nav: Guides tab only on desktop (sm and up) -->
     <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
       <span class="font-black text-[0.95rem] text-emerald-300 tracking-tight">
         spending.college
       </span>
-      <div class="flex gap-2">
+      <div class="flex gap-2 flex-wrap justify-end">
         <a href="index.html"
           class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-200 text-[0.8rem] font-semibold hover:border-emerald-400/60 transition">
           College Cash
@@ -50,7 +49,6 @@
           class="px-3 py-1.5 rounded-xl bg-emerald-400/20 border border-emerald-400/60 text-emerald-200 text-[0.8rem] font-semibold">
           Find Jobs
         </a>
-        <!-- Guides: desktop only -->
         <a href="guides.html"
           class="hidden sm:inline-block px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-200 text-[0.8rem] font-semibold hover:border-emerald-400/60 transition">
           Guides
@@ -58,13 +56,11 @@
       </div>
     </nav>
 
-    <!-- Mobile Guides link under nav -->
     <a href="guides.html"
       class="sm:hidden block text-[0.75rem] text-emerald-300 underline text-right">
       Money guides &amp; tips →
     </a>
 
-    <!-- Header -->
     <header class="space-y-2">
       <p class="uppercase tracking-[0.25em] text-emerald-300 text-[0.65rem]">
         Step 3
@@ -78,7 +74,6 @@
       </p>
     </header>
 
-    <!-- Search form -->
     <section class="glass rounded-3xl p-5 sm:p-6 mb-2">
       <form id="job-search-form" class="space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -177,7 +172,6 @@
       </form>
     </section>
 
-    <!-- Results -->
     <section aria-live="polite">
       <div id="job-results" class="space-y-3 text-sm text-slate-300">
         <p class="text-slate-400 text-sm">
@@ -212,7 +206,7 @@
         event.preventDefault();
 
         const town = document.getElementById("town").value.trim();
-        const state = document.getElementById("state").value.trim();
+        const state = document.getElementById("state").value.trim().toUpperCase();
         const targetMin = Number(document.getElementById("targetMin").value || 0);
         const maxHours = Number(document.getElementById("maxHours").value || 0);
         const keywordRaw = document.getElementById("keyword").value.trim();
@@ -229,13 +223,19 @@
         const params = new URLSearchParams({
           town,
           state,
-          targetMin: String(targetMin || ""),
-          maxHours: String(maxHours || ""),
-          keyword: keywordRaw || "",
+          targetMin: targetMin ? String(targetMin) : "",
+          maxHours: maxHours ? String(maxHours) : "",
+          keyword: keywordRaw || ""
         });
 
         try {
-          const response = await fetch(`/api/jobs?${params.toString()}`);
+          const response = await fetch(`/api/jobs?${params.toString()}`, {
+            method: "GET",
+            headers: {
+              "Accept": "application/json"
+            }
+          });
+
           if (!response.ok) {
             jobResults.innerHTML =
               '<p class="text-red-400">Could not load jobs right now. Please try again later.</p>';
@@ -251,82 +251,81 @@
       });
     });
 
-    function renderJobs(jobResults, o, hourlyTarget) {
-      if (!o || !Array.isArray(o.results)) {
+    function renderJobs(jobResults, data, hourlyTarget) {
+      if (!data || !Array.isArray(data.results)) {
         jobResults.innerHTML =
           '<p class="text-red-400">Could not load jobs right now. Please try again later.</p>';
         return;
       }
 
-      const jobs = o.results;
+      const jobs = data.results;
+
       if (!jobs.length) {
         jobResults.innerHTML =
           '<p class="text-slate-400">No jobs found for that location. Try a nearby town or a different keyword.</p>';
         return;
       }
 
-      const html = jobs
-        .map((job) => {
-          const title = escapeHtml(job.title || "Job");
-          const company = escapeHtml(
-            job.company && job.company.display_name
-              ? job.company.display_name
-              : "Company"
-          );
-          const location = escapeHtml(
-            job.location and job.location.display_name
-              ? job.location.display_name
-              : ""
-          );
-          const snippet = escapeHtml(
-            job.description ? job.description.substring(0, 220) + "..." : ""
-          );
-          const applyUrl = job.redirect_url || "#";
+      const html = jobs.map((job) => {
+        const title = escapeHtml(job.title || "Job");
+        const company = escapeHtml(
+          job.company && job.company.display_name
+            ? job.company.display_name
+            : "Company"
+        );
+        const location = escapeHtml(
+          job.location && job.location.display_name
+            ? job.location.display_name
+            : ""
+        );
+        const snippet = escapeHtml(
+          job.description ? job.description.substring(0, 220) + "..." : ""
+        );
+        const applyUrl = job.redirect_url || "#";
 
-          let hourlyEstimateText = "Pay not listed";
-          let meetsTarget = false;
+        let hourlyEstimateText = "Pay not listed";
+        let meetsTarget = false;
 
-          if (typeof job.salary_min === "number") {
-            const hourlyEstimate = job.salary_min / 2000;
-            hourlyEstimateText = "$" + hourlyEstimate.toFixed(2) + "/hr (estimate)";
-            if (hourlyTarget && hourlyEstimate >= hourlyTarget) {
-              meetsTarget = true;
-            }
+        if (typeof job.salary_min === "number" && Number.isFinite(job.salary_min)) {
+          const hourlyEstimate = job.salary_min / 2000;
+          hourlyEstimateText = "$" + hourlyEstimate.toFixed(2) + "/hr (estimate)";
+          if (hourlyTarget && hourlyEstimate >= hourlyTarget) {
+            meetsTarget = true;
           }
+        }
 
-          const badge = meetsTarget
-            ? '<span class="ml-2 inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-[10px] font-medium text-emerald-300">Meets your target</span>'
-            : "";
+        const badge = meetsTarget
+          ? '<span class="ml-2 inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-[10px] font-medium text-emerald-300">Meets your target</span>'
+          : "";
 
-          return `
-            <article class="glass rounded-2xl p-4">
-              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                <div>
-                  <h4 class="text-sm sm:text-base font-semibold text-slate-50">
-                    ${title}${badge}
-                  </h4>
-                  <p class="text-xs text-slate-400">${company}${location ? " · " + location : ""}</p>
-                </div>
-                <div class="text-right text-xs">
-                  <p class="font-semibold text-emerald-400">${hourlyEstimateText}</p>
-                </div>
+        return `
+          <article class="glass rounded-2xl p-4">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+              <div>
+                <h4 class="text-sm sm:text-base font-semibold text-slate-50">
+                  ${title}${badge}
+                </h4>
+                <p class="text-xs text-slate-400">${company}${location ? " · " + location : ""}</p>
               </div>
-              <p class="mt-2 text-xs text-slate-300 line-clamp-3">${snippet}</p>
-              <div class="mt-3">
-                <a
-                  href="${applyUrl}"
-                  target="_blank"
-                  rel="noopener"
-                  class="inline-flex items-center px-3 py-1.5 rounded-full bg-emerald-600 text-xs font-medium text-white hover:bg-emerald-500"
-                >
-                  View &amp; apply
-                  <span aria-hidden="true" class="ml-1">↗</span>
-                </a>
+              <div class="text-right text-xs">
+                <p class="font-semibold text-emerald-400">${hourlyEstimateText}</p>
               </div>
-            </article>
-          `;
-        })
-        .join("");
+            </div>
+            <p class="mt-2 text-xs text-slate-300">${snippet}</p>
+            <div class="mt-3">
+              <a
+                href="${applyUrl}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center px-3 py-1.5 rounded-full bg-emerald-600 text-xs font-medium text-white hover:bg-emerald-500"
+              >
+                View &amp; apply
+                <span aria-hidden="true" class="ml-1">↗</span>
+              </a>
+            </div>
+          </article>
+        `;
+      }).join("");
 
       jobResults.innerHTML = html;
     }
