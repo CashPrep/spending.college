@@ -6,6 +6,7 @@
   <title>Find Jobs Near Your College · spending.college</title>
   <meta name="description"
         content="Search for part-time jobs near your college and see which ones roughly match your weekly spending target." />
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBBZR62R5"></script>
   <script>
@@ -14,12 +15,15 @@
     gtag('js', new Date());
     gtag('config', 'G-PJBBZR62R5');
   </script>
+
   <!-- AdSense -->
   <script async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225"
           crossorigin="anonymous"></script>
+
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
     :root{
       --bg1:#020617;
@@ -41,6 +45,7 @@
 </head>
 <body class="min-h-screen text-slate-50 antialiased">
 <div class="max-w-2xl mx-auto px-4 pb-6 pt-4 space-y-4">
+
   <!-- Nav -->
   <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
     <span class="font-black text-[1rem] text-cyan-300 tracking-tight">
@@ -79,6 +84,19 @@
       We’ll flag jobs whose estimated hourly pay roughly meets that target.
     </p>
   </header>
+
+  <!-- Top Ad -->
+  <div class="flex justify-center overflow-hidden rounded-2xl">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;max-width:336px;"
+         data-ad-client="ca-pub-5702568182016225"
+         data-ad-slot="YOUR_SLOT_ID_FINDJOBS_TOP"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
   <!-- Find jobs widget -->
   <section class="glass rounded-3xl p-4 space-y-4 mt-2">
@@ -183,7 +201,7 @@
     </div>
   </section>
 
-  <!-- Bottom AdSense -->
+  <!-- Bottom Ad -->
   <div class="flex justify-center overflow-hidden rounded-2xl mt-3">
     <ins class="adsbygoogle"
          style="display:block;width:100%;max-width:336px;"
@@ -266,23 +284,24 @@
       lastJsonpScript.parentNode.removeChild(lastJsonpScript);
     }
 
-const script = document.createElement('script');
-script.type = 'text/javascript';
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
 
-const baseUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1';
-const params = [
-  'app_id=' + encodeURIComponent(ADZUNA_APP_ID),
-  'app_key=' + encodeURIComponent(ADZUNA_APP_KEY),
-  'where=' + encodedLocation,
-  'what=' + encodedKeyword,
-  'results_per_page=20',
-  'content-type=application/json',
-  'callback=' + encodeURIComponent(currentCallbackName)
-];
+    const baseUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1';
+    const params = [
+      'app_id=' + encodeURIComponent(ADZUNA_APP_ID),
+      'app_key=' + encodeURIComponent(ADZUNA_APP_KEY),
+      'where=' + encodedLocation,
+      'what=' + encodedKeyword,
+      'results_per_page=20',
+      'content-type=application/json',
+      'callback=' + encodeURIComponent(currentCallbackName)
+    ];
 
-script.src = baseUrl + '?' + params.join('&');
-lastJsonpScript = script;
-document.body.appendChild(script);
+    script.src = baseUrl + '?' + params.join('&');
+    lastJsonpScript = script;
+    document.body.appendChild(script);
+  });
 
   function handleAdzunaResponse(o, hourlyTarget) {
     if (!o || !Array.isArray(o.results)) {
@@ -350,14 +369,14 @@ document.body.appendChild(script);
     jobResults.innerHTML = html;
   }
 
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 </script>
 </body>
 </html>
