@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://spending.college/</loc>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+
+  <url>
+    <loc>https://spending.college/find-jobs.html</loc>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+
+  <url>
+    <loc>https://spending.college/guides.html</loc>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+
+  <url>
+    <loc>https://spending.college/jobs.html</loc>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+
+  <!-- Utility / verification pages - you can include or skip these -->
+  <url>
+    <loc>https://spending.college/fo-verify.html</loc>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+</urlset>
