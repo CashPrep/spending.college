@@ -163,4 +163,386 @@
         </div>
       </div>
       <div>
-        <div class="flex 
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-[0.8rem] text-slate-200">Hours per week</span>
+          <span id="hoursPerWeekLabel" class="text-[0.8rem] text-slate-300"></span>
+        </div>
+        <input id="hoursSlider" type="range" min="5" max="40" step="1" class="w-full" />
+      </div>
+      <!-- Example presets -->
+      <div class="flex flex-wrap gap-2 text-[0.8rem]">
+        <button type="button"
+                class="px-2.5 py-1.5 rounded-2xl bg-slate-900/80 border border-slate-700/80 text-slate-100 hover:border-cyan-400/60"
+                onclick="applyPreset('campus')">
+          Campus job · $15 · 12 hrs · 32 wks
+        </button>
+        <button type="button"
+                class="px-2.5 py-1.5 rounded-2xl bg-slate-900/80 border border-slate-700/80 text-slate-100 hover:border-cyan-400/60"
+                onclick="applyPreset('summer')">
+          Summer job · $18 · 30 hrs · 10 wks
+        </button>
+      </div>
+    </div>
+    <!-- Mode 2: plan job -->
+    <div id="planJobSection" class="space-y-3 pt-3 border-t border-slate-700/60 hidden">
+      <p class="text-[0.85rem] text-slate-300 font-semibold uppercase tracking-wider">
+        Suggested hours to hit your target
+      </p>
+      <p class="text-[0.86rem] text-slate-200">
+        Here are rough hours/week you’d need at common pay rates to hit your monthly target
+        (assuming about 32 working weeks in a year).
+      </p>
+      <div class="space-y-1">
+        <ul id="suggestionsList"
+            class="text-[0.84rem] text-slate-200 space-y-1.5">
+        </ul>
+      </div>
+      <hr class="border-slate-700/70 my-2" />
+      <p class="text-[0.85rem] text-slate-300 font-semibold">
+        Try your own hours and pay
+      </p>
+      <p class="text-[0.82rem] text-slate-300">
+        Change the pay and hours/week to see what that job could earn with the same 32‑week assumption.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-[0.8rem] text-slate-200 mb-1">
+            Hourly pay (before taxes)
+          </label>
+          <input id="planWageInput" type="number" step="0.5" min="0"
+                 class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+                 value="15" />
+        </div>
+        <div>
+          <label class="block text-[0.8rem] text-slate-200 mb-1">
+            Hours per week
+          </label>
+          <input id="planHoursInput" type="number" min="1" max="40"
+                 class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+                 value="12" />
+        </div>
+      </div>
+      <p class="text-[0.78rem] text-slate-400">
+        Assumes about 32 working weeks per year (school-year work). Your actual schedule may differ.
+      </p>
+    </div>
+    <!-- Results -->
+    <div class="pt-3 border-t border-slate-700/60 space-y-2">
+      <p class="text-[0.9rem] text-slate-200 font-semibold">Result</p>
+      <div id="statusBadge"
+           class="inline-flex items-center gap-2 rounded-2xl px-3 py-1.5 bg-slate-900/80 border border-slate-700/80">
+        <span id="statusDot" class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
+        <span id="statusText" class="text-[0.85rem] text-slate-100">
+          Enter numbers to see if a job setup could cover your target.
+        </span>
+      </div>
+      <p id="resultLine" class="text-[0.9rem] text-slate-100"></p>
+      <p id="shortfallLine" class="text-[0.85rem] text-slate-300"></p>
+      <p id="warningLine" class="text-[0.8rem] text-amber-300"></p>
+      <p class="text-[0.78rem] text-slate-300">
+        Note: all earnings here are gross pay (before taxes and deductions). Take‑home pay will be lower.
+      </p>
+
+      <!-- Button to send weekly target into Find Jobs page -->
+      <button type="button"
+              id="goFindJobs"
+              class="mt-2 inline-flex items-center px-3 py-1.5 rounded-2xl bg-cyan-400/90 text-slate-950 text-[0.8rem] font-semibold hover:bg-cyan-300">
+        Use this in Find Jobs →
+      </button>
+      <p class="text-[0.75rem] text-slate-500">
+        This will open the Find Jobs tab and pre-fill your weekly target there.
+      </p>
+    </div>
+  </div>
+
+  <!-- AdSense mid -->
+  <div class="flex justify-center overflow-hidden rounded-2xl">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;max-width:336px;"
+         data-ad-client="ca-pub-5702568182016225"
+         data-ad-slot="YOUR_SLOT_ID_JOBS_MID"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- About -->
+  <details class="glass card-tight rounded-3xl p-4">
+    <summary class="flex items-center justify-between cursor-pointer">
+      <span class="font-semibold text-[1rem]">About</span>
+      <span class="text-slate-400 text-xs">tap to read</span>
+    </summary>
+    <div class="pt-3 text-[0.85rem] text-slate-200 space-y-2">
+      <p>
+        College Job Hours pairs with College Cash. It compares your yearly spending target to what you might earn from a job.
+        It is a planning tool only, not a promise of any specific job, wage, or income.
+      </p>
+      <p>
+        In “I already have a job” mode, yearly earnings are calculated as hourly pay × hours per week × paid weeks.
+        In “Help me plan a job” mode, suggested hours assume about 32 working weeks per year (roughly two semesters).
+      </p>
+      <p>
+        Many students work part‑time during the school year and more during breaks, but the right schedule depends on your
+        classes, health, and local job options.
+      </p>
+    </div>
+  </details>
+  <!-- Privacy -->
+  <details class="glass card-tight rounded-3xl p-4">
+    <summary class="flex items-center justify-between cursor-pointer">
+      <span class="font-semibold text-[1rem]">Privacy</span>
+      <span class="text-slate-400 text-xs">tap to read</span>
+    </summary>
+    <div class="pt-3 text-[0.85rem] text-slate-200 space-y-2">
+      <p>
+        This is a static calculator. Inputs stay in your browser and are not stored on a server or tied to your identity.
+      </p>
+      <p>
+        Google AdSense may collect device and usage data to show and measure ads under Google’s own policies.
+        You can manage ad settings in your Google account.
+      </p>
+      <p>
+        We do not sell or share personal information because we do not collect it. If you email us, we only use your message
+        to respond.
+      </p>
+      <p>
+        Contact: <a href="mailto:unbanked123@gmail.com" class="text-cyan-300 underline">unbanked123@gmail.com</a>
+      </p>
+    </div>
+  </details>
+  <!-- Bottom AdSense -->
+  <div class="flex justify-center overflow-hidden rounded-2xl mt-2">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;max-width:336px;"
+         data-ad-client="ca-pub-5702568182016225"
+         data-ad-slot="YOUR_SLOT_ID_JOBS_BOTTOM"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <footer class="text-center text-[0.75rem] text-slate-500 pt-2">
+    spending.college · College Job Hours · Estimates only · Not financial advice
+  </footer>
+</div>
+
+<script>
+  const monthlyInput = document.getElementById("monthlyInput");
+  const wageInput = document.getElementById("wageInput");
+  const weeksInput = document.getElementById("weeksInput");
+  const hoursSlider = document.getElementById("hoursSlider");
+  const hoursPerWeekLabel = document.getElementById("hoursPerWeekLabel");
+  const resultLine = document.getElementById("resultLine");
+  const shortfallLine = document.getElementById("shortfallLine");
+  const monthlyHint = document.getElementById("monthlyHint");
+  const warningLine = document.getElementById("warningLine");
+  const statusDot = document.getElementById("statusDot");
+  const statusText = document.getElementById("statusText");
+  const modeHaveJobBtn = document.getElementById("modeHaveJob");
+  const modePlanJobBtn = document.getElementById("modePlanJob");
+  const haveJobSection = document.getElementById("haveJobSection");
+  const planJobSection = document.getElementById("planJobSection");
+  const modeHint = document.getElementById("modeHint");
+  const suggestionsList = document.getElementById("suggestionsList");
+  const planWageInput = document.getElementById("planWageInput");
+  const planHoursInput = document.getElementById("planHoursInput");
+  const goFindJobsBtn = document.getElementById("goFindJobs");
+  const PLAN_WEEKS = 32;
+  let mode = "haveJob";
+  let lastWeeklyMin = null;
+
+  function getMonthlyFromQuery() {
+    const url = new URL(window.location.href);
+    const m = url.searchParams.get("monthly");
+    const num = m ? Number(m) : NaN;
+    return Number.isFinite(num) && num > 0 ? num : null;
+  }
+
+  function initDefaults() {
+    const qMonthly = getMonthlyFromQuery();
+    if (qMonthly) {
+      monthlyInput.value = qMonthly;
+      monthlyHint.textContent = "Loaded from your College Cash estimate.";
+    } else {
+      monthlyInput.value = 400;
+      monthlyHint.textContent = "Tip: use your monthly number from College Cash.";
+    }
+    wageInput.value = 15;
+    weeksInput.value = 32;
+    hoursSlider.value = 15;
+    hoursPerWeekLabel.textContent = `${hoursSlider.value} hrs/week`;
+    planWageInput.value = 15;
+    planHoursInput.value = 12;
+    setMode("haveJob");
+  }
+
+  function applyPreset(type) {
+    if (type === "campus") {
+      wageInput.value = 15;
+      hoursSlider.value = 12;
+      weeksInput.value = 32;
+    } else if (type === "summer") {
+      wageInput.value = 18;
+      hoursSlider.value = 30;
+      weeksInput.value = 10;
+    }
+    recalc();
+  }
+
+  function setMode(newMode) {
+    mode = newMode;
+    if (mode === "haveJob") {
+      modeHaveJobBtn.classList.add("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
+      modeHaveJobBtn.classList.remove("bg-slate-900", "border-slate-600/70", "text-slate-200");
+      modePlanJobBtn.classList.remove("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
+      modePlanJobBtn.classList.add("bg-slate-900", "border-slate-600/70", "text-slate-200");
+      haveJobSection.classList.remove("hidden");
+      planJobSection.classList.add("hidden");
+      modeHint.textContent = "Enter your monthly target and your job details to see if it covers your spending.";
+    } else {
+      modePlanJobBtn.classList.add("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
+      modePlanJobBtn.classList.remove("bg-slate-900", "border-slate-600/70", "text-slate-200");
+      modeHaveJobBtn.classList.remove("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
+      modeHaveJobBtn.classList.add("bg-slate-900", "border-slate-600/70", "text-slate-200");
+      haveJobSection.classList.add("hidden");
+      planJobSection.classList.remove("hidden");
+      modeHint.textContent = "See suggested hours/week at different pay rates, then try your own numbers.";
+    }
+    recalc();
+  }
+
+  function recalcHaveJob() {
+    const monthly = Number(monthlyInput.value) || 0;
+    const wage = Number(wageInput.value) || 0;
+    const weeks = Number(weeksInput.value) || 0;
+    const hoursPerWeek = Number(hoursSlider.value) || 0;
+    hoursPerWeekLabel.textContent = `${hoursPerWeek} hrs/week`;
+    warningLine.textContent = "";
+    resultLine.textContent = "";
+    shortfallLine.textContent = "";
+
+    if (monthly > 0) {
+      lastWeeklyMin = monthly / 4;
+    } else {
+      lastWeeklyMin = null;
+    }
+
+    if (monthly <= 0 || wage <= 0 || weeks <= 0 || hoursPerWeek <= 0) {
+      statusDot.className = "w-2.5 h-2.5 rounded-full bg-slate-500";
+      statusText.textContent = "Enter positive values to see if your job covers it.";
+      return;
+    }
+    if (hoursPerWeek > 40 || wage > 60 || weeks > 52) {
+      warningLine.textContent =
+        "Heads up: these numbers are higher than what most college students work.";
+    } else {
+      warningLine.textContent = "";
+    }
+    const yearlyNeed = monthly * 12;
+    const yearlyEarn = wage * hoursPerWeek * weeks;
+    const diff = yearlyEarn - yearlyNeed;
+    const absDiff = Math.abs(diff);
+    const monthlyDiff = absDiff / 12;
+    resultLine.textContent =
+      `This setup earns about $${yearlyEarn.toLocaleString()} per year (~$${Math.round(yearlyEarn/12).toLocaleString()}/month).`;
+    if (diff >= 0) {
+      statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
+      statusText.textContent = "This setup covers your target.";
+      shortfallLine.textContent =
+        `Target: ~$${yearlyNeed.toLocaleString()}/year. You’re ahead by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
+    } else {
+      statusDot.className = "w-2.5 h-2.5 rounded-full bg-rose-400";
+      statusText.textContent = "This setup doesn’t fully cover your target.";
+      shortfallLine.textContent =
+        `Target: ~$${yearlyNeed.toLocaleString()}/year. You’re short by about $${absDiff.toLocaleString()} (≈ $${monthlyDiff.toFixed(0)}/month).`;
+    }
+  }
+
+  function recalcPlanJob() {
+    const monthly = Number(monthlyInput.value) || 0;
+    suggestionsList.innerHTML = "";
+    resultLine.textContent = "";
+    shortfallLine.textContent = "";
+    warningLine.textContent = "";
+
+    if (monthly > 0) {
+      lastWeeklyMin = monthly / 4;
+    } else {
+      lastWeeklyMin = null;
+    }
+
+    if (monthly <= 0) {
+      statusDot.className = "w-2.5 h-2.5 rounded-full bg-slate-500";
+      statusText.textContent = "Enter a monthly target to see suggested hours.";
+      return;
+    }
+    const yearlyNeed = monthly * 12;
+    const wagesToTry = [13, 15, 18];
+    wagesToTry.forEach(w => {
+      const hoursPerWeek = yearlyNeed / (w * PLAN_WEEKS);
+      if (!Number.isFinite(hoursPerWeek) || hoursPerWeek <= 0) return;
+      const li = document.createElement("li");
+      li.innerHTML =
+        `$${w.toFixed(2)}/hour → about <span class="font-semibold text-white">${hoursPerWeek.toFixed(1)} hours/week</span> for ${PLAN_WEEKS} weeks`;
+      suggestionsList.appendChild(li);
+    });
+    const wCustom = Number(planWageInput.value) || 0;
+    const hCustom = Number(planHoursInput.value) || 0;
+    if (wCustom > 0 && hCustom > 0) {
+      const yearlyEarn = wCustom * hCustom * PLAN_WEEKS;
+      const monthlyEarn = yearlyEarn / 12;
+      const diff = yearlyEarn - yearlyNeed;
+      const absDiff = Math.abs(diff);
+      const monthlyDiff = absDiff / 12;
+      resultLine.textContent =
+        `That setup is about $${Math.round(monthlyEarn).toLocaleString()}/month before taxes.`;
+      if (diff >= 0) {
+        statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
+        statusText.textContent = "This setup covers your target.";
+        shortfallLine.textContent =
+          `You’d be ahead by about $${absDiff.toLocaleString()} per year (≈ $${monthlyDiff.toFixed(0)}/month).`;
+      } else {
+        statusDot.className = "w-2.5 h-2.5 rounded-full bg-rose-400";
+        statusText.textContent = "This setup doesn’t fully cover your target.";
+        shortfallLine.textContent =
+          `You’d be short by about $${absDiff.toLocaleString()} per year (≈ $${monthlyDiff.toFixed(0)}/month).`;
+      }
+    } else {
+      statusDot.className = "w-2.5 h-2.5 rounded-full bg-cyan-400";
+      statusText.textContent = "Here are some possible job setups to cover your target.";
+    }
+  }
+
+  function recalc() {
+    if (mode === "haveJob") {
+      recalcHaveJob();
+    } else {
+      recalcPlanJob();
+    }
+  }
+
+  initDefaults();
+  modeHaveJobBtn.addEventListener("click", () => setMode("haveJob"));
+  modePlanJobBtn.addEventListener("click", () => setMode("planJob"));
+  monthlyInput.addEventListener("input", recalc);
+  wageInput.addEventListener("input", recalc);
+  weeksInput.addEventListener("input", recalc);
+  hoursSlider.addEventListener("input", recalc);
+  planWageInput.addEventListener("input", recalc);
+  planHoursInput.addEventListener("input", recalc);
+  recalc();
+
+  if (goFindJobsBtn) {
+    goFindJobsBtn.addEventListener("click", () => {
+      const weekly = lastWeeklyMin ? Math.round(lastWeeklyMin) : 0;
+      const url = new URL(window.location.origin + "/find-jobs.html");
+      if (weekly > 0) url.searchParams.set("weekly_min", weekly);
+      window.location.href = url.toString();
+    });
+  }
+</script>
+</body>
+</html>
