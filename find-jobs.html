@@ -266,24 +266,23 @@
       lastJsonpScript.parentNode.removeChild(lastJsonpScript);
     }
 
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
+const script = document.createElement('script');
+script.type = 'text/javascript';
 
-    const baseUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1';
-    const params = [
-      'app_id=' + encodeURIComponent(ADZUNA_APP_ID),
-      'app_key=' + encodeURIComponent(ADZUNA_APP_KEY),
-      'where=' + encodedLocation,
-      'what=' + encodedKeyword,
-      'results_per_page=20',
-      'content-type=application/json',
-      'callback=' + encodeURIComponent(currentCallbackName)
-    ];
+const baseUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1';
+const params = [
+  'app_id=' + encodeURIComponent(ADZUNA_APP_ID),
+  'app_key=' + encodeURIComponent(ADZUNA_APP_KEY),
+  'where=' + encodedLocation,
+  'what=' + encodedKeyword,
+  'results_per_page=20',
+  'content-type=application/json',
+  'callback=' + encodeURIComponent(currentCallbackName)
+];
 
-    script.src = baseUrl + '?' + params.join('&');
-    lastJsonpScript = script;
-    document.body.appendChild(script);
-  });
+script.src = baseUrl + '?' + params.join('&');
+lastJsonpScript = script;
+document.body.appendChild(script);
 
   function handleAdzunaResponse(o, hourlyTarget) {
     if (!o || !Array.isArray(o.results)) {
