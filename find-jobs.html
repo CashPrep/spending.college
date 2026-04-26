@@ -13,15 +13,15 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* Match index.html background + glass style */
     :root {
-      --bg1: #020617;
-      --bg2: #020617; /* match index background */
-      --accent-soft: rgba(16, 185, 129, 0.18); /* emerald glow */
+      --bg-main: #020617;
+      --accent-soft: rgba(16, 185, 129, 0.18); /* emerald-ish glow */
     }
     body {
       background:
         radial-gradient(circle at top left, var(--accent-soft), transparent 55%),
-        linear-gradient(to bottom, var(--bg1), var(--bg2));
+        linear-gradient(to bottom, var(--bg-main), var(--bg-main));
     }
     .glass {
       background: rgba(15, 23, 42, 0.96);
@@ -33,7 +33,7 @@
 </head>
 <body class="min-h-screen text-slate-50 antialiased">
   <div class="max-w-2xl mx-auto px-4 pb-10 pt-3 space-y-4">
-    <!-- Nav: College Cash / Job Hours / Find Jobs (no Guides tab) -->
+    <!-- Nav: same style as index, no Guides tab -->
     <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
       <span class="font-black text-[0.95rem] text-emerald-300 tracking-tight">
         spending.college
@@ -54,7 +54,7 @@
       </div>
     </nav>
 
-    <!-- Mobile Guides link under nav (same pattern placement as index) -->
+    <!-- Mobile Guides link under nav, matching index pattern -->
     <a href="guides.html"
       class="sm:hidden block text-[0.75rem] text-emerald-300 underline text-right">
       Money guides &amp; tips →
@@ -337,7 +337,7 @@
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(/'/g, "&apos;");
     }
   </script>
 </body>
