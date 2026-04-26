@@ -40,19 +40,25 @@
       </span>
       <div class="flex gap-2">
         <a href="index.html"
-          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-emerald-400/60 transition">
+          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-emerald-400/60 transition">
           College Cash
         </a>
         <a href="jobs.html"
-          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-emerald-400/60 transition">
+          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-emerald-400/60 transition">
           Job Hours
         </a>
         <a href="find-jobs.html"
-          class="px-3 py-1.5 rounded-xl bg-emerald-400/20 border border-emerald-400/60 text-emerald-200 text-[0.72rem] font-semibold">
+          class="px-3 py-1.5 rounded-xl bg-emerald-400/20 border border-emerald-400/60 text-emerald-200 text-[0.8rem] font-semibold">
           Find Jobs
         </a>
       </div>
     </nav>
+
+    <!-- Mobile Guides link under nav (same pattern as index) -->
+    <a href="guides.html"
+      class="sm:hidden block text-[0.75rem] text-emerald-300 underline text-right">
+      Money guides &amp; tips →
+    </a>
 
     <!-- Header -->
     <header class="space-y-2">
@@ -68,7 +74,7 @@
       </p>
     </header>
 
-    <!-- Guides & tips under the bar, like College Cash -->
+    <!-- Guides & tips sentence under header -->
     <section class="mt-1">
       <p class="text-[0.8rem] text-slate-400">
         Want help using this in real life? Check out the
@@ -193,7 +199,6 @@
   </div>
 
   <script>
-    // Read weekly_min from query string if present
     function getWeeklyMinFromQuery() {
       const url = new URL(window.location.href);
       const w = url.searchParams.get("weekly_min");
@@ -237,16 +242,12 @@
         });
 
         try {
-          // If this page is on the same Vercel project as api/jobs.js, this relative URL is correct.
-          // If your API is on a different domain, replace `/api/jobs` with the full URL.
           const response = await fetch(`/api/jobs?${params.toString()}`);
-
           if (!response.ok) {
             jobResults.innerHTML =
               '<p class="text-red-400">Could not load jobs right now. Please try again later.</p>';
             return;
           }
-
           const data = await response.json();
           renderJobs(jobResults, data, data.hourlyTarget || null);
         } catch (err) {
@@ -310,9 +311,7 @@
                   <h4 class="text-sm sm:text-base font-semibold text-slate-50">
                     ${title}${badge}
                   </h4>
-                  <p class="text-xs text-slate-400">${company}${
-            location ? " · " + location : ""
-          }</p>
+                  <p class="text-xs text-slate-400">${company}${location ? " · " + location : ""}</p>
                 </div>
                 <div class="text-right text-xs">
                   <p class="font-semibold text-emerald-400">${hourlyEstimateText}</p>
