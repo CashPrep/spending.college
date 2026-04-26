@@ -3,26 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Guides · spending.college</title>
-  <meta
-    name="description"
-    content="Simple guides to help you use your college spending and job estimates in real life."
-  />
+      <meta name='impact-site-verification' value='63c8b781-4885-438f-883a-8ea87f9822f9'>
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBBZR62R5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PJBBZR62R5');
+  </script>
+  <title>College Money Guides · spending.college</title>
+  <meta name="description"
+        content="Practical, honest guides for saving money in college, finding jobs, and using your College Cash number to plan your budget." />
+
+  <!-- AdSense (one-time include for this page) -->
   <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225"
-    crossorigin="anonymous"></script>
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225"
+          crossorigin="anonymous"></script>
+
+  <!-- Tailwind (same as index.html) -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
     :root {
       --bg1: #020617;
-      --bg2: #020617;
-      --accent-soft: rgba(56, 189, 248, 0.2);
-      --accent-soft2: rgba(168, 85, 247, 0.25);
+      --bg2: #0b1120;
+      --accent-soft: rgba(124, 58, 237, 0.18);
     }
     body {
       background:
         radial-gradient(circle at top left, var(--accent-soft), transparent 55%),
-        radial-gradient(circle at bottom right, var(--accent-soft2), transparent 55%),
         linear-gradient(to bottom, var(--bg1), var(--bg2));
     }
     .glass {
@@ -31,46 +41,388 @@
       border: 1px solid rgba(148, 163, 184, 0.4);
       box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
     }
+    a {
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    details summary::-webkit-details-marker,
+    details summary::marker {
+      display: none;
+    }
+    details summary {
+      list-style: none;
+    }
+    @media (max-width: 640px) {
+      body { padding-bottom: 2.75rem; }
+    }
   </style>
 </head>
 <body class="min-h-screen text-slate-50 antialiased">
   <div class="max-w-2xl mx-auto px-4 pb-10 pt-3 space-y-4">
-    <!-- Nav (no Guides button here) -->
-    <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
-      <span class="font-black text-[0.95rem] text-cyan-300 tracking-tight">
-        spending.college
-      </span>
-      <div class="flex gap-2">
+
+    <!-- Nav -->
+   <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
+  <span class="font-black text-[0.95rem] text-cyan-300 tracking-tight">
+    spending.college
+  </span>
+  <div class="flex gap-2">
+    <a href="index.html"
+      class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-cyan-400/60 transition">
+      College Cash
+    </a>
+    <a href="jobs.html"
+      class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-cyan-400/60 transition">
+      Job Hours
+    </a>
+    <a href="find-jobs.html"
+      class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-cyan-400/60 transition">
+      Find Jobs
+    </a>
+    <a href="guides.html"
+      class="px-3 py-1.5 rounded-xl bg-cyan-400/20 border border-cyan-400/60 text-cyan-200 text-[0.72rem] font-semibold">
+      Guides
+    </a>
+  </div>
+</nav>
+
+    <!-- Header -->
+<header class="space-y-2">
+  <h1 class="font-black text-[clamp(1.9rem,5vw,2.4rem)] leading-tight">
+    College Money Guides
+  </h1>
+  <p class="text-slate-300 text-[0.9rem] leading-relaxed">
+    Simple, honest guidance to help you spend less, earn what you need,
+    and use your College Cash estimate in real life. This page is
+    information only, not personal financial advice.
+  </p>
+</header>
+
+    <!-- 1. Using your College Cash number -->
+    <details class="glass rounded-3xl p-4" open>
+      <summary class="flex items-center justify-between cursor-pointer">
+        <span class="font-semibold text-[1.05rem]">1. Use your College Cash number</span>
+        <span class="text-slate-400 text-xs">tap to open/close</span>
+      </summary>
+      <div class="pt-3 space-y-3">
+        <p class="text-[0.86rem] text-slate-200">
+          When you use the College Cash calculator, you get a yearly and monthly spending estimate based on your state, housing,
+          meal setup, and lifestyle choices.
+        </p>
+        <ul class="list-disc list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            Take the monthly estimate and divide it by 4 to get a weekly target. For example, $400 per month is about $100 per week.
+          </li>
+          <li>
+            Use that weekly number as your “all in” budget for food out, rides, fun, random purchases, and extras.
+          </li>
+          <li>
+            Plug the same monthly number into the College Job Hours calculator to see how many hours of work you need at different pay rates.
+          </li>
+          <li>
+            Re‑run both tools when something changes — like moving off campus, dropping your meal plan, or taking on more classes.
+          </li>
+        </ul>
         <a href="index.html"
-          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-cyan-400/60 transition">
-          College Cash
-        </a>
-        <a href="jobs.html"
-          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-cyan-400/60 transition">
-          Job Hours
-        </a>
-        <a href="find-jobs.html"
-          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.72rem] font-semibold hover:border-cyan-400/60 transition">
-          Find Jobs
+           class="inline-flex items-center text-[0.8rem] text-cyan-300 underline">
+          Run the College Cash calculator →
         </a>
       </div>
-    </nav>
+    </details>
 
-    <!-- Header (same hero format) -->
-    <header class="space-y-2">
-      <h1 class="font-black text-[clamp(1.9rem,5vw,2.4rem)] leading-tight">
-        College Money Guides
-      </h1>
-      <p class="text-slate-300 text-[0.9rem] leading-relaxed">
-        Simple, honest guidance to help you spend less, earn what you need, and use your College Cash and Job Hours
-        estimates in real life. This page is information only, not personal financial advice.
-      </p>
-    </header>
+    <!-- 2. Saving money in college -->
+    <details class="glass rounded-3xl p-4">
+      <summary class="flex items-center justify-between cursor-pointer">
+        <span class="font-semibold text-[1.05rem]">2. Saving money in college</span>
+        <span class="text-slate-400 text-xs">tap to open/close</span>
+      </summary>
+      <div class="pt-3 space-y-3">
+        <p class="text-[0.86rem] text-slate-200">
+          You cannot control every cost, but small choices add up. These tips are based on common patterns seen in student budget
+          research and reports from campus financial aid offices, not on any one school’s rules.
+        </p>
 
-    <!-- Keep your existing guide cards / content here -->
+        <h3 class="text-[0.9rem] font-semibold mt-1">Food and meal plans</h3>
+        <ul class="list-disc list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            Treat your meal plan like a pre‑paid card. Use most of your swipes or dining dollars before buying extra meals off campus.
+          </li>
+          <li>
+            Keep low‑effort food in your room (instant oatmeal, pasta, frozen meals, snacks) so you are not ordering delivery by default.
+          </li>
+          <li>
+            If you do not have a meal plan, cook simple meals in batches and share grocery costs with roommates whenever possible.
+          </li>
+          <li>
+            Track how often you order out in one week; even cutting one delivery or restaurant trip can free up money every month.
+          </li>
+        </ul>
 
-    <footer class="text-center text-[0.7rem] text-slate-500 pt-4">
-      spending.college · Guides · Information only, not financial advice
+        <h3 class="text-[0.9rem] font-semibold mt-3">Textbooks and class materials</h3>
+        <ul class="list-disc list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            Compare prices: campus bookstore, used copies, rentals, older editions, and official digital versions can all be cheaper than new print.
+          </li>
+          <li>
+            Ask your professor if an older edition is acceptable. Often the content is similar but much less expensive.
+          </li>
+          <li>
+            Use the library when you can. Some classes keep copies of the textbook on reserve for short‑term use.
+          </li>
+        </ul>
+
+        <h3 class="text-[0.9rem] font-semibold mt-3">Transportation and getting around</h3>
+        <ul class="list-disc list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            Learn your campus transit options. Many colleges include local buses or shuttles in student fees at no extra charge.
+          </li>
+          <li>
+            Walk or bike for short trips when it is safe instead of using rideshares by default.
+          </li>
+          <li>
+            If you drive, try to group errands into one trip and split parking or gas costs with friends when it makes sense.
+          </li>
+        </ul>
+
+        <h3 class="text-[0.9rem] font-semibold mt-3">Subscriptions and “small” expenses</h3>
+        <ul class="list-disc list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            List every subscription you pay for (streaming, apps, cloud storage, games). Cancel anything you barely use.
+          </li>
+          <li>
+            Look for student discounts on services you truly need; many large companies offer lower student pricing.
+          </li>
+          <li>
+            Decide on a monthly “fun” amount for things like coffee, snacks, and in‑app purchases and stick to it.
+          </li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 3. Finding jobs in college -->
+    <details class="glass rounded-3xl p-4">
+      <summary class="flex items-center justify-between cursor-pointer">
+        <span class="font-semibold text-[1.05rem]">3. Finding jobs while in college</span>
+        <span class="text-slate-400 text-xs">tap to open/close</span>
+      </summary>
+      <div class="pt-3 space-y-3">
+        <p class="text-[0.86rem] text-slate-200">
+          The right job depends on your schedule, financial aid, and what is available on your campus and online. These ideas are based
+          on common job types many colleges and students talk about.
+        </p>
+
+        <h3 class="text-[0.9rem] font-semibold mt-1">On‑campus jobs</h3>
+        <ul class="list-disc list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            Check your school’s official job board or career center website for positions like library assistant, front desk staff,
+            lab helper, or event support.
+          </li>
+          <li>
+            Ask departments related to your major about openings for office assistants, graders, or research assistants.
+          </li>
+          <li>
+            Campus jobs often understand student schedules and may be more flexible around exams than off‑campus work.
+          </li>
+        </ul>
+
+        <h3 class="text-[0.9rem] font-semibold mt-3">Work‑study and financial aid‑linked jobs</h3>
+        <p class="text-[0.83rem] text-slate-300">
+          If your financial aid package mentions “work‑study,” that usually means you may qualify for certain part‑time jobs funded
+          through a government or school program. Exact rules depend on the country and school.
+        </p>
+        <ul class="list-disc list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            Read your financial aid letter carefully and contact your financial aid office if you are not sure whether you have work‑study.
+          </li>
+          <li>
+            Ask which campus offices are hiring work‑study students and how to apply through your school.
+          </li>
+        </ul>
+
+        <h3 class="text-[0.9rem] font-semibold mt-3">Off‑campus and remote jobs</h3>
+        <ul class="list-disc list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            Look for part‑time roles with flexible hours, such as retail, food service, childcare, or front desk work near campus.
+          </li>
+          <li>
+            For remote work, search large job sites for terms like “part‑time remote,” “evening shift,” or roles in customer support,
+            content review, or online tutoring.
+          </li>
+          <li>
+            Be cautious of any job that asks you to pay money up front, share sensitive personal information too early, or move money
+            for other people. If something feels off, ask your campus career center for a second opinion.
+          </li>
+        </ul>
+
+        <h3 class="text-[0.9rem] font-semibold mt-3">Balancing hours with school</h3>
+        <ul class="list-disc list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            Many students aim for somewhere around 10–20 hours of work per week during the semester, but the right number depends on
+            your course load and personal situation.
+          </li>
+          <li>
+            Use the College Job Hours calculator to see how different hourly rates and hours per week line up with your spending goal.
+          </li>
+          <li>
+            If your grades start to slip or you feel overwhelmed, talk to an advisor and consider adjusting your hours.
+          </li>
+        </ul>
+
+        <a href="jobs.html"
+           class="inline-flex items-center text-[0.8rem] text-cyan-300 underline">
+          Open the Job Hours calculator →
+        </a>
+      </div>
+    </details>
+
+    <!-- 4. Simple budget framework -->
+    <details class="glass rounded-3xl p-4">
+      <summary class="flex items-center justify-between cursor-pointer">
+        <span class="font-semibold text-[1.05rem]">4. A simple student budget</span>
+        <span class="text-slate-400 text-xs">tap to open/close</span>
+      </summary>
+      <div class="pt-3 space-y-3">
+        <p class="text-[0.86rem] text-slate-200">
+          You do not need a perfect budget app to be organized. A basic structure can make your College Cash estimate much more useful.
+        </p>
+        <ol class="list-decimal list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            Start with your monthly College Cash number (from the calculator) and list your expected income for the month.
+          </li>
+          <li>
+            Separate essentials (transportation, phone bill, basic groceries, hygiene items) from extras (eating out, fun, shopping).
+          </li>
+          <li>
+            Make sure your essentials fit comfortably inside your income, then decide how much of the remaining money you want to use
+            for extras and how much to save.
+          </li>
+          <li>
+            Check in once a week. You can use a notes app, spreadsheet, or any budgeting app you like; the tool is less important than
+            being consistent.
+          </li>
+        </ol>
+      </div>
+    </details>
+
+    <!-- 5. Helpful resources -->
+    <details class="glass rounded-3xl p-4">
+      <summary class="flex items-center justify-between cursor-pointer">
+        <span class="font-semibold text-[1.05rem]">5. Helpful places to look for more info</span>
+        <span class="text-slate-400 text-xs">tap to open/close</span>
+      </summary>
+      <div class="pt-3 space-y-3">
+        <p class="text-[0.86rem] text-slate-200">
+          These are general types of resources many students use. Always use official school or government websites when you are making big decisions.
+        </p>
+        <ul class="list-disc list-inside text-[0.86rem] text-slate-200 space-y-1.5">
+          <li>
+            Your own college career center site and job board
+            (log in through your school’s official website or student portal).
+          </li>
+          <li>
+            U.S. Federal Work-Study overview on the official student aid site:
+            <a href="https://studentaid.gov/understand-aid/types/work-study"
+               class="text-cyan-300 underline" target="_blank" rel="noopener">
+              studentaid.gov – Work-Study
+            </a>
+          </li>
+          <li>
+            Major job boards for part-time and remote roles, such as
+            <a href="https://www.indeed.com" class="text-cyan-300 underline" target="_blank" rel="noopener">
+              Indeed
+            </a>
+            and
+            <a href="https://www.linkedin.com/jobs" class="text-cyan-300 underline" target="_blank" rel="noopener">
+              LinkedIn Jobs
+            </a>.
+          </li>
+          <li>
+            Large scholarship search tools run by well-known organizations, for example
+            <a href="https://www.fastweb.com" class="text-cyan-300 underline" target="_blank" rel="noopener">
+              Fastweb
+            </a>
+            or
+            <a href="https://bigfuture.collegeboard.org/scholarship-search" class="text-cyan-300 underline" target="_blank" rel="noopener">
+              College Board’s BigFuture
+            </a>.
+          </li>
+        </ul>
+        <p class="text-[0.8rem] text-slate-400">
+          These are external websites, not affiliated with spending.college. Always review their own terms and privacy policies.
+        </p>
+      </div>
+    </details>
+
+    <!-- About these guides -->
+    <details class="glass rounded-3xl p-4">
+      <summary class="flex items-center justify-between cursor-pointer">
+        <span class="font-semibold text-[0.95rem]">About these guides</span>
+        <span class="text-slate-400 text-xs">tap to read</span>
+      </summary>
+      <div class="pt-3 text-[0.85rem] text-slate-200 space-y-2">
+        <p>
+          These guides are written to give students simple, practical ideas for saving money,
+          finding work, and using the College Cash tools. They are based on common patterns
+          in student budgets and on the way many colleges talk about money and jobs, not on
+          any one school’s rules.
+        </p>
+        <p>
+          None of this is personal financial advice, legal advice, or tax advice. Everyone’s
+          situation is different, and costs, job options, and rules can change over time.
+          Always check details like tuition, fees, financial aid, and job policies on official
+          school and government websites.
+        </p>
+        <p>
+          spending.college is an independent project and is not affiliated with any college,
+          university, bank, or government agency.
+        </p>
+      </div>
+    </details>
+
+    <!-- Privacy -->
+    <details class="glass rounded-3xl p-4">
+      <summary class="flex items-center justify-between cursor-pointer">
+        <span class="font-semibold text-[0.95rem]">Privacy</span>
+        <span class="text-slate-400 text-xs">tap to read</span>
+      </summary>
+      <div class="pt-3 text-[0.85rem] text-slate-200 space-y-2">
+        <p>
+          This guides page is static. When you read it, we do not ask for your name, login,
+          or any personal details, and there are no form fields to submit data.
+        </p>
+        <p>
+          We use Google AdSense to show ads. AdSense may collect technical data like your IP
+          address, device information, and cookies to serve and measure ads under Google’s
+          own policies. You can manage your ad settings or consent inside your Google account
+          or browser.
+        </p>
+        <p>
+          spending.college does not sell or share your personal information because we do not
+          collect it through this page. If you choose to contact us by email, we only use your
+          message to reply and handle your request.
+        </p>
+        <p>
+          Contact: <a href="mailto:unbanked123@gmail.com" class="text-cyan-300 underline">
+          unbanked123@gmail.com</a>
+        </p>
+      </div>
+    </details>
+
+    <!-- AdSense on guides page -->
+    <div class="mt-2 flex justify-center overflow-hidden rounded-2xl">
+      <ins class="adsbygoogle"
+           style="display:block;width:100%;max-width:336px;"
+           data-ad-client="ca-pub-5702568182016225"
+           data-ad-slot="YOUR_GUIDES_SLOT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-[0.7rem] text-slate-500 pt-2">
+      spending.college · College Money Guides · Information only, not financial advice
     </footer>
   </div>
 </body>
