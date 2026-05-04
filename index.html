@@ -15,11 +15,34 @@
     gtag('config', 'G-PJBBZR62R5');
   </script>
 
-  <title>College Spending Money Calculator by State | spending.college</title>
-  <meta name="description"
-        content="Free college spending money calculator — estimate how much cash you actually need for college by state, housing, meal plan, and lifestyle. Not tuition. Not rent. Real day-to-day numbers." />
+  <title>College Spending Money Calculator – Realistic College Cash by State</title>
+  <meta name="description" content="See exactly how much spending money you really need for college – not tuition, just real day-to-day cash based on your state, housing, and lifestyle. Get your number in 60 seconds." />
 
-  <!-- FAQPage Schema for Google rich results -->
+  <!-- Open Graph -->
+  <meta property="og:title" content="College Spending Money Calculator – Realistic College Cash by State" />
+  <meta property="og:description" content="See exactly how much spending money you really need for college – not tuition, just real day-to-day cash based on your state, housing, and lifestyle." />
+  <meta property="og:url" content="https://www.spending.college/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="spending.college" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="College Spending Money Calculator – Realistic College Cash by State" />
+  <meta name="twitter:description" content="See exactly how much spending money you really need for college – not tuition, just real day-to-day cash based on your state, housing, and lifestyle." />
+
+  <!-- WebApplication Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "College Cash Calculator",
+    "description": "Calculate realistic college spending money by state – not tuition, just real day-to-day cash.",
+    "url": "https://www.spending.college/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- FAQPage Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -43,7 +66,7 @@
       "name": "How does this college spending calculator work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We start with the national average for student 'other expenses' (typically $2,400\u2013$2,600 per year). Then, we scale that baseline using your college state's cost-of-living index. Finally, we adjust the estimate based on your housing situation, meal plan, and personal lifestyle habits."
+        "text": "We start with the national average for student 'other expenses' (typically $2,400–$2,600 per year). Then, we scale that baseline using your college state's cost-of-living index. Finally, we adjust the estimate based on your housing situation, meal plan, and personal lifestyle habits."
       }
     },{
       "@type": "Question",
@@ -101,10 +124,13 @@
     details summary::marker {
       display: none;
     }
+    /* Mobile nav: allow wrapping on very small screens */
+    @media (max-width: 400px) {
+      .nav-links { flex-wrap: wrap; gap: 0.35rem; }
+      .nav-links a { font-size: 0.72rem; padding: 0.3rem 0.6rem; }
+    }
     @media (max-width: 640px) {
-      body {
-        padding-bottom: 2.75rem;
-      }
+      body { padding-bottom: 2.75rem; }
     }
   </style>
 </head>
@@ -113,10 +139,10 @@
 
     <!-- Nav -->
     <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
-      <span class="font-black text-[1rem] text-cyan-300 tracking-tight">
+      <span class="font-black text-[1rem] text-cyan-300 tracking-tight shrink-0">
         spending.college
       </span>
-      <div class="flex gap-2">
+      <div class="nav-links flex gap-2 flex-wrap justify-end">
         <a href="index.html"
            class="px-3 py-1.5 rounded-xl bg-cyan-400/20 border border-cyan-400/50 text-cyan-100 text-[0.8rem] font-semibold">
           College Cash
@@ -186,7 +212,7 @@
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">College Cost of Living by State</p>
       <h2 class="text-[1.05rem] font-semibold">1. Pick your state</h2>
       <p class="text-[0.8rem] text-slate-300">
-        We use your state’s cost‑of‑living index to set a realistic baseline for spending money.
+        We use your state's cost‑of‑living index to set a realistic baseline for spending money.
       </p>
       <select id="stateSelect"
               class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/60 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"></select>
@@ -247,7 +273,7 @@
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">How to Save Money in College</p>
       <h2 class="text-[1.05rem] font-semibold">Need ideas to save or earn?</h2>
       <p class="text-[0.84rem] text-slate-300">
-        After you get your College Cash estimate, visit the Guides tab for tips on saving money in college and finding flexible jobs.
+        After you get your number, <a href="guides.html" class="text-cyan-300 underline">use the College Cash guides</a> for tips on saving money in college and finding flexible jobs that fit your schedule.
       </p>
       <a href="guides.html" class="inline-flex items-center text-[0.8rem] text-cyan-300 underline">
         Open College Money Guides →
@@ -259,7 +285,7 @@
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">How Many Hours Should a College Student Work?</p>
       <h2 class="text-[1.05rem] font-semibold">Now find out how many hours to work</h2>
       <p class="text-[0.82rem] text-slate-300">
-        You know your spending target. Use College Job Hours to see exactly how many hours per week you need to work to cover it.
+        You know your spending target. <a href="jobs.html" class="text-cyan-300 underline">Use the College Job Hours calculator</a> to see exactly how many hours per week you need to work to cover it.
       </p>
       <a id="goToJobHours" href="jobs.html?monthly=221"
          class="flex items-center justify-between w-full rounded-2xl bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 border border-cyan-400/40 px-4 py-3 hover:from-cyan-500/30 hover:to-indigo-500/30 transition">
@@ -276,7 +302,7 @@
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">Best Free Bank Accounts for College Students</p>
       <h2 class="text-[0.95rem] font-semibold text-sky-100">Optional money tools for your College Cash</h2>
       <p class="text-[0.8rem] text-slate-300">
-        You don’t need any specific bank to use this calculator, but some students
+        You don't need any specific bank to use this calculator, but some students
         like to separate their College Cash into a dedicated account or start investing small amounts.
       </p>
       <div class="grid gap-3 sm:grid-cols-2">
@@ -288,7 +314,7 @@
           </div>
           <p class="text-[0.8rem] text-slate-300">
             Keep your College Cash in a separate online checking/savings account so
-            it’s easier to see how much you have left for the month.
+            it's easier to see how much you have left for the month.
           </p>
           <p class="text-[0.78rem] text-slate-200">
             With this referral, friends who open and fund a SoFi Checking &amp;
@@ -302,7 +328,7 @@
           </a>
           <p class="text-[0.7rem] text-slate-400">
             Referral link – I may earn a bonus if you open and fund an account.
-            Offers can change; always check SoFi’s latest terms.
+            Offers can change; always check SoFi's latest terms.
           </p>
         </div>
         <!-- SoFi Invest -->
@@ -328,7 +354,7 @@
           <p class="text-[0.7rem] text-slate-400">
             Investing involves risk, including loss of money. Referral link – I may
             earn a bonus if you open and fund an account. Offers can change; always
-            check SoFi’s latest terms.
+            check SoFi's latest terms.
           </p>
         </div>
       </div>
@@ -352,8 +378,8 @@
         </summary>
         <p class="pt-3 text-[0.8rem] text-slate-300 leading-relaxed">
           On average, college students need between $200 and $500 per month for day-to-day expenses.
-          However, this varies significantly based on the state’s cost of living, whether you commute,
-          and your lifestyle choices. Our calculator helps you find a realistic baseline for your specific location.
+          However, this varies significantly based on the state's cost of living, whether you commute,
+          and your lifestyle choices. <a href="/" class="text-cyan-300 underline">Use the College Cash calculator to get your number</a> based on your actual state and situation.
         </p>
       </details>
 
@@ -375,8 +401,8 @@
           <span class="ml-3 text-slate-400 text-xs shrink-0">tap to expand</span>
         </summary>
         <p class="pt-3 text-[0.8rem] text-slate-300 leading-relaxed">
-          We start with the national average for student “other expenses” (typically $2,400–$2,600 per year).
-          Then, we scale that baseline using your college state’s cost-of-living index. Finally, we adjust
+          We start with the national average for student "other expenses" (typically $2,400–$2,600 per year).
+          Then, we scale that baseline using your college state's cost-of-living index. Finally, we adjust
           the estimate based on your housing situation, meal plan, and personal lifestyle habits.
         </p>
       </details>
@@ -389,7 +415,7 @@
         <p class="pt-3 text-[0.8rem] text-slate-300 leading-relaxed">
           This calculator is designed for personal budgeting and planning your day-to-day cash needs.
           While it gives a realistic estimate for living expenses, you should always consult your
-          university’s official Cost of Attendance (COA) for exact financial aid and loan borrowing limits.
+          university's official Cost of Attendance (COA) for exact financial aid and loan borrowing limits.
         </p>
       </details>
     </section>
@@ -403,11 +429,11 @@
       <div class="pt-3 text-[0.8rem] text-slate-300 space-y-2">
         <p>
           College Cash focuses on day‑to‑day spending money only — not tuition, not rent.
-          The baseline is built from national “other expenses” data (transportation, personal, and miscellaneous)
+          The baseline is built from national "other expenses" data (transportation, personal, and miscellaneous)
           and typically lands around $2,400–$2,600 per year for a full‑time student.
         </p>
         <p>
-          We scale that baseline using each state’s cost‑of‑living index so high‑cost states show higher estimates
+          We scale that baseline using each state's cost‑of‑living index so high‑cost states show higher estimates
           than lower‑cost states. This approximates how far the same amount of cash goes in different parts of the U.S.
         </p>
         <p>
@@ -435,7 +461,7 @@
         <p>
           We use Google AdSense to show ads. AdSense may collect technical data like your IP
           address, device information, and cookies to serve and measure ads according to
-          Google’s own policies. You can adjust your ad settings in your Google account.
+          Google's own policies. You can adjust your ad settings in your Google account.
         </p>
         <p>
           We do not sell or share any personal information because we do not collect it in
