@@ -84,6 +84,14 @@
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225"
           crossorigin="anonymous"></script>
 
+  <!-- Fonts for receipt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
   <!-- Tailwind — no defer so styles apply before first paint (prevents flash) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -118,7 +126,6 @@
     /* ── Chips ── */
     .chip {
       transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
-      /* Minimum touch target 44px height for mobile */
       min-height: 56px;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
@@ -142,7 +149,6 @@
       accent-color: #22d3ee;
       height: 6px;
       cursor: pointer;
-      /* Better touch target on mobile */
       padding: 8px 0;
     }
 
@@ -157,7 +163,6 @@
 
     /* ── Select ── */
     select {
-      /* Prevent iOS zoom on focus (needs font-size >= 16px) */
       font-size: 16px !important;
       cursor: pointer;
     }
@@ -168,7 +173,6 @@
       .nav-links a { font-size: 0.7rem; padding: 0.35rem 0.55rem; }
     }
 
-    /* ── Mobile bottom padding for sticky bar ── */
     @media (max-width: 640px) {
       body { padding-bottom: 1rem; }
     }
@@ -180,17 +184,14 @@
       line-height: 1;
     }
 
-    /* ── Better tap area for FAQ summaries ── */
     details summary {
       padding: 0.75rem 0;
       margin: -0.75rem 0;
     }
 
-    /* ── Prevent horizontal scroll ── */
     * { box-sizing: border-box; }
     body, html { overflow-x: hidden; max-width: 100vw; }
 
-    /* ── Desktop max-width container ── */
     .page-wrap {
       max-width: 720px;
       margin-left: auto;
@@ -199,7 +200,6 @@
       padding-right: 1rem;
     }
 
-    /* ── Wider desktop layout ── */
     @media (min-width: 768px) {
       .page-wrap {
         padding-left: 1.5rem;
@@ -207,7 +207,6 @@
       }
     }
 
-    /* ── Two-column estimate on desktop ── */
     @media (min-width: 640px) {
       .estimate-grid {
         display: grid;
@@ -217,9 +216,251 @@
       }
     }
 
-    /* ── Smooth number transition ── */
     .estimate-num {
       transition: color 0.2s ease;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RECEIPT SECTION
+    ═══════════════════════════════════════════════ */
+
+    /* Receipt reveal animation */
+    #receipt-section {
+      display: none;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    #receipt-section.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #receipt-section.show-animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Receipt card – always dark, story-ready */
+    #receipt-card {
+      font-family: 'Space Mono', monospace;
+      background: #0a0a0f;
+      color: #e2e8f0;
+      width: 340px;
+      margin: 0 auto;
+      border-radius: 18px;
+      padding: 28px 24px 20px;
+      border: 1px solid rgba(56,189,248,0.18);
+      box-shadow: 0 0 40px rgba(56,189,248,0.08), 0 20px 60px rgba(0,0,0,0.8);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Subtle glow top bar */
+    #receipt-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+    }
+
+    .receipt-brand {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #22d3ee;
+      margin-bottom: 4px;
+    }
+    .receipt-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      color: #475569;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+
+    .receipt-vibe {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+    .vibe-frugal   { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
+    .vibe-balanced { background: rgba(56,189,248,0.12); color: #38bdf8; border: 1px solid rgba(56,189,248,0.25); }
+    .vibe-bigspend { background: rgba(234,179,8,0.12);  color: #eab308; border: 1px solid rgba(234,179,8,0.25); }
+    .vibe-broke    { background: rgba(239,68,68,0.12);  color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+
+    .receipt-total-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: #475569;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .receipt-total {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1;
+      color: #f8fafc;
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+    }
+    .receipt-per-year {
+      font-size: 11px;
+      color: #475569;
+      margin-bottom: 20px;
+    }
+
+    .receipt-divider {
+      border: none;
+      border-top: 1px dashed rgba(71,85,105,0.5);
+      margin: 14px 0;
+    }
+
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      margin-bottom: 7px;
+      color: #94a3b8;
+    }
+    .receipt-row .label { color: #cbd5e1; }
+    .receipt-row.top-cat .label { color: #22d3ee; font-weight: 700; }
+    .receipt-row.top-cat .val   { color: #22d3ee; font-weight: 700; }
+    .receipt-pct-bar {
+      width: 60px;
+      height: 3px;
+      background: rgba(71,85,105,0.3);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0 8px;
+      flex-shrink: 0;
+    }
+    .receipt-pct-fill {
+      height: 100%;
+      background: #475569;
+      border-radius: 2px;
+    }
+    .receipt-row.top-cat .receipt-pct-fill { background: #22d3ee; }
+
+    .receipt-state-row {
+      font-size: 10px;
+      color: #475569;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .receipt-barcode {
+      margin-top: 14px;
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      height: 28px;
+    }
+    .receipt-barcode span {
+      display: inline-block;
+      background: #1e293b;
+      border-radius: 1px;
+    }
+
+    .receipt-footer-brand {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #22d3ee;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+    .receipt-cta {
+      font-size: 9px;
+      color: #475569;
+      letter-spacing: 0.08em;
+    }
+
+    /* Receipt action buttons */
+    .receipt-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      border-radius: 14px;
+      padding: 0.65rem 1.2rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: none;
+      min-height: 44px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .receipt-btn-save {
+      background: linear-gradient(135deg, #22d3ee, #818cf8);
+      color: #020617;
+      flex: 1;
+    }
+    .receipt-btn-save:hover { opacity: 0.9; transform: translateY(-1px); }
+    .receipt-btn-save:active { transform: scale(0.97); }
+    .receipt-btn-copy {
+      background: rgba(30,41,59,1);
+      border: 1px solid rgba(71,85,105,0.6);
+      color: #94a3b8;
+    }
+    .receipt-btn-copy:hover { border-color: #22d3ee; color: #22d3ee; }
+    .receipt-btn-copy:active { transform: scale(0.97); }
+
+    /* Trigger button (appears after calc) */
+    #receipt-trigger-wrap {
+      display: none;
+    }
+    #receipt-trigger-wrap.visible {
+      display: block;
+      animation: slideUp 0.4s ease forwards;
+    }
+    @keyframes slideUp {
+      from { opacity:0; transform: translateY(12px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /* Handle input for receipt */
+    #receipt-handle-input {
+      font-family: 'Space Mono', monospace;
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(71,85,105,0.5);
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    #receipt-handle-input:focus {
+      border-color: #22d3ee;
+    }
+    #receipt-handle-input::placeholder {
+      color: #475569;
+    }
+
+    /* Copy success flash */
+    .copy-flash {
+      animation: flashGreen 1.5s ease forwards;
+    }
+    @keyframes flashGreen {
+      0%   { color: #10b981; border-color: #10b981; }
+      80%  { color: #10b981; border-color: #10b981; }
+      100% { color: #94a3b8; border-color: rgba(71,85,105,0.6); }
     }
   </style>
 </head>
@@ -367,6 +608,98 @@
       </p>
       <div id="weights" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
     </section>
+
+    <!-- ═══════════════════════════════════
+         RECEIPT TRIGGER — appears after first interaction
+    ═══════════════════════════════════ -->
+    <div id="receipt-trigger-wrap">
+      <div class="glass rounded-3xl p-4 sm:p-5">
+        <!-- Teaser header -->
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400/30 to-indigo-500/30 border border-cyan-400/30 flex items-center justify-center text-lg shrink-0">🧾</div>
+          <div>
+            <p class="font-bold text-[0.95rem] text-white">Turn this into a shareable receipt</p>
+            <p class="text-[0.73rem] text-slate-400">Save to camera roll &amp; post to your story</p>
+          </div>
+        </div>
+
+        <!-- Handle input -->
+        <div class="mb-3">
+          <label class="block text-[0.72rem] text-slate-400 uppercase tracking-wider mb-1">Your handle (optional)</label>
+          <input id="receipt-handle-input" type="text" placeholder="@yourhandle" maxlength="30" />
+        </div>
+
+        <!-- Generate button -->
+        <button id="generate-receipt-btn"
+          onclick="generateAndShowReceipt()"
+          class="w-full rounded-2xl bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 border border-cyan-400/40 px-4 py-3 font-bold text-[0.9rem] text-white hover:from-cyan-500/30 hover:to-indigo-500/30 transition active:scale-[0.99] flex items-center justify-center gap-2"
+          style="min-height:52px;">
+          <span>Generate My Receipt</span>
+          <span class="text-lg">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         RECEIPT SECTION
+    ═══════════════════════════════════ -->
+    <div id="receipt-section">
+      <div class="glass rounded-3xl p-4 sm:p-5 space-y-4">
+        <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">Your Budget Receipt</p>
+        <p class="text-[0.82rem] text-slate-300">Save it to your camera roll and post to your story. 📲</p>
+
+        <!-- The actual receipt card (captured by html2canvas) -->
+        <div id="receipt-card">
+          <div class="receipt-brand">spending.college</div>
+          <div class="receipt-subtitle">MONTHLY SPENDING REPORT</div>
+
+          <div id="r-vibe" class="receipt-vibe vibe-balanced">Balanced Spend</div>
+
+          <div class="receipt-total-label">MONTHLY TOTAL</div>
+          <div id="r-total" class="receipt-total">$221</div>
+          <div id="r-peryear" class="receipt-per-year">/ mo &nbsp;·&nbsp; $2,650 / yr</div>
+
+          <hr class="receipt-divider">
+
+          <!-- Line items -->
+          <div id="r-lineitems"></div>
+
+          <hr class="receipt-divider">
+
+          <!-- Meta row -->
+          <div class="receipt-state-row">
+            <span id="r-state">US Average</span>
+            <span id="r-date"></span>
+          </div>
+          <div class="receipt-state-row">
+            <span id="r-handle" style="color:#22d3ee;"></span>
+            <span id="r-housing-meal" style="font-size:9px;"></span>
+          </div>
+
+          <hr class="receipt-divider">
+
+          <!-- Barcode -->
+          <div class="receipt-barcode" id="r-barcode"></div>
+
+          <!-- Footer -->
+          <div class="receipt-footer-brand">spending.college</div>
+          <div class="receipt-cta">calculate yours → spending.college</div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="flex gap-3 mt-2">
+          <button class="receipt-btn receipt-btn-save" onclick="downloadReceipt()">
+            <span>⬇</span> Save to Camera Roll
+          </button>
+          <button class="receipt-btn receipt-btn-copy" id="copy-link-btn" onclick="copyLink()">
+            <span>🔗</span> Copy Link
+          </button>
+        </div>
+
+        <!-- Re-generate / edit -->
+        <button onclick="resetReceipt()" class="w-full text-[0.75rem] text-slate-500 hover:text-slate-300 transition py-1">← Edit handle / regenerate</button>
+      </div>
+    </div>
 
     <!-- Guides callout -->
     <section class="glass rounded-3xl p-4 sm:p-5 space-y-2">
@@ -610,18 +943,30 @@
     };
 
     const categories = [
-      { key: "food_out", label: "Food & coffee" },
-      { key: "rides",    label: "Rides & travel" },
-      { key: "fun",      label: "Fun & events" },
-      { key: "shopping", label: "Shopping" },
-      { key: "random",   label: "Random stuff" }
+      { key: "food_out", label: "Food & coffee",   emoji: "☕" },
+      { key: "rides",    label: "Rides & travel",  emoji: "🚗" },
+      { key: "fun",      label: "Fun & events",    emoji: "🎉" },
+      { key: "shopping", label: "Shopping",        emoji: "🛍" },
+      { key: "random",   label: "Random stuff",    emoji: "🎲" }
     ];
+
+    // Rough spending split percentages (must sum to 100)
+    const CAT_BASE_PCT = {
+      food_out: 35,
+      rides:    15,
+      fun:      20,
+      shopping: 18,
+      random:   12
+    };
 
     let selectedState = "US Average";
     let housing = "on_campus";
     let meal = "plan";
     const weights = { food_out: 2, rides: 2, fun: 2, shopping: 2, random: 2 };
     const LIFESTYLE_STRENGTH = 0.25;
+    let currentMonthly = 221;
+    let currentYearly  = 2650;
+    let receiptTriggered = false;
 
     const stateSelect       = document.getElementById("stateSelect");
     const selectedStateDiv  = document.getElementById("selectedState");
@@ -636,6 +981,8 @@
     const weightsContainer  = document.getElementById("weights");
     const handoffTextEl     = document.getElementById("handoffText");
     const goToJobHours      = document.getElementById("goToJobHours");
+    const receiptTrigger    = document.getElementById("receipt-trigger-wrap");
+    const receiptSection    = document.getElementById("receipt-section");
 
     function initStates() {
       Object.keys(stateCOLIndex).forEach(state => {
@@ -712,10 +1059,10 @@
 
     function computeHousingMealAdjustment(base) {
       let f = 1;
-      if (housing === "on_campus")   f += 0.12;
+      if (housing === "on_campus")       f += 0.12;
       else if (housing === "with_family") f -= 0.07;
-      if (meal === "plan")      f -= 0.06;
-      else if (meal === "no_plan") f += 0.18;
+      if (meal === "plan")               f -= 0.06;
+      else if (meal === "no_plan")       f += 0.18;
       return base * f;
     }
 
@@ -727,6 +1074,9 @@
     function recalc() {
       const yearly  = Math.round(applyLifestyleToTotal(computeHousingMealAdjustment(computeBaseForState())));
       const monthly = Math.round(yearly / 12);
+      currentYearly  = yearly;
+      currentMonthly = monthly;
+
       estimateEl.textContent       = `$${yearly.toLocaleString()}`;
       estimateMobileEl.textContent = `$${yearly.toLocaleString()}`;
       monthlyLineEl.textContent    = `≈ $${monthly.toLocaleString()} per month for day-to-day spending.`;
@@ -737,6 +1087,156 @@
       handoffTextEl.textContent    = `Use your ~$${monthly.toLocaleString()}/month target in College Job Hours.`;
       if (goToJobHours) goToJobHours.href = `jobs.html?monthly=${monthly}`;
       try { window.parent.postMessage({ type: "monthlyEstimate", value: monthly }, "*"); } catch {}
+
+      // Reveal receipt trigger after first real interaction
+      if (!receiptTriggered) {
+        receiptTriggered = true;
+        receiptTrigger.classList.add("visible");
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       RECEIPT GENERATOR
+    ═══════════════════════════════════════════════ */
+
+    function getVibe(monthly) {
+      if (monthly < 200) return { label: "Frugal Mode 🌿",       cls: "vibe-frugal" };
+      if (monthly < 350) return { label: "Balanced Spend ✨",    cls: "vibe-balanced" };
+      if (monthly < 500) return { label: "Big Spender 💸",       cls: "vibe-bigspend" };
+      return                     { label: "Broke Mode Activated 💀", cls: "vibe-broke" };
+    }
+
+    function buildBarcode() {
+      const bc = document.getElementById("r-barcode");
+      bc.innerHTML = "";
+      // Generate pseudo-random bars seeded from monthly total
+      const seed = currentMonthly;
+      const heights = [18,10,22,14,26,10,18,24,12,20,16,28,10,22,14,18,26,12,20,16,24,10,18,22,14];
+      heights.forEach((h, i) => {
+        const bar = document.createElement("span");
+        const mod = ((seed * (i + 7)) % 18) + 8;
+        bar.style.width  = (i % 3 === 0 ? "3px" : "2px");
+        bar.style.height = mod + "px";
+        bar.style.background = i % 5 === 0 ? "#22d3ee" : "#1e293b";
+        bc.appendChild(bar);
+      });
+    }
+
+    function generateAndShowReceipt() {
+      const monthly = currentMonthly;
+      const yearly  = currentYearly;
+      const handle  = document.getElementById("receipt-handle-input").value.trim();
+
+      // Vibe label
+      const vibe = getVibe(monthly);
+      const vibeEl = document.getElementById("r-vibe");
+      vibeEl.textContent = vibe.label;
+      vibeEl.className   = "receipt-vibe " + vibe.cls;
+
+      // Total
+      document.getElementById("r-total").textContent   = `$${monthly.toLocaleString()}`;
+      document.getElementById("r-peryear").textContent  = `/ mo · $${yearly.toLocaleString()} / yr`;
+
+      // Line items — compute weighted percentages
+      const totalWeight = Object.values(weights).reduce((a, b) => a + b, 0);
+      let topCat = null, topPct = 0;
+
+      // Build adjusted percentages from slider weights × base pct
+      let rawPcts = {};
+      let rawSum  = 0;
+      categories.forEach(cat => {
+        const adj = (CAT_BASE_PCT[cat.key] / 100) * (weights[cat.key] / 2.5);
+        rawPcts[cat.key] = adj;
+        rawSum += adj;
+      });
+      // Normalize to 100
+      const lineitems = categories.map(cat => {
+        const pct = Math.round((rawPcts[cat.key] / rawSum) * 100);
+        return { ...cat, pct };
+      });
+      // Identify top category
+      lineitems.forEach(item => {
+        if (item.pct > topPct) { topPct = item.pct; topCat = item.key; }
+      });
+
+      const container = document.getElementById("r-lineitems");
+      container.innerHTML = "";
+      lineitems.forEach(item => {
+        const amt  = Math.round((item.pct / 100) * monthly);
+        const isTop = item.key === topCat;
+        const row  = document.createElement("div");
+        row.className = "receipt-row" + (isTop ? " top-cat" : "");
+        row.innerHTML = `
+          <span class="label">${item.emoji} ${item.label}</span>
+          <div class="receipt-pct-bar"><div class="receipt-pct-fill" style="width:${item.pct}%"></div></div>
+          <span class="val">$${amt} <span style="opacity:0.6;font-size:9px;">(${item.pct}%)</span></span>
+        `;
+        container.appendChild(row);
+      });
+
+      // Meta
+      document.getElementById("r-state").textContent        = selectedState;
+      document.getElementById("r-date").textContent         = new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" });
+      document.getElementById("r-handle").textContent       = handle ? (handle.startsWith("@") ? handle : "@" + handle) : "";
+      document.getElementById("r-housing-meal").textContent = (housing === "on_campus" ? "on campus" : "commuter") + " · " + (meal === "plan" ? "meal plan" : "no plan");
+
+      // Barcode
+      buildBarcode();
+
+      // Show receipt section with animation
+      receiptSection.style.display = "block";
+      // Force reflow then animate
+      receiptSection.offsetHeight;
+      receiptSection.classList.add("visible");
+
+      // Scroll to receipt
+      setTimeout(() => {
+        receiptSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+
+      // Track in GA
+      try { gtag("event", "receipt_generated", { state: selectedState, monthly: monthly }); } catch {}
+    }
+
+    function downloadReceipt() {
+      const card = document.getElementById("receipt-card");
+      html2canvas(card, {
+        scale: 3,
+        backgroundColor: "#0a0a0f",
+        useCORS: true,
+        logging: false
+      }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = `spending-receipt-${selectedState.replace(/\s+/g,"-").toLowerCase()}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+        try { gtag("event", "receipt_downloaded", { state: selectedState }); } catch {}
+      });
+    }
+
+    function copyLink() {
+      const url = `https://spending.college/?state=${encodeURIComponent(selectedState)}&total=${currentMonthly}`;
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = document.getElementById("copy-link-btn");
+        btn.textContent = "✓ Copied!";
+        btn.classList.add("copy-flash");
+        setTimeout(() => {
+          btn.innerHTML = "<span>🔗</span> Copy Link";
+          btn.classList.remove("copy-flash");
+        }, 1800);
+      }).catch(() => {
+        // Fallback for older Safari
+        const ta = document.createElement("textarea");
+        ta.value = url; document.body.appendChild(ta);
+        ta.select(); document.execCommand("copy");
+        document.body.removeChild(ta);
+      });
+    }
+
+    function resetReceipt() {
+      receiptSection.classList.remove("visible");
+      setTimeout(() => { receiptSection.style.display = "none"; }, 350);
+      receiptTrigger.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
     document.addEventListener("DOMContentLoaded", () => {
