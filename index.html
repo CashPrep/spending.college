@@ -93,19 +93,35 @@
       --bg2: #0b1120;
       --accent-soft: rgba(124, 58, 237, 0.18);
     }
+
+    /* ── Smooth scroll ── */
+    html { scroll-behavior: smooth; }
+
+    /* ── Background ── */
     body {
       background:
         radial-gradient(circle at top left, var(--accent-soft), transparent 55%),
         linear-gradient(to bottom, var(--bg1), var(--bg2));
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+
+    /* ── Glass card ── */
     .glass {
       background: rgba(15, 23, 42, 0.9);
       backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border: 1px solid rgba(148, 163, 184, 0.4);
       box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
     }
+
+    /* ── Chips ── */
     .chip {
       transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+      /* Minimum touch target 44px height for mobile */
+      min-height: 56px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
     .chip.active {
       transform: translateY(-1px);
@@ -117,46 +133,123 @@
       background: rgba(15, 23, 42, 0.94);
       border-color: rgba(56, 189, 248, 0.5);
     }
+    .chip:active {
+      transform: scale(0.98);
+    }
+
+    /* ── Range input ── */
     input[type=range] {
       accent-color: #22d3ee;
+      height: 6px;
+      cursor: pointer;
+      /* Better touch target on mobile */
+      padding: 8px 0;
     }
+
+    /* ── Details / summary ── */
     details summary::-webkit-details-marker,
     details summary::marker {
       display: none;
     }
-    /* Mobile nav: allow wrapping on very small screens */
-    @media (max-width: 400px) {
-      .nav-links { flex-wrap: wrap; gap: 0.35rem; }
-      .nav-links a { font-size: 0.72rem; padding: 0.3rem 0.6rem; }
+    details summary {
+      -webkit-tap-highlight-color: transparent;
     }
+
+    /* ── Select ── */
+    select {
+      /* Prevent iOS zoom on focus (needs font-size >= 16px) */
+      font-size: 16px !important;
+      cursor: pointer;
+    }
+
+    /* ── Nav ── */
+    @media (max-width: 480px) {
+      .nav-links { flex-wrap: wrap; gap: 0.3rem; }
+      .nav-links a { font-size: 0.7rem; padding: 0.35rem 0.55rem; }
+    }
+
+    /* ── Mobile bottom padding for sticky bar ── */
     @media (max-width: 640px) {
-      body { padding-bottom: 2.75rem; }
+      body { padding-bottom: 1rem; }
+    }
+
+    /* ── Fluid estimate number ── */
+    .estimate-num {
+      font-size: clamp(2rem, 8vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    /* ── Better tap area for FAQ summaries ── */
+    details summary {
+      padding: 0.75rem 0;
+      margin: -0.75rem 0;
+    }
+
+    /* ── Prevent horizontal scroll ── */
+    * { box-sizing: border-box; }
+    body, html { overflow-x: hidden; max-width: 100vw; }
+
+    /* ── Desktop max-width container ── */
+    .page-wrap {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    /* ── Wider desktop layout ── */
+    @media (min-width: 768px) {
+      .page-wrap {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    /* ── Two-column estimate on desktop ── */
+    @media (min-width: 640px) {
+      .estimate-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: center;
+      }
+    }
+
+    /* ── Smooth number transition ── */
+    .estimate-num {
+      transition: color 0.2s ease;
     }
   </style>
 </head>
-<body class="min-h-screen text-slate-50 antialiased">
-  <div class="max-w-2xl mx-auto px-4 pb-10 pt-3 space-y-4">
+<body class="min-h-screen text-slate-50">
+  <div class="page-wrap pb-10 pt-3 space-y-4">
 
     <!-- Nav -->
     <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
-      <span class="font-black text-[1rem] text-cyan-300 tracking-tight shrink-0">
+      <a href="/" class="font-black text-[1rem] text-cyan-300 tracking-tight shrink-0 no-underline">
         spending.college
-      </span>
+      </a>
       <div class="nav-links flex gap-2 flex-wrap justify-end">
         <a href="index.html"
-           class="px-3 py-1.5 rounded-xl bg-cyan-400/20 border border-cyan-400/50 text-cyan-100 text-[0.8rem] font-semibold">
+           class="px-3 py-2 rounded-xl bg-cyan-400/20 border border-cyan-400/50 text-cyan-100 text-[0.8rem] font-semibold touch-target"
+           style="min-height:36px;display:inline-flex;align-items:center;">
           College Cash
         </a>
         <a href="jobs.html"
-           class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-cyan-400/60 transition">
+           class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-cyan-400/60 transition"
+           style="min-height:36px;display:inline-flex;align-items:center;">
           Job Hours
         </a>
         <a href="find-jobs.html"
-           class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-cyan-400/60 transition">
+           class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-cyan-400/60 transition"
+           style="min-height:36px;display:inline-flex;align-items:center;">
           Find Jobs
         </a>
         <a href="guides.html"
-           class="hidden sm:inline-block px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-cyan-400/60 transition">
+           class="hidden sm:inline-flex items-center px-3 py-2 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-cyan-400/60 transition"
+           style="min-height:36px;">
           Guides
         </a>
       </div>
@@ -164,17 +257,17 @@
 
     <!-- Mobile Guides link under nav -->
     <a href="guides.html"
-       class="sm:hidden block text-[0.75rem] text-cyan-300 underline text-right">
+       class="sm:hidden block text-[0.75rem] text-cyan-300 underline text-right py-1">
       Money guides &amp; tips →
     </a>
 
     <!-- Header -->
     <header class="space-y-2">
       <p class="uppercase tracking-[0.25em] text-emerald-300 text-[0.65rem]">Step 1</p>
-      <h1 class="font-black text-[clamp(1.9rem,5vw,2.5rem)] leading-tight">
+      <h1 class="font-black leading-tight" style="font-size:clamp(1.75rem,5.5vw,2.5rem);">
         College Spending Money Calculator
       </h1>
-      <p class="text-slate-300 text-[0.88rem] leading-relaxed">
+      <p class="text-slate-300 text-[0.9rem] leading-relaxed">
         How much <span class="font-semibold text-white">spending money</span> do you actually need for college?
         Not tuition. Not rent. Just real day‑to‑day cash based on your state, housing, meal plan, and lifestyle.
       </p>
@@ -185,115 +278,123 @@
       <div class="glass rounded-3xl px-3 py-3 flex items-center justify-between gap-3">
         <div>
           <p class="uppercase tracking-widest text-slate-400 text-[0.6rem]">Yearly spending money</p>
-          <p id="estimateMobile" class="text-[2rem] font-black mt-0.5">$2,650</p>
-          <p id="monthlyMobile" class="text-[0.7rem] text-slate-400 mt-0.5">≈ $221 per month.</p>
+          <p id="estimateMobile" class="estimate-num mt-0.5">$2,650</p>
+          <p id="monthlyMobile" class="text-[0.72rem] text-slate-400 mt-0.5">≈ $221 per month.</p>
         </div>
-        <div class="text-right max-w-[55%]">
+        <div class="text-right" style="max-width:52%;">
           <p id="scenarioMobile" class="text-[0.7rem] text-slate-400 leading-relaxed">US Average, on campus, with meal plan.</p>
         </div>
       </div>
     </div>
 
     <!-- Desktop estimate -->
-    <div class="hidden sm:flex glass rounded-3xl p-5 items-center gap-6">
-      <div class="flex-1">
-        <p class="text-[0.72rem] uppercase tracking-widest text-slate-400">Yearly spending money</p>
-        <p id="estimate" class="text-[2.8rem] font-black leading-none mt-1">$2,650</p>
-        <p id="monthlyLine" class="text-xs text-slate-400 mt-1">≈ $221 per month for day-to-day spending.</p>
-      </div>
-      <div class="flex-1">
-        <p class="text-[0.7rem] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Scenario</p>
-        <p id="scenarioLabel" class="text-[0.78rem] text-slate-300 leading-relaxed">US Average, on campus, with meal plan.</p>
+    <div class="hidden sm:block glass rounded-3xl p-5">
+      <div class="estimate-grid">
+        <div>
+          <p class="text-[0.72rem] uppercase tracking-widest text-slate-400">Yearly spending money</p>
+          <p id="estimate" class="estimate-num mt-1">$2,650</p>
+          <p id="monthlyLine" class="text-xs text-slate-400 mt-1">≈ $221 per month for day-to-day spending.</p>
+        </div>
+        <div>
+          <p class="text-[0.7rem] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Scenario</p>
+          <p id="scenarioLabel" class="text-[0.78rem] text-slate-300 leading-relaxed">US Average, on campus, with meal plan.</p>
+        </div>
       </div>
     </div>
 
     <!-- Step 1: State -->
-    <section class="glass rounded-3xl p-4 space-y-3">
+    <section class="glass rounded-3xl p-4 sm:p-5 space-y-3">
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">College Cost of Living by State</p>
       <h2 class="text-[1.05rem] font-semibold">1. Pick your state</h2>
-      <p class="text-[0.8rem] text-slate-300">
+      <p class="text-[0.82rem] text-slate-300">
         We use your state's cost‑of‑living index to set a realistic baseline for spending money.
       </p>
       <select id="stateSelect"
-              class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/60 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"></select>
+              class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/60 px-3 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+              style="font-size:16px;"></select>
       <div id="selectedState"
-           class="rounded-2xl bg-slate-900/80 border border-slate-600/70 px-3 py-3 text-[0.8rem] text-slate-300">
+           class="rounded-2xl bg-slate-900/80 border border-slate-600/70 px-3 py-3 text-[0.82rem] text-slate-300">
       </div>
     </section>
 
     <!-- Step 2: Housing & meals -->
-    <section class="glass rounded-3xl p-4 space-y-4">
+    <section class="glass rounded-3xl p-4 sm:p-5 space-y-4">
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">College Housing &amp; Meal Plan Costs</p>
       <h2 class="text-[1.05rem] font-semibold">2. Housing &amp; meals</h2>
-      <p class="text-[0.8rem] text-slate-300">
+      <p class="text-[0.82rem] text-slate-300">
         This changes extra cash for food out, snacks, and commuting — not rent or the meal‑plan price itself.
       </p>
+
+      <!-- Housing -->
       <div class="space-y-2">
         <p class="text-[0.72rem] text-slate-400 font-semibold uppercase tracking-wider">Housing</p>
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-2 gap-2 sm:gap-3">
           <button class="chip rounded-2xl border border-slate-600/70 bg-slate-900/80 px-3 py-3 text-left" data-housing="on_campus">
-            <span class="block font-semibold text-[0.85rem]">On campus</span>
-            <span class="block text-[0.7rem] text-slate-400 mt-0.5">Dorm / campus housing</span>
+            <span class="block font-semibold text-[0.88rem]">On campus</span>
+            <span class="block text-[0.72rem] text-slate-400 mt-0.5">Dorm / campus housing</span>
           </button>
           <button class="chip rounded-2xl border border-slate-600/70 bg-slate-900/80 px-3 py-3 text-left" data-housing="with_family">
-            <span class="block font-semibold text-[0.85rem]">With family</span>
-            <span class="block text-[0.7rem] text-slate-400 mt-0.5">Commuter / at home</span>
+            <span class="block font-semibold text-[0.88rem]">With family</span>
+            <span class="block text-[0.72rem] text-slate-400 mt-0.5">Commuter / at home</span>
           </button>
         </div>
-        <p id="housingNote" class="text-[0.7rem] text-slate-400"></p>
+        <p id="housingNote" class="text-[0.72rem] text-slate-400"></p>
       </div>
+
+      <!-- Meals -->
       <div class="space-y-2 pt-3 border-t border-slate-700/60">
         <p class="text-[0.72rem] text-slate-400 font-semibold uppercase tracking-wider">Meal setup</p>
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-2 gap-2 sm:gap-3">
           <button class="chip rounded-2xl border border-slate-600/70 bg-slate-900/80 px-3 py-3 text-left" data-meal="plan">
-            <span class="block font-semibold text-[0.85rem]">Meal plan</span>
-            <span class="block text-[0.7rem] text-slate-400 mt-0.5">Campus meal plan</span>
+            <span class="block font-semibold text-[0.88rem]">Meal plan</span>
+            <span class="block text-[0.72rem] text-slate-400 mt-0.5">Campus meal plan</span>
           </button>
           <button class="chip rounded-2xl border border-slate-600/70 bg-slate-900/80 px-3 py-3 text-left" data-meal="no_plan">
-            <span class="block font-semibold text-[0.85rem]">No plan</span>
-            <span class="block text-[0.7rem] text-slate-400 mt-0.5">You buy all food</span>
+            <span class="block font-semibold text-[0.88rem]">No plan</span>
+            <span class="block text-[0.72rem] text-slate-400 mt-0.5">You buy all food</span>
           </button>
         </div>
-        <p id="mealNote" class="text-[0.7rem] text-slate-400"></p>
+        <p id="mealNote" class="text-[0.72rem] text-slate-400"></p>
       </div>
     </section>
 
     <!-- Step 3: Lifestyle -->
-    <section class="glass rounded-3xl p-4 space-y-3">
+    <section class="glass rounded-3xl p-4 sm:p-5 space-y-3">
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">College Student Monthly Spending by Lifestyle</p>
       <h2 class="text-[1.05rem] font-semibold">3. Lifestyle</h2>
-      <p class="text-[0.8rem] text-slate-300">
+      <p class="text-[0.82rem] text-slate-300">
         Drag each slider from 1 (low) to 4 (high). Higher lifestyle = higher total spending money needed.
       </p>
-      <div id="weights" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+      <div id="weights" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
     </section>
 
     <!-- Guides callout -->
-    <section class="glass rounded-3xl p-4 space-y-2">
+    <section class="glass rounded-3xl p-4 sm:p-5 space-y-2">
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">How to Save Money in College</p>
       <h2 class="text-[1.05rem] font-semibold">Need ideas to save or earn?</h2>
-      <p class="text-[0.84rem] text-slate-300">
+      <p class="text-[0.85rem] text-slate-300">
         After you get your number, <a href="guides.html" class="text-cyan-300 underline">use the College Cash guides</a> for tips on saving money in college and finding flexible jobs that fit your schedule.
       </p>
-      <a href="guides.html" class="inline-flex items-center text-[0.8rem] text-cyan-300 underline">
+      <a href="guides.html" class="inline-flex items-center text-[0.82rem] text-cyan-300 underline py-1">
         Open College Money Guides →
       </a>
     </section>
 
     <!-- Handoff to Job Hours -->
-    <section class="glass rounded-3xl p-4 space-y-3">
+    <section class="glass rounded-3xl p-4 sm:p-5 space-y-3">
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">How Many Hours Should a College Student Work?</p>
       <h2 class="text-[1.05rem] font-semibold">Now find out how many hours to work</h2>
-      <p class="text-[0.82rem] text-slate-300">
+      <p class="text-[0.83rem] text-slate-300">
         You know your spending target. <a href="jobs.html" class="text-cyan-300 underline">Use the College Job Hours calculator</a> to see exactly how many hours per week you need to work to cover it.
       </p>
       <a id="goToJobHours" href="jobs.html?monthly=221"
-         class="flex items-center justify-between w-full rounded-2xl bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 border border-cyan-400/40 px-4 py-3 hover:from-cyan-500/30 hover:to-indigo-500/30 transition">
+         class="flex items-center justify-between w-full rounded-2xl bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 border border-cyan-400/40 px-4 py-4 hover:from-cyan-500/30 hover:to-indigo-500/30 transition active:scale-[0.99]"
+         style="min-height:60px;">
         <div>
-          <p class="font-bold text-[0.9rem] text-white">College Job Hours →</p>
-          <p class="text-[0.72rem] text-slate-300 mt-0.5" id="handoffText">Use your ~$221/month target in College Job Hours.</p>
+          <p class="font-bold text-[0.92rem] text-white">College Job Hours →</p>
+          <p class="text-[0.73rem] text-slate-300 mt-0.5" id="handoffText">Use your ~$221/month target in College Job Hours.</p>
         </div>
-        <span class="text-2xl text-cyan-300">→</span>
+        <span class="text-2xl text-cyan-300 shrink-0 ml-2">→</span>
       </a>
     </section>
 
@@ -301,28 +402,28 @@
     <section class="mt-8 space-y-4 text-sm text-slate-200">
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">Best Free Bank Accounts for College Students</p>
       <h2 class="text-[0.95rem] font-semibold text-sky-100">Optional money tools for your College Cash</h2>
-      <p class="text-[0.8rem] text-slate-300">
+      <p class="text-[0.82rem] text-slate-300">
         You don't need any specific bank to use this calculator, but some students
         like to separate their College Cash into a dedicated account or start investing small amounts.
       </p>
       <div class="grid gap-3 sm:grid-cols-2">
         <!-- SoFi Checking & Savings -->
-        <div class="glass rounded-2xl p-3 space-y-2">
+        <div class="glass rounded-2xl p-4 space-y-2">
           <div class="flex items-center justify-between gap-2">
             <h3 class="text-[0.9rem] font-semibold text-sky-100">SoFi Checking &amp; Savings</h3>
-            <span class="text-[0.7rem] text-slate-400">Optional</span>
+            <span class="text-[0.7rem] text-slate-400 shrink-0">Optional</span>
           </div>
-          <p class="text-[0.8rem] text-slate-300">
+          <p class="text-[0.82rem] text-slate-300">
             Keep your College Cash in a separate online checking/savings account so
             it's easier to see how much you have left for the month.
           </p>
-          <p class="text-[0.78rem] text-slate-200">
+          <p class="text-[0.8rem] text-slate-200">
             With this referral, friends who open and fund a SoFi Checking &amp;
             Savings account with at least <span class="font-semibold">$50</span>
             (funds must settle within 21 days) can get <span class="font-semibold">$25</span>.
           </p>
           <a href="https://www.sofi.com/invite/money?gcp=1c331e58-19f2-4da3-8dbc-b74aa836b1e4&isAliasGcp=false"
-             class="inline-flex items-center text-[0.8rem] text-cyan-300 hover:text-cyan-200 underline"
+             class="inline-flex items-center text-[0.82rem] text-cyan-300 hover:text-cyan-200 underline py-1"
              rel="nofollow noopener">
             Check SoFi Checking &amp; Savings →
           </a>
@@ -332,22 +433,22 @@
           </p>
         </div>
         <!-- SoFi Invest -->
-        <div class="glass rounded-2xl p-3 space-y-2">
+        <div class="glass rounded-2xl p-4 space-y-2">
           <div class="flex items-center justify-between gap-2">
             <h3 class="text-[0.9rem] font-semibold text-sky-100">SoFi Invest</h3>
-            <span class="text-[0.7rem] text-amber-300">Higher risk</span>
+            <span class="text-[0.7rem] text-amber-300 shrink-0">Higher risk</span>
           </div>
-          <p class="text-[0.8rem] text-slate-300">
+          <p class="text-[0.82rem] text-slate-300">
             For extra savings (not rent or basics), some students use SoFi Invest
             to start investing small amounts in stocks and ETFs.
           </p>
-          <p class="text-[0.78rem] text-slate-200">
+          <p class="text-[0.8rem] text-slate-200">
             With this referral, friends who open and fund an Active Investing
             account with at least <span class="font-semibold">$25</span> can get
             <span class="font-semibold">$25</span> in stocks.
           </p>
           <a href="https://www.sofi.com/invite/invest?gcp=921af434-dd37-4988-8fce-1ba75e7e7808&isAliasGcp=false"
-             class="inline-flex items-center text-[0.8rem] text-cyan-300 hover:text-cyan-200 underline"
+             class="inline-flex items-center text-[0.82rem] text-cyan-300 hover:text-cyan-200 underline py-1"
              rel="nofollow noopener">
             Learn about SoFi Invest →
           </a>
@@ -358,16 +459,10 @@
           </p>
         </div>
       </div>
-      <footer class="mt-10 mb-6 text-[0.7rem] text-slate-500 text-center">
-        spending.college · Independent project · Information only, not financial advice · Estimates only.
-        <br />
-        Some pages may include referral or affiliate links (for example, to banks or apps).
-        If you choose to sign up through those links, I may earn a bonus or other benefit at no extra cost to you.
-      </footer>
     </section>
 
     <!-- FAQ Section -->
-    <section class="glass rounded-3xl p-4 space-y-3">
+    <section class="glass rounded-3xl p-4 sm:p-5 space-y-3">
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">College Spending Money — Common Questions</p>
       <h2 class="text-[1.05rem] font-semibold">Frequently Asked Questions</h2>
 
@@ -376,7 +471,7 @@
           How much spending money does a college student need per month?
           <span class="ml-3 text-slate-400 text-xs shrink-0">tap to expand</span>
         </summary>
-        <p class="pt-3 text-[0.8rem] text-slate-300 leading-relaxed">
+        <p class="pt-3 text-[0.82rem] text-slate-300 leading-relaxed">
           On average, college students need between $200 and $500 per month for day-to-day expenses.
           However, this varies significantly based on the state's cost of living, whether you commute,
           and your lifestyle choices. <a href="/" class="text-cyan-300 underline">Use the College Cash calculator to get your number</a> based on your actual state and situation.
@@ -388,7 +483,7 @@
           What is included in day-to-day college expenses?
           <span class="ml-3 text-slate-400 text-xs shrink-0">tap to expand</span>
         </summary>
-        <p class="pt-3 text-[0.8rem] text-slate-300 leading-relaxed">
+        <p class="pt-3 text-[0.82rem] text-slate-300 leading-relaxed">
           Day-to-day spending money covers personal expenses like eating out, coffee, snacks, laundry,
           toiletries, entertainment, and local transportation or commuting costs. It does not include
           major fixed costs like tuition, dorm rent, or your primary university meal plan.
@@ -400,7 +495,7 @@
           How does this college spending calculator work?
           <span class="ml-3 text-slate-400 text-xs shrink-0">tap to expand</span>
         </summary>
-        <p class="pt-3 text-[0.8rem] text-slate-300 leading-relaxed">
+        <p class="pt-3 text-[0.82rem] text-slate-300 leading-relaxed">
           We start with the national average for student "other expenses" (typically $2,400–$2,600 per year).
           Then, we scale that baseline using your college state's cost-of-living index. Finally, we adjust
           the estimate based on your housing situation, meal plan, and personal lifestyle habits.
@@ -412,7 +507,7 @@
           Should I use this calculator for student loan planning?
           <span class="ml-3 text-slate-400 text-xs shrink-0">tap to expand</span>
         </summary>
-        <p class="pt-3 text-[0.8rem] text-slate-300 leading-relaxed">
+        <p class="pt-3 text-[0.82rem] text-slate-300 leading-relaxed">
           This calculator is designed for personal budgeting and planning your day-to-day cash needs.
           While it gives a realistic estimate for living expenses, you should always consult your
           university's official Cost of Attendance (COA) for exact financial aid and loan borrowing limits.
@@ -421,12 +516,12 @@
     </section>
 
     <!-- About the data -->
-    <details class="glass rounded-3xl p-4">
+    <details class="glass rounded-3xl p-4 sm:p-5">
       <summary class="flex items-center justify-between cursor-pointer">
         <span class="font-semibold text-[0.95rem]">About the data</span>
         <span class="text-slate-400 text-xs">tap to expand</span>
       </summary>
-      <div class="pt-3 text-[0.8rem] text-slate-300 space-y-2">
+      <div class="pt-3 text-[0.82rem] text-slate-300 space-y-2">
         <p>
           College Cash focuses on day‑to‑day spending money only — not tuition, not rent.
           The baseline is built from national "other expenses" data (transportation, personal, and miscellaneous)
@@ -448,12 +543,12 @@
     </details>
 
     <!-- Privacy policy -->
-    <details class="glass rounded-3xl p-4">
+    <details class="glass rounded-3xl p-4 sm:p-5">
       <summary class="flex items-center justify-between cursor-pointer">
         <span class="font-semibold text-[0.95rem]">Privacy policy</span>
         <span class="text-slate-400 text-xs">tap to expand</span>
       </summary>
-      <div class="pt-3 text-[0.8rem] text-slate-300 space-y-2">
+      <div class="pt-3 text-[0.82rem] text-slate-300 space-y-2">
         <p>
           This page is a static calculator. All inputs (state, housing, sliders) are processed
           in your browser only and are not stored on a server or tied to your identity.
@@ -487,8 +582,11 @@
       </script>
     </div>
 
-    <footer class="text-center text-[0.7rem] text-slate-500 pt-2">
-      spending.college · College Spending Money Calculator · Not financial advice · Estimates only
+    <footer class="mt-10 mb-6 text-[0.7rem] text-slate-500 text-center leading-relaxed">
+      spending.college · Independent project · Information only, not financial advice · Estimates only.
+      <br />
+      Some pages may include referral or affiliate links (for example, to banks or apps).
+      If you choose to sign up through those links, I may earn a bonus or other benefit at no extra cost to you.
     </footer>
   </div>
 
@@ -593,7 +691,7 @@
         const wrapper = document.createElement("div");
         wrapper.className = "space-y-1";
         const label = document.createElement("div");
-        label.className = "flex items-center justify-between text-[0.8rem]";
+        label.className = "flex items-center justify-between text-[0.82rem]";
         label.innerHTML = `<span class="font-medium">${cat.label}</span><span id="${cat.key}Value" class="text-slate-400">2 / 4</span>`;
         const input = document.createElement("input");
         input.type = "range"; input.min = "1"; input.max = "4";
