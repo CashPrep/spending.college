@@ -1,542 +1,719 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name='impact-site-verification' value='63c8b781-4885-438f-883a-8ea87f9822f9'>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBBZR62R5"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-PJBBZR62R5');
-  </script>
-  <title>College Job Hours Calculator – See If Your Job Covers Your Budget</title>
-  <meta name="description"
-        content="Know if your college job actually covers your spending money goal. Plug in your pay, hours, and weeks worked to see if your job hits your College Cash target or how many hours you really need." />
-  <!-- AdSense -->
-  <script async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225"
-          crossorigin="anonymous"></script>
-  <!-- Tailwind -->
- <script src="https://cdn.tailwindcss.com" defer></script>
-  <style>
-    :root{
-      --bg1:#020617;
-      --bg2:#0b1120;
-      --accent-soft:rgba(56,189,248,0.18);
-    }
-    body{
-      background:
-        radial-gradient(circle at bottom right,var(--accent-soft),transparent 55%),
-        linear-gradient(to bottom,var(--bg1),var(--bg2));
-    }
-    .glass{
-      background:rgba(15,23,42,0.9);
-      backdrop-filter:blur(18px);
-      border:1px solid rgba(148,163,184,0.35);
-      box-shadow:0 18px 40px rgba(15,23,42,0.8);
-    }
-    input[type=range]{accent-color:#22d3ee;}
-    details summary::-webkit-details-marker{display:none;}
-    details summary::marker{display:none;}
-    @media (max-width: 640px) {
-      body {
-        padding-bottom: 2.5rem;
-      }
-      .card-tight {
-        padding: 1rem 0.9rem;
-      }
-      .card-tight h2 {
-        font-size: 1.05rem;
-      }
-      .card-tight p {
-        font-size: 0.9rem;
-      }
-      .header-tight {
-        margin-bottom: 0.4rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Job Hours Calculator – spending.college</title>
+<meta name="description" content="Know if your college job actually covers your spending money goal. Plug in your pay, hours, and weeks worked to see if your job hits your College Cash target.">
+<link rel="canonical" href="https://www.spending.college/jobs.html">
+<link rel="icon" href="/favicon.ico">
+<meta name='impact-site-verification' value='63c8b781-4885-438f-883a-8ea87f9822f9'>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBBZR62R5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PJBBZR62R5');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225" crossorigin="anonymous"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:#06080f;
+  color:#e2e8f0;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+:root{
+  --accent:#7c3aed;
+  --accent-light:#a78bfa;
+  --accent2:#06b6d4;
+  --accent2-light:#67e8f9;
+  --glow-v:rgba(124,58,237,0.15);
+  --glow-c:rgba(6,182,212,0.10);
+  --surface:rgba(13,17,32,0.95);
+  --surface2:rgba(20,25,48,0.80);
+  --border:rgba(148,163,184,0.10);
+  --border-accent:rgba(124,58,237,0.30);
+  --muted:#64748b;
+  --secondary:#94a3b8;
+  --radius-sm:12px;
+  --radius:20px;
+  --radius-lg:28px;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 70% 45% at 8% 0%, var(--glow-v) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 35% at 92% 85%, var(--glow-c) 0%, transparent 60%),
+    linear-gradient(175deg,#06080f 0%,#090d1c 100%);
+  pointer-events:none;
+  z-index:0;
+}
+.page-wrap{position:relative;z-index:1;}
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 40px;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(6,8,15,0.75);
+}
+.nav-logo{
+  font-size:1.1rem;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  color:#fff;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.nav-logo-dot{
+  width:8px;height:8px;
+  background:var(--accent-light);
+  border-radius:50%;
+  display:inline-block;
+  box-shadow:0 0 8px var(--accent-light);
+}
+.nav-links{
+  display:flex;
+  gap:6px;
+  list-style:none;
+}
+.nav-links a{
+  color:var(--secondary);
+  text-decoration:none;
+  font-size:0.875rem;
+  font-weight:500;
+  padding:7px 14px;
+  border-radius:var(--radius-sm);
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.06);}
+.nav-links a.active{color:#fff;background:rgba(124,58,237,0.18);border:1px solid var(--border-accent);}
+.section{max-width:780px;margin:0 auto;padding:0 24px;}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:40px;
+  margin-bottom:32px;
+  backdrop-filter:blur(16px);
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-accent),transparent);
+}
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:1.2rem;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  margin-bottom:28px;
+  color:#fff;
+}
+.card-title-icon{
+  width:40px;height:40px;
+  background:rgba(124,58,237,0.15);
+  border:1px solid var(--border-accent);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.card-title-icon svg{width:18px;height:18px;color:var(--accent-light);}
+.field{margin-bottom:24px;}
+.field:last-child{margin-bottom:0;}
+label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:0.875rem;
+  font-weight:600;
+  color:var(--secondary);
+  margin-bottom:10px;
+  letter-spacing:0.01em;
+}
+label svg{width:15px;height:15px;color:var(--accent-light);opacity:0.8;}
+select,input[type="number"]{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  color:#fff;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.95rem;
+  font-weight:500;
+  padding:13px 16px;
+  outline:none;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+  -webkit-appearance:none;
+  appearance:none;
+}
+select:focus,input[type="number"]:focus{
+  border-color:var(--accent);
+  background:rgba(124,58,237,0.08);
+  box-shadow:0 0 0 3px rgba(124,58,237,0.12);
+}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:560px){.grid-2{grid-template-columns:1fr;}}
+input[type="range"]{
+  -webkit-appearance:none;
+  appearance:none;
+  width:100%;
+  height:4px;
+  background:var(--border);
+  border-radius:99px;
+  outline:none;
+  cursor:pointer;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:20px;height:20px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 10px rgba(124,58,237,0.5);
+  cursor:pointer;
+  border:2px solid rgba(255,255,255,0.2);
+}
+.slider-labels{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  font-size:0.75rem;
+  color:var(--muted);
+  font-weight:500;
+}
+.mode-toggle{
+  display:flex;
+  gap:8px;
+  margin-bottom:20px;
+}
+.mode-btn{
+  flex:1;
+  padding:10px 16px;
+  border-radius:var(--radius-sm);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.875rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .2s;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.04);
+  color:var(--secondary);
+}
+.mode-btn.active{
+  background:rgba(124,58,237,0.18);
+  border-color:var(--accent);
+  color:#fff;
+  box-shadow:0 0 12px rgba(124,58,237,0.2);
+}
+.preset-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 14px;
+  border-radius:var(--radius-sm);
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  color:var(--secondary);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.8rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .2s;
+}
+.preset-btn:hover{border-color:var(--border-accent);color:#fff;background:rgba(124,58,237,0.08);}
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:14px 20px;
+  margin-top:8px;
+}
+.status-dot{width:10px;height:10px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.status-dot.green{background:#34d399;box-shadow:0 0 8px rgba(52,211,153,0.5);}
+.status-dot.red{background:#f87171;box-shadow:0 0 8px rgba(248,113,113,0.5);}
+.status-dot.cyan{background:var(--accent2);box-shadow:0 0 8px rgba(6,182,212,0.5);}
+.result-lines{margin-top:16px;space-y:8px;}
+.result-lines p{font-size:0.9rem;color:var(--secondary);margin-bottom:8px;line-height:1.6;}
+.result-lines p strong{color:#fff;}
+.warning-line{color:#fbbf24!important;}
+.note-line{font-size:0.8rem!important;color:var(--muted)!important;}
+.btn-group{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:12px 22px;
+  border-radius:var(--radius-sm);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.875rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .2s;
+  border:1px solid transparent;
+  text-decoration:none;
+}
+.btn svg{width:16px;height:16px;}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+  box-shadow:0 2px 16px rgba(124,58,237,0.3);
+}
+.btn-primary:hover{background:#6d28d9;box-shadow:0 4px 24px rgba(124,58,237,0.45);}
+.btn-secondary{
+  background:rgba(255,255,255,0.05);
+  color:var(--secondary);
+  border-color:var(--border);
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.15);}
+.hero{
+  max-width:760px;
+  margin:0 auto;
+  padding:72px 24px 48px;
+}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(124,58,237,0.12);
+  border:1px solid var(--border-accent);
+  border-radius:999px;
+  padding:6px 16px;
+  font-size:0.8rem;
+  font-weight:600;
+  color:var(--accent-light);
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+.hero h1{
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-0.035em;
+  margin-bottom:16px;
+  background:linear-gradient(135deg,#fff 0%,#c4b5fd 55%,var(--accent2-light) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero p{
+  font-size:1rem;
+  color:var(--secondary);
+  max-width:520px;
+  line-height:1.7;
+  margin-bottom:0;
+}
+.section-label{
+  font-size:0.75rem;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--accent-light);
+  margin-bottom:6px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.section-label::before{
+  content:'';
+  width:20px;height:2px;
+  background:var(--accent);
+  border-radius:2px;
+}
+footer{
+  border-top:1px solid var(--border);
+  padding:40px;
+  text-align:center;
+  margin-top:80px;
+}
+.footer-links{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;margin-bottom:16px;}
+.footer-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:0.85rem;
+  padding:6px 12px;
+  border-radius:var(--radius-sm);
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--secondary);}
+.footer-copy{font-size:0.8rem;color:var(--muted);}
+@media(max-width:640px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  .hero{padding:48px 20px 32px;}
+  .card{padding:24px 20px;}
+}
+.hint-text{font-size:0.78rem;color:var(--muted);margin-top:6px;}
+</style>
 </head>
-<body class="min-h-screen text-slate-50 antialiased">
-<div class="max-w-2xl mx-auto px-4 pb-6 pt-4 space-y-4">
-  <!-- Nav -->
-  <nav class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
-    <span class="font-black text-[1rem] text-cyan-300 tracking-tight">
-      spending.college
-    </span>
-    <div class="flex gap-2">
-      <a href="index.html"
-         class="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-600/60 text-slate-200 text-[0.8rem] font-semibold hover:border-cyan-400/50 transition">
-        College Cash
-      </a>
-      <a href="jobs.html"
-         class="px-3 py-1.5 rounded-xl bg-cyan-400/20 border border-cyan-400/50 text-cyan-100 text-[0.8rem] font-semibold">
-        Job Hours
-      </a>
-      <a href="find-jobs.html"
-         class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-cyan-400/60 transition">
-        Find Jobs
-      </a>
-      <a href="guides.html"
-         class="hidden sm:inline-block px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-600/70 text-slate-300 text-[0.8rem] font-semibold hover:border-cyan-400/60 transition">
-        Guides
-      </a>
-    </div>
-  </nav>
-  <!-- Mobile Guides link -->
-  <a href="guides.html"
-     class="sm:hidden block text-[0.75rem] text-cyan-300 underline text-right">
-    Money guides &amp; tips &rarr;
+<body>
+<div class="page-wrap">
+
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-dot"></span>
+    spending.college
   </a>
-  <!-- Header -->
-  <header class="space-y-2 header-tight">
- <p class="uppercase tracking-[0.22em] text-cyan-300 text-[0.7rem]">
+  <ul class="nav-links">
+    <li><a href="/">Calculator</a></li>
+    <li><a href="/jobs.html" class="active">Job Hours</a></li>
+    <li><a href="/find-jobs.html">Find Jobs</a></li>
+    <li><a href="/guides.html">Guides</a></li>
+    <li><a href="/faq.html">FAQ</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
     Step 2
-  </p>
-    <h1 class="font-black text-[clamp(2rem,5vw,2.6rem)] leading-tight">
-      College Job Hours
-    </h1>
-    <p class="text-slate-200 text-[0.9rem] leading-relaxed">
-      Use this tool right after College Cash to turn your monthly spending number into hours per week you need to work.
-      Check if your current job covers it, or see suggested hours and pay that could reach your goal.
-      Then send your weekly target into the Find Jobs tab to look at real listings near your college.
-    </p>
-  </header>
+  </div>
+  <h1>College Job Hours</h1>
+  <p>Turn your monthly spending target into hours per week you actually need to work. Check if your current job covers it, or plan one that does.</p>
+</div>
 
-  <!-- Main calculator -->
-  <div class="glass card-tight rounded-3xl p-4 space-y-4">
-    <!-- Monthly target -->
-    <div class="space-y-1">
-      <p class="text-[0.9rem] text-slate-200 font-medium">Monthly spending target</p>
-      <div class="flex items-center gap-2">
-        <span class="text-slate-300 text-[0.9rem]">$</span>
-        <input id="monthlyInput" type="number" min="0" step="10"
-               class="flex-1 rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400" />
-      </div>
-      <p class="text-[0.8rem] text-slate-300" id="monthlyHint"></p>
-    </div>
-    <!-- Mode toggle -->
-    <div class="pt-3 border-t border-slate-700/60 space-y-2">
-      <p class="text-[0.85rem] text-slate-300 font-semibold uppercase tracking-wider">
-        Choose how to use this tool
-      </p>
-      <div class="flex gap-2 text-[0.8rem]">
-        <button type="button"
-                id="modeHaveJob"
-                class="flex-1 px-3 py-1.5 rounded-2xl bg-cyan-400/20 border border-cyan-400/60 text-cyan-100 font-semibold">
-          I already have a job
-        </button>
-        <button type="button"
-                id="modePlanJob"
-                class="flex-1 px-3 py-1.5 rounded-2xl bg-slate-900 border border-slate-600/70 text-slate-200 font-semibold hover:border-cyan-400/60">
-          Help me plan a job
-        </button>
-      </div>
-      <p id="modeHint" class="text-[0.78rem] text-slate-300">
-        Enter your monthly target and your job details to see if it covers your spending.
-      </p>
-    </div>
-    <!-- Mode 1: have job -->
-    <div id="haveJobSection" class="space-y-3 pt-3 border-t border-slate-700/60">
-      <p class="text-[0.85rem] text-slate-300 font-semibold uppercase tracking-wider">
-        Your job setup
-      </p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div>
-          <label class="block text-[0.8rem] text-slate-200 mb-1">Hourly pay (before taxes)</label>
-          <input id="wageInput" type="number" step="0.5" min="0"
-                 class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400" />
-          <p class="text-[0.75rem] text-slate-400 mt-1">
-            Example: $13&ndash;$20/hour for many campus and part-time jobs.
-          </p>
-        </div>
-        <div>
-          <label class="block text-[0.8rem] text-slate-200 mb-1">Paid weeks / year</label>
-          <input id="weeksInput" type="number" min="1" max="52"
-                 class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400" />
-          <p class="text-[0.75rem] text-slate-400 mt-1">
-            Example: ~32 weeks for school-year work, ~10 weeks for summer-only.
-          </p>
-        </div>
-      </div>
-      <div>
-        <div class="flex items-center justify-between mb-1">
-          <span class="text-[0.8rem] text-slate-200">Hours per week</span>
-          <span id="hoursPerWeekLabel" class="text-[0.8rem] text-slate-300"></span>
-        </div>
-        <input id="hoursSlider" type="range" min="5" max="40" step="1" class="w-full" />
-      </div>
-      <!-- Example presets -->
-      <div class="flex flex-wrap gap-2 text-[0.8rem]">
-        <button type="button"
-                class="px-2.5 py-1.5 rounded-2xl bg-slate-900/80 border border-slate-700/80 text-slate-100 hover:border-cyan-400/60"
-                onclick="applyPreset('campus')">
-          Campus job &middot; $15 &middot; 12 hrs &middot; 32 wks
-        </button>
-        <button type="button"
-                class="px-2.5 py-1.5 rounded-2xl bg-slate-900/80 border border-slate-700/80 text-slate-100 hover:border-cyan-400/60"
-                onclick="applyPreset('summer')">
-          Summer job &middot; $18 &middot; 30 hrs &middot; 10 wks
-        </button>
-      </div>
-    </div>
-    <!-- Mode 2: plan job -->
-    <div id="planJobSection" class="space-y-3 pt-3 border-t border-slate-700/60 hidden">
-      <p class="text-[0.85rem] text-slate-300 font-semibold uppercase tracking-wider">
-        Suggested hours to hit your target
-      </p>
-      <p class="text-[0.86rem] text-slate-200">
-        Here are rough hours/week you'd need at common pay rates to hit your monthly target
-        (assuming about 32 working weeks in a year).
-      </p>
-      <div class="space-y-1">
-        <ul id="suggestionsList"
-            class="text-[0.84rem] text-slate-200 space-y-1.5">
-        </ul>
-      </div>
-      <hr class="border-slate-700/70 my-2" />
-      <p class="text-[0.85rem] text-slate-300 font-semibold">
-        Try your own hours and pay
-      </p>
-      <p class="text-[0.82rem] text-slate-300">
-        Change the pay and hours/week to see what that job could earn with the same 32&#8209;week assumption.
-      </p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div>
-          <label class="block text-[0.8rem] text-slate-200 mb-1">
-            Hourly pay (before taxes)
-          </label>
-          <input id="planWageInput" type="number" step="0.5" min="0"
-                 class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
-                 value="15" />
-        </div>
-        <div>
-          <label class="block text-[0.8rem] text-slate-200 mb-1">
-            Hours per week
-          </label>
-          <input id="planHoursInput" type="number" min="1" max="40"
-                 class="w-full rounded-2xl bg-slate-900/70 border border-slate-600/70 px-3 py-2.5 text-[0.95rem] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
-                 value="12" />
-        </div>
-      </div>
-      <p class="text-[0.78rem] text-slate-400">
-        Assumes about 32 working weeks per year (school-year work). Your actual schedule may differ.
-      </p>
-    </div>
-    <!-- Results -->
-    <div class="pt-3 border-t border-slate-700/60 space-y-2">
-      <p class="text-[0.9rem] text-slate-200 font-semibold">Result</p>
-      <div id="statusBadge"
-           class="inline-flex items-center gap-2 rounded-2xl px-3 py-1.5 bg-slate-900/80 border border-slate-700/80">
-        <span id="statusDot" class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
-        <span id="statusText" class="text-[0.85rem] text-slate-100">
-          Enter numbers to see if a job setup could cover your target.
-        </span>
-      </div>
-      <p id="resultLine" class="text-[0.9rem] text-slate-100"></p>
-      <p id="shortfallLine" class="text-[0.85rem] text-slate-300"></p>
-      <p id="warningLine" class="text-[0.8rem] text-amber-300"></p>
-      <p class="text-[0.78rem] text-slate-300">
-        Note: all earnings here are gross pay (before taxes and deductions). Take&#8209;home pay will be lower.
-      </p>
+<div class="section" style="margin-bottom:80px;">
 
-      <!-- Button to send weekly target into Find Jobs page -->
-      <button type="button"
-              id="goFindJobs"
-              class="mt-2 inline-flex items-center px-3 py-1.5 rounded-2xl bg-cyan-400/90 text-slate-950 text-[0.8rem] font-semibold hover:bg-cyan-300">
-        Use this in Find Jobs &rarr;
-      </button>
-      <p class="text-[0.75rem] text-slate-500">
-        This will open the Find Jobs tab and pre-fill your weekly target there.
-      </p>
+  <!-- Monthly target -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-title-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      </div>
+      Monthly Spending Target
+    </div>
+    <div class="field">
+      <label>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        Target ($/month)
+      </label>
+      <input id="monthlyInput" type="number" min="0" step="10" placeholder="e.g. 400" />
+      <p class="hint-text" id="monthlyHint">Tip: use your monthly number from the College Cash calculator.</p>
     </div>
   </div>
 
-  <!-- Internal link to College Cash -->
-  <div class="glass card-tight rounded-3xl p-4">
-    <p class="text-[0.86rem] text-slate-200">
-      Not sure how much you need? <a href="https://www.spending.college/index.html" class="text-cyan-300 underline font-semibold">Use the College Cash calculator to get your real monthly spending money number</a> first, then come back here to see if your job covers it.
-    </p>
+  <!-- Mode toggle + job inputs -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-title-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      </div>
+      How Do You Want to Use This?
+    </div>
+    <div class="mode-toggle">
+      <button type="button" id="modeHaveJob" class="mode-btn active">I already have a job</button>
+      <button type="button" id="modePlanJob" class="mode-btn">Help me plan a job</button>
+    </div>
+    <p id="modeHint" style="font-size:0.85rem;color:var(--secondary);margin-bottom:20px;">Enter your monthly target and job details to see if it covers your spending.</p>
+
+    <!-- Mode 1 -->
+    <div id="haveJobSection">
+      <div class="grid-2">
+        <div class="field">
+          <label>Hourly pay (before taxes)</label>
+          <input id="wageInput" type="number" step="0.5" min="0" placeholder="e.g. 15" />
+          <p class="hint-text">$13–$20/hr is common for campus jobs.</p>
+        </div>
+        <div class="field">
+          <label>Paid weeks / year</label>
+          <input id="weeksInput" type="number" min="1" max="52" placeholder="e.g. 32" />
+          <p class="hint-text">~32 weeks school-year, ~10 weeks summer.</p>
+        </div>
+      </div>
+      <div class="field">
+        <label>Hours per week — <span id="hoursPerWeekLabel" style="color:#fff;">15 hrs/week</span></label>
+        <input id="hoursSlider" type="range" min="5" max="40" step="1" value="15" />
+        <div class="slider-labels"><span>5 hrs</span><span>40 hrs</span></div>
+      </div>
+      <div class="btn-group" style="margin-top:8px;">
+        <button type="button" class="preset-btn" onclick="applyPreset('campus')">Campus job · $15 · 12 hrs · 32 wks</button>
+        <button type="button" class="preset-btn" onclick="applyPreset('summer')">Summer job · $18 · 30 hrs · 10 wks</button>
+      </div>
+    </div>
+
+    <!-- Mode 2 -->
+    <div id="planJobSection" class="hidden" style="display:none;">
+      <p style="font-size:0.875rem;color:var(--secondary);margin-bottom:16px;">Here are rough hours/week you'd need at common pay rates (assumes ~32 working weeks/year).</p>
+      <ul id="suggestionsList" style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;"></ul>
+      <hr style="border-color:rgba(148,163,184,0.1);margin-bottom:24px;">
+      <p style="font-size:0.875rem;font-weight:600;color:#fff;margin-bottom:4px;">Try your own numbers</p>
+      <p style="font-size:0.8rem;color:var(--secondary);margin-bottom:16px;">Assumes ~32 working weeks/year.</p>
+      <div class="grid-2">
+        <div class="field">
+          <label>Hourly pay (before taxes)</label>
+          <input id="planWageInput" type="number" step="0.5" min="0" value="15" />
+        </div>
+        <div class="field">
+          <label>Hours per week</label>
+          <input id="planHoursInput" type="number" min="1" max="40" value="12" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-title-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+      </div>
+      Result
+    </div>
+    <div class="status-badge">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusText" style="font-size:0.9rem;color:#fff;">Enter numbers to see if a job setup could cover your target.</span>
+    </div>
+    <div class="result-lines">
+      <p id="resultLine"></p>
+      <p id="shortfallLine"></p>
+      <p id="warningLine" class="warning-line"></p>
+      <p class="note-line">All earnings are gross pay (before taxes). Take-home will be lower.</p>
+    </div>
+    <div class="btn-group">
+      <button type="button" id="goFindJobs" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        Use this in Find Jobs
+      </button>
+      <a href="/" class="btn btn-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        Get spending number first
+      </a>
+    </div>
   </div>
 
   <!-- About -->
-  <details class="glass card-tight rounded-3xl p-4">
-    <summary class="flex items-center justify-between cursor-pointer">
-      <span class="font-semibold text-[1rem]">About</span>
-      <span class="text-slate-400 text-xs">tap to read</span>
-    </summary>
-    <div class="pt-3 text-[0.85rem] text-slate-200 space-y-2">
-      <p>
-        College Job Hours pairs with College Cash. It compares your yearly spending target to what you might earn from a job.
-        It is a planning tool only, not a promise of any specific job, wage, or income.
-      </p>
-      <p>
-        In "I already have a job" mode, yearly earnings are calculated as hourly pay &times; hours per week &times; paid weeks.
-        In "Help me plan a job" mode, suggested hours assume about 32 working weeks per year (roughly two semesters).
-      </p>
-      <p>
-        Many students work part&#8209;time during the school year and more during breaks, but the right schedule depends on your
-        classes, health, and local job options.
-      </p>
+  <details style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:24px;">
+    <summary style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:1rem;font-weight:700;color:#fff;">About <span style="font-size:0.8rem;color:var(--muted);font-weight:400;">tap to read</span></summary>
+    <div style="margin-top:16px;font-size:0.875rem;color:var(--secondary);line-height:1.7;display:flex;flex-direction:column;gap:12px;">
+      <p>College Job Hours pairs with College Cash. It compares your yearly spending target to what you might earn from a job. It is a planning tool only — not a guarantee of any specific income.</p>
+      <p>In "I already have a job" mode, yearly earnings are calculated as hourly pay × hours per week × paid weeks. In "Help me plan" mode, suggestions assume about 32 working weeks per year.</p>
     </div>
   </details>
-  <!-- Privacy -->
-  <details class="glass card-tight rounded-3xl p-4">
-    <summary class="flex items-center justify-between cursor-pointer">
-      <span class="font-semibold text-[1rem]">Privacy</span>
-      <span class="text-slate-400 text-xs">tap to read</span>
-    </summary>
-    <div class="pt-3 text-[0.85rem] text-slate-200 space-y-2">
-      <p>
-        This is a static calculator. Inputs stay in your browser and are not stored on a server or tied to your identity.
-      </p>
-      <p>
-        Google AdSense may collect device and usage data to show and measure ads under Google's own policies.
-        You can manage ad settings in your Google account.
-      </p>
-      <p>
-        We do not sell or share personal information because we do not collect it. If you email us, we only use your message
-        to respond.
-      </p>
-      <p>
-        Contact: <a href="mailto:unbanked123@gmail.com" class="text-cyan-300 underline">unbanked123@gmail.com</a>
-      </p>
+
+  <details style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:24px;">
+    <summary style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:1rem;font-weight:700;color:#fff;">Privacy <span style="font-size:0.8rem;color:var(--muted);font-weight:400;">tap to read</span></summary>
+    <div style="margin-top:16px;font-size:0.875rem;color:var(--secondary);line-height:1.7;display:flex;flex-direction:column;gap:12px;">
+      <p>This is a static calculator. Inputs stay in your browser and are not stored on a server.</p>
+      <p>Google AdSense may collect device and usage data under Google's own policies. Contact: <a href="mailto:unbanked123@gmail.com" style="color:var(--accent-light);">unbanked123@gmail.com</a></p>
     </div>
   </details>
-  <!-- Bottom AdSense -->
-  <div class="flex justify-center overflow-hidden rounded-2xl mt-2">
-    <ins class="adsbygoogle"
-         style="display:block;width:100%;max-width:336px;"
-         data-ad-client="ca-pub-5702568182016225"
-         data-ad-slot="YOUR_SLOT_ID_JOBS_BOTTOM"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+
+  <div style="display:flex;justify-content:center;overflow:hidden;border-radius:var(--radius);margin-top:8px;">
+    <ins class="adsbygoogle" style="display:block;width:100%;max-width:336px;" data-ad-client="ca-pub-5702568182016225" data-ad-slot="YOUR_SLOT_ID_JOBS_BOTTOM" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
   </div>
-  <footer class="text-center text-[0.75rem] text-slate-500 pt-2">
-    spending.college &middot; College Job Hours Calculator &middot; Estimates only &middot; Not financial advice
-  </footer>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Calculator</a>
+    <a href="/jobs.html">Job Hours</a>
+    <a href="/find-jobs.html">Find Jobs</a>
+    <a href="/guides.html">Guides</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <p class="footer-copy">&copy; 2025 spending.college — Estimates only. Not financial advice.</p>
+</footer>
+
 </div>
 
 <script>
-  const monthlyInput = document.getElementById("monthlyInput");
-  const wageInput = document.getElementById("wageInput");
-  const weeksInput = document.getElementById("weeksInput");
-  const hoursSlider = document.getElementById("hoursSlider");
-  const hoursPerWeekLabel = document.getElementById("hoursPerWeekLabel");
-  const resultLine = document.getElementById("resultLine");
-  const shortfallLine = document.getElementById("shortfallLine");
-  const monthlyHint = document.getElementById("monthlyHint");
-  const warningLine = document.getElementById("warningLine");
-  const statusDot = document.getElementById("statusDot");
-  const statusText = document.getElementById("statusText");
-  const modeHaveJobBtn = document.getElementById("modeHaveJob");
-  const modePlanJobBtn = document.getElementById("modePlanJob");
-  const haveJobSection = document.getElementById("haveJobSection");
-  const planJobSection = document.getElementById("planJobSection");
-  const modeHint = document.getElementById("modeHint");
-  const suggestionsList = document.getElementById("suggestionsList");
-  const planWageInput = document.getElementById("planWageInput");
-  const planHoursInput = document.getElementById("planHoursInput");
-  const goFindJobsBtn = document.getElementById("goFindJobs");
-  const PLAN_WEEKS = 32;
-  let mode = "haveJob";
-  let lastWeeklyMin = null;
+  const monthlyInput=document.getElementById('monthlyInput');
+  const wageInput=document.getElementById('wageInput');
+  const weeksInput=document.getElementById('weeksInput');
+  const hoursSlider=document.getElementById('hoursSlider');
+  const hoursPerWeekLabel=document.getElementById('hoursPerWeekLabel');
+  const resultLine=document.getElementById('resultLine');
+  const shortfallLine=document.getElementById('shortfallLine');
+  const monthlyHint=document.getElementById('monthlyHint');
+  const warningLine=document.getElementById('warningLine');
+  const statusDot=document.getElementById('statusDot');
+  const statusText=document.getElementById('statusText');
+  const modeHaveJobBtn=document.getElementById('modeHaveJob');
+  const modePlanJobBtn=document.getElementById('modePlanJob');
+  const haveJobSection=document.getElementById('haveJobSection');
+  const planJobSection=document.getElementById('planJobSection');
+  const modeHint=document.getElementById('modeHint');
+  const suggestionsList=document.getElementById('suggestionsList');
+  const planWageInput=document.getElementById('planWageInput');
+  const planHoursInput=document.getElementById('planHoursInput');
+  const goFindJobsBtn=document.getElementById('goFindJobs');
+  const PLAN_WEEKS=32;
+  let mode='haveJob';
+  let lastWeeklyMin=null;
 
-  function getMonthlyFromQuery() {
-    const url = new URL(window.location.href);
-    const m = url.searchParams.get("monthly");
-    const num = m ? Number(m) : NaN;
-    return Number.isFinite(num) && num > 0 ? num : null;
+  function getMonthlyFromQuery(){
+    const url=new URL(window.location.href);
+    const m=url.searchParams.get('monthly');
+    const num=m?Number(m):NaN;
+    return Number.isFinite(num)&&num>0?num:null;
   }
 
-  function initDefaults() {
-    const qMonthly = getMonthlyFromQuery();
-    if (qMonthly) {
-      monthlyInput.value = qMonthly;
-      monthlyHint.textContent = "Loaded from your College Cash estimate.";
+  function initDefaults(){
+    const qMonthly=getMonthlyFromQuery();
+    if(qMonthly){
+      monthlyInput.value=qMonthly;
+      monthlyHint.textContent='Loaded from your College Cash estimate.';
     } else {
-      monthlyInput.value = 400;
-      monthlyHint.textContent = "Tip: use your monthly number from College Cash.";
+      monthlyInput.value=400;
+      monthlyHint.textContent='Tip: use your monthly number from College Cash.';
     }
-    wageInput.value = 15;
-    weeksInput.value = 32;
-    hoursSlider.value = 15;
-    hoursPerWeekLabel.textContent = `${hoursSlider.value} hrs/week`;
-    planWageInput.value = 15;
-    planHoursInput.value = 12;
-    setMode("haveJob");
+    wageInput.value=15;
+    weeksInput.value=32;
+    hoursSlider.value=15;
+    hoursPerWeekLabel.textContent='15 hrs/week';
+    planWageInput.value=15;
+    planHoursInput.value=12;
+    setMode('haveJob');
   }
 
-  function applyPreset(type) {
-    if (type === "campus") {
-      wageInput.value = 15;
-      hoursSlider.value = 12;
-      weeksInput.value = 32;
-    } else if (type === "summer") {
-      wageInput.value = 18;
-      hoursSlider.value = 30;
-      weeksInput.value = 10;
+  function applyPreset(type){
+    if(type==='campus'){wageInput.value=15;hoursSlider.value=12;weeksInput.value=32;}
+    else if(type==='summer'){wageInput.value=18;hoursSlider.value=30;weeksInput.value=10;}
+    recalc();
+  }
+
+  function setMode(newMode){
+    mode=newMode;
+    if(mode==='haveJob'){
+      modeHaveJobBtn.classList.add('active');
+      modePlanJobBtn.classList.remove('active');
+      haveJobSection.style.display='';
+      planJobSection.style.display='none';
+      modeHint.textContent='Enter your monthly target and your job details to see if it covers your spending.';
+    } else {
+      modePlanJobBtn.classList.add('active');
+      modeHaveJobBtn.classList.remove('active');
+      haveJobSection.style.display='none';
+      planJobSection.style.display='';
+      modeHint.textContent='See suggested hours/week at different pay rates, then try your own numbers.';
     }
     recalc();
   }
 
-  function setMode(newMode) {
-    mode = newMode;
-    if (mode === "haveJob") {
-      modeHaveJobBtn.classList.add("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
-      modeHaveJobBtn.classList.remove("bg-slate-900", "border-slate-600/70", "text-slate-200");
-      modePlanJobBtn.classList.remove("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
-      modePlanJobBtn.classList.add("bg-slate-900", "border-slate-600/70", "text-slate-200");
-      haveJobSection.classList.remove("hidden");
-      planJobSection.classList.add("hidden");
-      modeHint.textContent = "Enter your monthly target and your job details to see if it covers your spending.";
-    } else {
-      modePlanJobBtn.classList.add("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
-      modePlanJobBtn.classList.remove("bg-slate-900", "border-slate-600/70", "text-slate-200");
-      modeHaveJobBtn.classList.remove("bg-cyan-400/20", "border-cyan-400/60", "text-cyan-100");
-      modeHaveJobBtn.classList.add("bg-slate-900", "border-slate-600/70", "text-slate-200");
-      haveJobSection.classList.add("hidden");
-      planJobSection.classList.remove("hidden");
-      modeHint.textContent = "See suggested hours/week at different pay rates, then try your own numbers.";
-    }
-    recalc();
-  }
-
-  function recalcHaveJob() {
-    const monthly = Number(monthlyInput.value) || 0;
-    const wage = Number(wageInput.value) || 0;
-    const weeks = Number(weeksInput.value) || 0;
-    const hoursPerWeek = Number(hoursSlider.value) || 0;
-    hoursPerWeekLabel.textContent = `${hoursPerWeek} hrs/week`;
-    warningLine.textContent = "";
-    resultLine.textContent = "";
-    shortfallLine.textContent = "";
-
-    if (monthly > 0) {
-      lastWeeklyMin = monthly / 4;
-    } else {
-      lastWeeklyMin = null;
-    }
-
-    if (monthly <= 0 || wage <= 0 || weeks <= 0 || hoursPerWeek <= 0) {
-      statusDot.className = "w-2.5 h-2.5 rounded-full bg-slate-500";
-      statusText.textContent = "Enter positive values to see if your job covers it.";
+  function recalcHaveJob(){
+    const monthly=Number(monthlyInput.value)||0;
+    const wage=Number(wageInput.value)||0;
+    const weeks=Number(weeksInput.value)||0;
+    const hoursPerWeek=Number(hoursSlider.value)||0;
+    hoursPerWeekLabel.textContent=hoursPerWeek+' hrs/week';
+    warningLine.textContent='';
+    resultLine.textContent='';
+    shortfallLine.textContent='';
+    lastWeeklyMin=monthly>0?monthly/4:null;
+    if(monthly<=0||wage<=0||weeks<=0||hoursPerWeek<=0){
+      statusDot.className='status-dot';
+      statusText.textContent='Enter positive values to see if your job covers it.';
       return;
     }
-    if (hoursPerWeek > 40 || wage > 60 || weeks > 52) {
-      warningLine.textContent =
-        "Heads up: these numbers are higher than what most college students work.";
+    if(hoursPerWeek>40||wage>60||weeks>52)warningLine.textContent='Heads up: these numbers are higher than what most college students work.';
+    const yearlyNeed=monthly*12;
+    const yearlyEarn=wage*hoursPerWeek*weeks;
+    const diff=yearlyEarn-yearlyNeed;
+    const absDiff=Math.abs(diff);
+    const monthlyDiff=absDiff/12;
+    resultLine.textContent='This setup earns about $'+yearlyEarn.toLocaleString()+'/year (~$'+Math.round(yearlyEarn/12).toLocaleString()+'/month).';
+    if(diff>=0){
+      statusDot.className='status-dot green';
+      statusText.textContent='This setup covers your target.';
+      shortfallLine.textContent='Target: ~$'+yearlyNeed.toLocaleString()+'/year. You are ahead by about $'+absDiff.toLocaleString()+' (approx $'+monthlyDiff.toFixed(0)+'/month).';
     } else {
-      warningLine.textContent = "";
-    }
-    const yearlyNeed = monthly * 12;
-    const yearlyEarn = wage * hoursPerWeek * weeks;
-    const diff = yearlyEarn - yearlyNeed;
-    const absDiff = Math.abs(diff);
-    const monthlyDiff = absDiff / 12;
-    resultLine.textContent =
-      `This setup earns about $${yearlyEarn.toLocaleString()} per year (~$${Math.round(yearlyEarn/12).toLocaleString()}/month).`;
-    if (diff >= 0) {
-      statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
-      statusText.textContent = "This setup covers your target.";
-      shortfallLine.textContent =
-        `Target: ~$${yearlyNeed.toLocaleString()}/year. You're ahead by about $${absDiff.toLocaleString()} (approx $${monthlyDiff.toFixed(0)}/month).`;
-    } else {
-      statusDot.className = "w-2.5 h-2.5 rounded-full bg-rose-400";
-      statusText.textContent = "This setup doesn't fully cover your target.";
-      shortfallLine.textContent =
-        `Target: ~$${yearlyNeed.toLocaleString()}/year. You're short by about $${absDiff.toLocaleString()} (approx $${monthlyDiff.toFixed(0)}/month).`;
+      statusDot.className='status-dot red';
+      statusText.textContent="This setup doesn't fully cover your target.";
+      shortfallLine.textContent='Target: ~$'+yearlyNeed.toLocaleString()+'/year. You are short by about $'+absDiff.toLocaleString()+' (approx $'+monthlyDiff.toFixed(0)+'/month).';
     }
   }
 
-  function recalcPlanJob() {
-    const monthly = Number(monthlyInput.value) || 0;
-    suggestionsList.innerHTML = "";
-    resultLine.textContent = "";
-    shortfallLine.textContent = "";
-    warningLine.textContent = "";
-
-    if (monthly > 0) {
-      lastWeeklyMin = monthly / 4;
-    } else {
-      lastWeeklyMin = null;
-    }
-
-    if (monthly <= 0) {
-      statusDot.className = "w-2.5 h-2.5 rounded-full bg-slate-500";
-      statusText.textContent = "Enter a monthly target to see suggested hours.";
+  function recalcPlanJob(){
+    const monthly=Number(monthlyInput.value)||0;
+    suggestionsList.innerHTML='';
+    resultLine.textContent='';
+    shortfallLine.textContent='';
+    warningLine.textContent='';
+    lastWeeklyMin=monthly>0?monthly/4:null;
+    if(monthly<=0){
+      statusDot.className='status-dot';
+      statusText.textContent='Enter a monthly target to see suggested hours.';
       return;
     }
-    const yearlyNeed = monthly * 12;
-    const wagesToTry = [13, 15, 18];
-    wagesToTry.forEach(w => {
-      const hoursPerWeek = yearlyNeed / (w * PLAN_WEEKS);
-      if (!Number.isFinite(hoursPerWeek) || hoursPerWeek <= 0) return;
-      const li = document.createElement("li");
-      li.innerHTML =
-        `$${w.toFixed(2)}/hour &rarr; about <span class="font-semibold text-white">${hoursPerWeek.toFixed(1)} hours/week</span> for ${PLAN_WEEKS} weeks`;
+    const yearlyNeed=monthly*12;
+    [13,15,18].forEach(w=>{
+      const hpw=yearlyNeed/(w*PLAN_WEEKS);
+      if(!Number.isFinite(hpw)||hpw<=0)return;
+      const li=document.createElement('li');
+      li.style.cssText='padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(148,163,184,0.1);border-radius:12px;font-size:0.875rem;color:var(--secondary);';
+      li.innerHTML='$'+w.toFixed(2)+'/hour &rarr; about <strong style="color:#fff;">'+hpw.toFixed(1)+' hours/week</strong> for '+PLAN_WEEKS+' weeks';
       suggestionsList.appendChild(li);
     });
-    const wCustom = Number(planWageInput.value) || 0;
-    const hCustom = Number(planHoursInput.value) || 0;
-    if (wCustom > 0 && hCustom > 0) {
-      const yearlyEarn = wCustom * hCustom * PLAN_WEEKS;
-      const monthlyEarn = yearlyEarn / 12;
-      const diff = yearlyEarn - yearlyNeed;
-      const absDiff = Math.abs(diff);
-      const monthlyDiff = absDiff / 12;
-      resultLine.textContent =
-        `That setup is about $${Math.round(monthlyEarn).toLocaleString()}/month before taxes.`;
-      if (diff >= 0) {
-        statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
-        statusText.textContent = "This setup covers your target.";
-        shortfallLine.textContent =
-          `You'd be ahead by about $${absDiff.toLocaleString()} per year (approx $${monthlyDiff.toFixed(0)}/month).`;
+    const wCustom=Number(planWageInput.value)||0;
+    const hCustom=Number(planHoursInput.value)||0;
+    if(wCustom>0&&hCustom>0){
+      const yearlyEarn=wCustom*hCustom*PLAN_WEEKS;
+      const diff=yearlyEarn-yearlyNeed;
+      const absDiff=Math.abs(diff);
+      resultLine.textContent='That setup is about $'+Math.round(yearlyEarn/12).toLocaleString()+'/month before taxes.';
+      if(diff>=0){
+        statusDot.className='status-dot green';
+        statusText.textContent='This setup covers your target.';
+        shortfallLine.textContent="You'd be ahead by about $"+absDiff.toLocaleString()+'/year (approx $'+(absDiff/12).toFixed(0)+'/month).';
       } else {
-        statusDot.className = "w-2.5 h-2.5 rounded-full bg-rose-400";
-        statusText.textContent = "This setup doesn't fully cover your target.";
-        shortfallLine.textContent =
-          `You'd be short by about $${absDiff.toLocaleString()} per year (approx $${monthlyDiff.toFixed(0)}/month).`;
+        statusDot.className='status-dot red';
+        statusText.textContent="This setup doesn't fully cover your target.";
+        shortfallLine.textContent="You'd be short by about $"+absDiff.toLocaleString()+'/year (approx $'+(absDiff/12).toFixed(0)+'/month).';
       }
     } else {
-      statusDot.className = "w-2.5 h-2.5 rounded-full bg-cyan-400";
-      statusText.textContent = "Here are some possible job setups to cover your target.";
+      statusDot.className='status-dot cyan';
+      statusText.textContent='Here are some possible job setups to cover your target.';
     }
   }
 
-  function recalc() {
-    if (mode === "haveJob") {
-      recalcHaveJob();
-    } else {
-      recalcPlanJob();
-    }
+  function recalc(){
+    if(mode==='haveJob')recalcHaveJob();
+    else recalcPlanJob();
   }
 
   initDefaults();
-  modeHaveJobBtn.addEventListener("click", () => setMode("haveJob"));
-  modePlanJobBtn.addEventListener("click", () => setMode("planJob"));
-  monthlyInput.addEventListener("input", recalc);
-  wageInput.addEventListener("input", recalc);
-  weeksInput.addEventListener("input", recalc);
-  hoursSlider.addEventListener("input", recalc);
-  planWageInput.addEventListener("input", recalc);
-  planHoursInput.addEventListener("input", recalc);
+  modeHaveJobBtn.addEventListener('click',()=>setMode('haveJob'));
+  modePlanJobBtn.addEventListener('click',()=>setMode('planJob'));
+  monthlyInput.addEventListener('input',recalc);
+  wageInput.addEventListener('input',recalc);
+  weeksInput.addEventListener('input',recalc);
+  hoursSlider.addEventListener('input',recalc);
+  planWageInput.addEventListener('input',recalc);
+  planHoursInput.addEventListener('input',recalc);
   recalc();
 
-  if (goFindJobsBtn) {
-    goFindJobsBtn.addEventListener("click", () => {
-      const weekly = lastWeeklyMin ? Math.round(lastWeeklyMin) : 0;
-      const url = new URL(window.location.origin + "/find-jobs.html");
-      if (weekly > 0) url.searchParams.set("weekly_min", weekly);
-      window.location.href = url.toString();
-    });
-  }
+  goFindJobsBtn.addEventListener('click',()=>{
+    const weekly=lastWeeklyMin?Math.round(lastWeeklyMin):0;
+    const url=new URL(window.location.origin+'/find-jobs.html');
+    if(weekly>0)url.searchParams.set('weekly_min',weekly);
+    window.location.href=url.toString();
+  });
 </script>
 </body>
 </html>
