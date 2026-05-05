@@ -1,1 +1,427 @@
-PLACEHOLDER_guides
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Money Guides – spending.college</title>
+<meta name="description" content="Practical, honest guides for saving money in college, finding jobs, and using your College Cash number to plan your budget.">
+<link rel="canonical" href="https://www.spending.college/guides.html">
+<link rel="icon" href="/favicon.ico">
+<meta name='impact-site-verification' value='63c8b781-4885-438f-883a-8ea87f9822f9'>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBBZR62R5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PJBBZR62R5');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:#06080f;
+  color:#e2e8f0;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+:root{
+  --accent:#7c3aed;
+  --accent-light:#a78bfa;
+  --accent2:#06b6d4;
+  --accent2-light:#67e8f9;
+  --glow-v:rgba(124,58,237,0.15);
+  --glow-c:rgba(6,182,212,0.10);
+  --surface:rgba(13,17,32,0.95);
+  --surface2:rgba(20,25,48,0.80);
+  --border:rgba(148,163,184,0.10);
+  --border-accent:rgba(124,58,237,0.30);
+  --muted:#64748b;
+  --secondary:#94a3b8;
+  --radius-sm:12px;
+  --radius:20px;
+  --radius-lg:28px;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 70% 45% at 8% 0%, var(--glow-v) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 35% at 92% 85%, var(--glow-c) 0%, transparent 60%),
+    linear-gradient(175deg,#06080f 0%,#090d1c 100%);
+  pointer-events:none;
+  z-index:0;
+}
+.page-wrap{position:relative;z-index:1;}
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 40px;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(6,8,15,0.75);
+}
+.nav-logo{
+  font-size:1.1rem;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  color:#fff;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.nav-logo-dot{
+  width:8px;height:8px;
+  background:var(--accent-light);
+  border-radius:50%;
+  display:inline-block;
+  box-shadow:0 0 8px var(--accent-light);
+}
+.nav-links{
+  display:flex;
+  gap:6px;
+  list-style:none;
+}
+.nav-links a{
+  color:var(--secondary);
+  text-decoration:none;
+  font-size:0.875rem;
+  font-weight:500;
+  padding:7px 14px;
+  border-radius:var(--radius-sm);
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.06);}
+.nav-links a.active{color:#fff;background:rgba(124,58,237,0.18);border:1px solid var(--border-accent);}
+.section{max-width:780px;margin:0 auto;padding:0 24px;}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:40px;
+  margin-bottom:32px;
+  backdrop-filter:blur(16px);
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-accent),transparent);
+}
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:1.2rem;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  margin-bottom:24px;
+  color:#fff;
+}
+.card-title-icon{
+  width:40px;height:40px;
+  background:rgba(124,58,237,0.15);
+  border:1px solid var(--border-accent);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.card-title-icon svg{width:18px;height:18px;color:var(--accent-light);}
+details{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px 32px;
+  margin-bottom:24px;
+  position:relative;
+  overflow:hidden;
+}
+details::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-accent),transparent);
+}
+details summary{
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:1rem;
+  font-weight:700;
+  color:#fff;
+  list-style:none;
+}
+details summary::-webkit-details-marker,
+details summary::marker{display:none;}
+.summary-hint{font-size:0.8rem;color:var(--muted);font-weight:400;}
+details .detail-body{margin-top:20px;}
+.detail-body p{font-size:0.875rem;color:var(--secondary);line-height:1.7;margin-bottom:12px;}
+.detail-body h3{font-size:0.9rem;font-weight:700;color:#fff;margin:20px 0 10px;}
+.detail-body ul,.detail-body ol{padding-left:20px;display:flex;flex-direction:column;gap:8px;}
+.detail-body li{font-size:0.875rem;color:var(--secondary);line-height:1.6;}
+.detail-body a{color:var(--accent-light);text-decoration:underline;}
+.state-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px;}
+@media(max-width:480px){.state-grid{grid-template-columns:repeat(2,1fr);}}
+.state-link{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  padding:12px 14px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  text-decoration:none;
+  transition:border-color .2s,background .2s;
+}
+.state-link:hover{border-color:var(--border-accent);background:rgba(124,58,237,0.06);}
+.state-link span:first-child{font-size:0.85rem;font-weight:600;color:#fff;}
+.state-link span:last-child{font-size:0.75rem;color:var(--muted);}
+.state-link.all-states span:first-child{color:var(--accent-light);}
+.hero{
+  max-width:760px;
+  margin:0 auto;
+  padding:72px 24px 48px;
+}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(124,58,237,0.12);
+  border:1px solid var(--border-accent);
+  border-radius:999px;
+  padding:6px 16px;
+  font-size:0.8rem;
+  font-weight:600;
+  color:var(--accent-light);
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+.hero h1{
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-0.035em;
+  margin-bottom:16px;
+  background:linear-gradient(135deg,#fff 0%,#c4b5fd 55%,var(--accent2-light) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero p{font-size:1rem;color:var(--secondary);max-width:520px;line-height:1.7;}
+footer{
+  border-top:1px solid var(--border);
+  padding:40px;
+  text-align:center;
+  margin-top:80px;
+}
+.footer-links{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;margin-bottom:16px;}
+.footer-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:0.85rem;
+  padding:6px 12px;
+  border-radius:var(--radius-sm);
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--secondary);}
+.footer-copy{font-size:0.8rem;color:var(--muted);}
+@media(max-width:640px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  .hero{padding:48px 20px 32px;}
+  .card,.details{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-dot"></span>
+    spending.college
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Calculator</a></li>
+    <li><a href="/jobs.html">Job Hours</a></li>
+    <li><a href="/find-jobs.html">Find Jobs</a></li>
+    <li><a href="/guides.html" class="active">Guides</a></li>
+    <li><a href="/faq.html">FAQ</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+    Guides
+  </div>
+  <h1>College Money Guides</h1>
+  <p>Simple, honest guidance to help you spend less, earn what you need, and use your College Cash estimate in real life. Information only — not financial advice.</p>
+</div>
+
+<div class="section" style="margin-bottom:80px;">
+
+  <!-- State guides -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-title-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      </div>
+      College Budget Guides by State
+    </div>
+    <p style="font-size:0.875rem;color:var(--secondary);margin-bottom:20px;">Real cost breakdowns for tuition, housing, food, and more — based on 2026 data from public universities.</p>
+    <div class="state-grid">
+      <a href="guides/california-college-budget.html" class="state-link"><span>California</span><span>~$39,700/yr</span></a>
+      <a href="guides/florida-college-budget.html" class="state-link"><span>Florida</span><span>~$26,600/yr</span></a>
+      <a href="guides/massachusetts-college-budget.html" class="state-link"><span>Massachusetts</span><span>~$38,400/yr</span></a>
+      <a href="guides/new-york-college-budget.html" class="state-link"><span>New York</span><span>~$40,300/yr</span></a>
+      <a href="guides/texas-college-budget.html" class="state-link"><span>Texas</span><span>~$29,700/yr</span></a>
+      <a href="guides/" class="state-link all-states"><span>All States →</span><span>View full list</span></a>
+    </div>
+  </div>
+
+  <!-- Guide 1 -->
+  <details open>
+    <summary>1. Use your College Cash number <span class="summary-hint">tap to open/close</span></summary>
+    <div class="detail-body">
+      <p>When you use the College Cash calculator, you get a yearly and monthly spending estimate based on your state, housing, meal setup, and lifestyle choices.</p>
+      <ul>
+        <li>Take the monthly estimate and divide by 4 to get a weekly target. For example, $400/month is about $100/week.</li>
+        <li>Use that weekly number as your "all in" budget for food out, rides, fun, random purchases, and extras.</li>
+        <li>Plug the same monthly number into the College Job Hours calculator to see how many hours of work you need.</li>
+        <li>Re-run both tools when something changes — moving off campus, dropping your meal plan, or taking more classes.</li>
+      </ul>
+      <p style="margin-top:16px;"><a href="/">Run the College Cash calculator →</a></p>
+    </div>
+  </details>
+
+  <!-- Guide 2 -->
+  <details>
+    <summary>2. Saving money in college <span class="summary-hint">tap to open/close</span></summary>
+    <div class="detail-body">
+      <p>You cannot control every cost, but small choices add up fast.</p>
+      <h3>Food and meal plans</h3>
+      <ul>
+        <li>Treat your meal plan like a pre-paid card. Use most of your swipes before buying extra meals off campus.</li>
+        <li>Keep low-effort food in your room so you are not ordering delivery by default.</li>
+        <li>Track how often you order out in one week — even cutting one delivery can free up real money each month.</li>
+      </ul>
+      <h3>Textbooks and materials</h3>
+      <ul>
+        <li>Compare prices across campus bookstore, used copies, rentals, older editions, and digital versions.</li>
+        <li>Ask your professor if an older edition is acceptable. The content is often nearly identical.</li>
+        <li>Use the library — some classes keep copies on reserve for short-term use.</li>
+      </ul>
+      <h3>Transportation</h3>
+      <ul>
+        <li>Many colleges include local buses or shuttles in student fees at no extra charge.</li>
+        <li>Walk or bike for short trips instead of defaulting to rideshares.</li>
+      </ul>
+      <h3>Subscriptions</h3>
+      <ul>
+        <li>List every subscription you pay for. Cancel anything you barely use.</li>
+        <li>Look for student discounts on services you truly need.</li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- Guide 3 -->
+  <details>
+    <summary>3. Finding jobs while in college <span class="summary-hint">tap to open/close</span></summary>
+    <div class="detail-body">
+      <p>The right job depends on your schedule, financial aid, and what's available on or near campus.</p>
+      <h3>On-campus jobs</h3>
+      <ul>
+        <li>Check your school's official job board or career center for positions like library assistant, front desk staff, or event support.</li>
+        <li>Campus jobs often understand student schedules and may be more flexible around exams.</li>
+      </ul>
+      <h3>Work-study</h3>
+      <ul>
+        <li>Read your financial aid letter carefully. If it mentions "work-study," ask your financial aid office which campus offices are hiring.</li>
+      </ul>
+      <h3>Off-campus and remote</h3>
+      <ul>
+        <li>Look for part-time roles with flexible hours: retail, food service, childcare, or front desk work near campus.</li>
+        <li>For remote work, search for "part-time remote," "evening shift," customer support, or online tutoring.</li>
+        <li>Be cautious of any job that asks you to pay money up front or move money for other people.</li>
+      </ul>
+      <h3>Balancing hours with school</h3>
+      <ul>
+        <li>Many students aim for 10–20 hours/week during the semester, but the right number depends on your course load.</li>
+        <li>Use the College Job Hours calculator to see how different pay rates and hours line up with your goal.</li>
+      </ul>
+      <p style="margin-top:16px;"><a href="/jobs.html">Open the Job Hours calculator →</a></p>
+    </div>
+  </details>
+
+  <!-- Guide 4 -->
+  <details>
+    <summary>4. A simple student budget <span class="summary-hint">tap to open/close</span></summary>
+    <div class="detail-body">
+      <p>You do not need a perfect budget app to be organized. A basic structure makes your College Cash estimate much more useful.</p>
+      <ol>
+        <li>Start with your monthly College Cash number and list your expected income for the month.</li>
+        <li>Separate essentials (transport, phone, basic groceries) from extras (eating out, fun, shopping).</li>
+        <li>Make sure essentials fit inside your income, then decide how much of the rest goes to extras vs. savings.</li>
+        <li>Check in once a week using a notes app, spreadsheet, or any budgeting tool — consistency matters more than the tool.</li>
+      </ol>
+    </div>
+  </details>
+
+  <!-- Guide 5 -->
+  <details>
+    <summary>5. Helpful resources <span class="summary-hint">tap to open/close</span></summary>
+    <div class="detail-body">
+      <p>These are general types of resources many students use. Always use official school or government websites for big decisions.</p>
+      <ul>
+        <li>Your own college career center site and job board (log in through your school's official student portal).</li>
+        <li>U.S. Federal Work-Study overview: <a href="https://studentaid.gov/understand-aid/types/work-study" target="_blank" rel="noopener">studentaid.gov – Work-Study</a></li>
+        <li>Major job boards: <a href="https://www.indeed.com" target="_blank" rel="noopener">Indeed</a> and <a href="https://www.linkedin.com/jobs" target="_blank" rel="noopener">LinkedIn Jobs</a>.</li>
+        <li>Scholarship tools: <a href="https://www.fastweb.com" target="_blank" rel="noopener">Fastweb</a> and <a href="https://bigfuture.collegeboard.org/scholarship-search" target="_blank" rel="noopener">College Board BigFuture</a>.</li>
+      </ul>
+      <p>These are external sites, not affiliated with spending.college. Review their own terms and privacy policies.</p>
+    </div>
+  </details>
+
+  <!-- About -->
+  <details>
+    <summary>About these guides <span class="summary-hint">tap to read</span></summary>
+    <div class="detail-body">
+      <p>These guides are written to give students simple, practical ideas for saving money, finding work, and using the College Cash tools. They are based on common patterns in student budgets, not any one school's rules.</p>
+      <p>None of this is personal financial advice, legal advice, or tax advice. Always check details like tuition, fees, and financial aid on official school and government websites.</p>
+      <p>spending.college is an independent project and is not affiliated with any college, university, bank, or government agency. Contact: <a href="mailto:unbanked123@gmail.com">unbanked123@gmail.com</a></p>
+    </div>
+  </details>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Calculator</a>
+    <a href="/jobs.html">Job Hours</a>
+    <a href="/find-jobs.html">Find Jobs</a>
+    <a href="/guides.html">Guides</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <p class="footer-copy">&copy; 2025 spending.college — Information only. Not financial advice.</p>
+</footer>
+
+</div>
+</body>
+</html>
