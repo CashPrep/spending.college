@@ -221,7 +221,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       RECEIPT SECTION
+       RECEIPT SECTION — REDESIGNED
     ═══════════════════════════════════════════════ */
 
     /* Receipt reveal animation */
@@ -241,195 +241,307 @@
       transform: translateY(0);
     }
 
+    /* ── Receipt wrapper: centers card on wider screens ── */
+    .receipt-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
     /* Receipt card – always dark, story-ready */
     #receipt-card {
       font-family: 'Space Mono', monospace;
-      background: #0a0a0f;
+      background: #080c14;
       color: #e2e8f0;
-      width: 340px;
-      margin: 0 auto;
-      border-radius: 18px;
-      padding: 28px 24px 20px;
-      border: 1px solid rgba(56,189,248,0.18);
-      box-shadow: 0 0 40px rgba(56,189,248,0.08), 0 20px 60px rgba(0,0,0,0.8);
+      width: 320px;
+      border-radius: 24px;
+      padding: 28px 22px 22px;
+      border: 1px solid rgba(56,189,248,0.14);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 0 50px rgba(56,189,248,0.07),
+        0 24px 64px rgba(0,0,0,0.85);
       position: relative;
       overflow: hidden;
     }
-    /* Subtle glow top bar */
+    /* Top accent line */
     #receipt-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+      background: linear-gradient(90deg, transparent 5%, #22d3ee 40%, #818cf8 60%, transparent 95%);
+      opacity: 0.7;
+    }
+    /* Subtle inner glow */
+    #receipt-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at top center, rgba(34,211,238,0.04) 0%, transparent 65%);
+      pointer-events: none;
     }
 
     .receipt-brand {
       font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       color: #22d3ee;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .receipt-subtitle {
       font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
-      color: #475569;
-      letter-spacing: 0.08em;
-      margin-bottom: 18px;
+      font-size: 9px;
+      color: #334155;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
     }
 
     .receipt-vibe {
       font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      padding: 5px 10px;
-      border-radius: 6px;
+      padding: 4px 10px;
+      border-radius: 8px;
       display: inline-block;
       margin-bottom: 14px;
     }
-    .vibe-frugal   { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
-    .vibe-balanced { background: rgba(56,189,248,0.12); color: #38bdf8; border: 1px solid rgba(56,189,248,0.25); }
-    .vibe-bigspend { background: rgba(234,179,8,0.12);  color: #eab308; border: 1px solid rgba(234,179,8,0.25); }
-    .vibe-broke    { background: rgba(239,68,68,0.12);  color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+    .vibe-frugal   { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.25); }
+    .vibe-balanced { background: rgba(56,189,248,0.10); color: #38bdf8; border: 1px solid rgba(56,189,248,0.22); }
+    .vibe-bigspend { background: rgba(234,179,8,0.10);  color: #eab308; border: 1px solid rgba(234,179,8,0.22); }
+    .vibe-broke    { background: rgba(239,68,68,0.10);  color: #ef4444; border: 1px solid rgba(239,68,68,0.25); }
 
     .receipt-total-label {
       font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      color: #475569;
-      letter-spacing: 0.2em;
+      font-size: 8px;
+      color: #334155;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       margin-bottom: 2px;
     }
     .receipt-total {
       font-family: 'DM Sans', sans-serif;
-      font-size: 52px;
+      font-size: 56px;
       font-weight: 900;
       line-height: 1;
       color: #f8fafc;
-      letter-spacing: -1px;
+      letter-spacing: -2px;
       margin-bottom: 4px;
     }
     .receipt-per-year {
-      font-size: 11px;
+      font-size: 10px;
       color: #475569;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      font-family: 'Space Mono', monospace;
     }
 
     .receipt-divider {
       border: none;
-      border-top: 1px dashed rgba(71,85,105,0.5);
-      margin: 14px 0;
+      border-top: 1px dashed rgba(51,65,85,0.8);
+      margin: 12px 0;
     }
 
     .receipt-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 11px;
-      margin-bottom: 7px;
+      font-size: 10px;
+      margin-bottom: 6px;
       color: #94a3b8;
     }
-    .receipt-row .label { color: #cbd5e1; }
+    .receipt-row .label { color: #94a3b8; }
     .receipt-row.top-cat .label { color: #22d3ee; font-weight: 700; }
     .receipt-row.top-cat .val   { color: #22d3ee; font-weight: 700; }
     .receipt-pct-bar {
-      width: 60px;
-      height: 3px;
-      background: rgba(71,85,105,0.3);
+      width: 52px;
+      height: 2px;
+      background: rgba(51,65,85,0.5);
       border-radius: 2px;
       overflow: hidden;
-      margin: 0 8px;
+      margin: 0 6px;
       flex-shrink: 0;
     }
     .receipt-pct-fill {
       height: 100%;
-      background: #475569;
+      background: #334155;
       border-radius: 2px;
     }
     .receipt-row.top-cat .receipt-pct-fill { background: #22d3ee; }
 
     .receipt-state-row {
-      font-size: 10px;
-      color: #475569;
+      font-size: 9px;
+      color: #334155;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
+      font-family: 'Space Mono', monospace;
     }
 
     .receipt-barcode {
-      margin-top: 14px;
+      margin-top: 12px;
       display: flex;
       gap: 2px;
       align-items: flex-end;
-      height: 28px;
+      height: 24px;
     }
     .receipt-barcode span {
       display: inline-block;
-      background: #1e293b;
       border-radius: 1px;
     }
 
     .receipt-footer-brand {
       font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
+      font-size: 9px;
+      font-weight: 800;
       color: #22d3ee;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       margin-top: 10px;
+      opacity: 0.7;
     }
     .receipt-cta {
-      font-size: 9px;
-      color: #475569;
-      letter-spacing: 0.08em;
+      font-size: 8px;
+      color: #1e293b;
+      letter-spacing: 0.1em;
+      font-family: 'Space Mono', monospace;
     }
 
     /* Receipt watermark */
     .receipt-watermark {
       font-family: 'DM Sans', sans-serif;
-      font-size: 9px;
-      font-weight: 700;
-      color: rgba(34,211,238,0.45);
-      letter-spacing: 0.12em;
+      font-size: 8px;
+      font-weight: 800;
+      color: rgba(34,211,238,0.3);
+      letter-spacing: 0.14em;
       text-align: right;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
-    /* Receipt action buttons */
-    .receipt-btn {
+    /* ── Action buttons row ── */
+    .receipt-actions {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Save button — primary */
+    .receipt-btn-save {
       font-family: 'DM Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.82rem;
-      border-radius: 14px;
-      padding: 0.65rem 1.2rem;
+      font-weight: 800;
+      font-size: 0.9rem;
+      border-radius: 16px;
+      padding: 0.8rem 1.4rem;
       cursor: pointer;
       transition: all 0.15s ease;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      justify-content: center;
+      gap: 0.5rem;
       border: none;
-      min-height: 44px;
+      min-height: 52px;
+      width: 100%;
+      background: linear-gradient(135deg, #22d3ee 0%, #818cf8 100%);
+      color: #020617;
+      letter-spacing: 0.02em;
       -webkit-tap-highlight-color: transparent;
     }
-    .receipt-btn-save {
-      background: linear-gradient(135deg, #22d3ee, #818cf8);
-      color: #020617;
-      flex: 1;
+    .receipt-btn-save:hover { opacity: 0.92; transform: translateY(-1px); }
+    .receipt-btn-save:active { transform: scale(0.98); }
+
+    /* Share row — Instagram + Snapchat side by side */
+    .receipt-share-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
     }
-    .receipt-btn-save:hover { opacity: 0.9; transform: translateY(-1px); }
-    .receipt-btn-save:active { transform: scale(0.97); }
+
+    .receipt-share-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      border-radius: 14px;
+      padding: 0.65rem 0.9rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border: 1px solid;
+      min-height: 46px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .receipt-share-btn:active { transform: scale(0.97); }
+
+    /* Instagram — gradient border */
+    .btn-instagram {
+      background: linear-gradient(135deg, rgba(225,48,108,0.12), rgba(193,53,132,0.08));
+      border-color: rgba(225,48,108,0.4);
+      color: #f9a8d4;
+    }
+    .btn-instagram:hover {
+      background: linear-gradient(135deg, rgba(225,48,108,0.22), rgba(193,53,132,0.16));
+      border-color: rgba(225,48,108,0.7);
+    }
+
+    /* Snapchat — yellow */
+    .btn-snapchat {
+      background: rgba(255,252,0,0.07);
+      border-color: rgba(255,252,0,0.25);
+      color: #fef08a;
+    }
+    .btn-snapchat:hover {
+      background: rgba(255,252,0,0.14);
+      border-color: rgba(255,252,0,0.5);
+    }
+
+    /* Copy link — subtle */
     .receipt-btn-copy {
-      background: rgba(30,41,59,1);
-      border: 1px solid rgba(71,85,105,0.6);
-      color: #94a3b8;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      border-radius: 14px;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border: 1px solid rgba(51,65,85,0.7);
+      min-height: 44px;
+      background: rgba(15,23,42,0.6);
+      color: #64748b;
+      width: 100%;
+      -webkit-tap-highlight-color: transparent;
     }
     .receipt-btn-copy:hover { border-color: #22d3ee; color: #22d3ee; }
     .receipt-btn-copy:active { transform: scale(0.97); }
+
+    /* Share hint text */
+    .share-hint {
+      font-size: 0.72rem;
+      color: #475569;
+      text-align: center;
+      width: 320px;
+    }
+
+    /* Copy success flash */
+    .copy-flash {
+      animation: flashGreen 1.5s ease forwards;
+    }
+    @keyframes flashGreen {
+      0%   { color: #10b981; border-color: #10b981; }
+      80%  { color: #10b981; border-color: #10b981; }
+      100% { color: #64748b; border-color: rgba(51,65,85,0.7); }
+    }
 
     /* Trigger button (appears after calc) */
     #receipt-trigger-wrap {
@@ -447,68 +559,60 @@
     /* Handle input for receipt */
     #receipt-handle-input {
       font-family: 'Space Mono', monospace;
-      background: rgba(15,23,42,0.8);
-      border: 1px solid rgba(71,85,105,0.5);
+      background: rgba(8,12,20,0.9);
+      border: 1px solid rgba(51,65,85,0.7);
       color: #e2e8f0;
-      border-radius: 10px;
-      padding: 8px 12px;
+      border-radius: 12px;
+      padding: 10px 14px;
       font-size: 13px;
       width: 100%;
       outline: none;
-      transition: border-color 0.15s;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
     #receipt-handle-input:focus {
       border-color: #22d3ee;
+      box-shadow: 0 0 0 3px rgba(34,211,238,0.1);
     }
     #receipt-handle-input::placeholder {
-      color: #475569;
-    }
-
-    /* Copy success flash */
-    .copy-flash {
-      animation: flashGreen 1.5s ease forwards;
-    }
-    @keyframes flashGreen {
-      0%   { color: #10b981; border-color: #10b981; }
-      80%  { color: #10b981; border-color: #10b981; }
-      100% { color: #94a3b8; border-color: rgba(71,85,105,0.6); }
+      color: #1e293b;
     }
 
     /* ── Affiliate CTA banner (in-receipt) ── */
     .sofi-cta-banner {
-      background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(34,211,238,0.1));
-      border: 1px solid rgba(16,185,129,0.35);
-      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(16,185,129,0.10), rgba(34,211,238,0.08));
+      border: 1px solid rgba(16,185,129,0.28);
+      border-radius: 16px;
       padding: 14px 16px;
       display: flex;
       align-items: center;
       gap: 12px;
+      width: 320px;
     }
     .sofi-cta-banner .sofi-icon {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       flex-shrink: 0;
     }
     .sofi-cta-banner .sofi-text {
       flex: 1;
     }
     .sofi-cta-banner .sofi-headline {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: #f0fdf4;
       line-height: 1.3;
     }
     .sofi-cta-banner .sofi-sub {
-      font-size: 0.72rem;
-      color: #94a3b8;
+      font-size: 0.7rem;
+      color: #64748b;
       margin-top: 2px;
     }
     .sofi-cta-banner .sofi-btn {
       background: linear-gradient(135deg, #10b981, #22d3ee);
       color: #020617;
       font-weight: 800;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       border-radius: 10px;
-      padding: 8px 14px;
+      padding: 8px 12px;
       white-space: nowrap;
       text-decoration: none;
       flex-shrink: 0;
@@ -669,105 +773,137 @@
     <div id="receipt-trigger-wrap">
       <div class="glass rounded-3xl p-4 sm:p-5">
         <!-- Teaser header -->
-        <div class="flex items-center gap-3 mb-3">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400/30 to-indigo-500/30 border border-cyan-400/30 flex items-center justify-center text-lg shrink-0">🧾</div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-indigo-500/20 border border-cyan-400/20 flex items-center justify-center text-xl shrink-0">🧾</div>
           <div>
             <p class="font-bold text-[0.95rem] text-white">Turn this into a shareable receipt</p>
-            <p class="text-[0.73rem] text-slate-400">Save to camera roll &amp; post to your story</p>
+            <p class="text-[0.73rem] text-slate-400 mt-0.5">Download &amp; post to your Instagram or Snapchat story</p>
           </div>
         </div>
 
         <!-- Handle input -->
         <div class="mb-3">
-          <label class="block text-[0.72rem] text-slate-400 uppercase tracking-wider mb-1">Your handle (optional)</label>
+          <label class="block text-[0.7rem] text-slate-500 uppercase tracking-widest mb-1.5">Your handle (optional)</label>
           <input id="receipt-handle-input" type="text" placeholder="@yourhandle" maxlength="30" />
         </div>
 
         <!-- Generate button -->
         <button id="generate-receipt-btn"
           onclick="generateAndShowReceipt()"
-          class="w-full rounded-2xl bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 border border-cyan-400/40 px-4 py-3 font-bold text-[0.9rem] text-white hover:from-cyan-500/30 hover:to-indigo-500/30 transition active:scale-[0.99] flex items-center justify-center gap-2"
+          class="w-full rounded-2xl bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 border border-cyan-400/35 px-4 py-3.5 font-bold text-[0.9rem] text-white hover:from-cyan-500/30 hover:to-indigo-500/30 transition active:scale-[0.99] flex items-center justify-center gap-2"
           style="min-height:52px;">
           <span>Generate My Receipt</span>
-          <span class="text-lg">→</span>
+          <span>→</span>
         </button>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════
-         RECEIPT SECTION
+         RECEIPT SECTION — REDESIGNED
     ═══════════════════════════════════ -->
     <div id="receipt-section">
-      <div class="glass rounded-3xl p-4 sm:p-5 space-y-4">
-        <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">Your Budget Receipt</p>
-        <p class="text-[0.82rem] text-slate-300">Save it to your camera roll and post to your story. 📲</p>
-
-        <!-- The actual receipt card (captured by html2canvas) -->
-        <div id="receipt-card">
-          <div class="receipt-brand">spending.college</div>
-          <div class="receipt-subtitle">MONTHLY SPENDING REPORT</div>
-
-          <div id="r-vibe" class="receipt-vibe vibe-balanced">Balanced Spend</div>
-
-          <div class="receipt-total-label">MONTHLY TOTAL</div>
-          <div id="r-total" class="receipt-total">$221</div>
-          <div id="r-peryear" class="receipt-per-year">/ mo &nbsp;·&nbsp; $2,650 / yr</div>
-
-          <hr class="receipt-divider">
-
-          <!-- Line items -->
-          <div id="r-lineitems"></div>
-
-          <hr class="receipt-divider">
-
-          <!-- Meta row -->
-          <div class="receipt-state-row">
-            <span id="r-state">US Average</span>
-            <span id="r-date"></span>
+      <div class="glass rounded-3xl p-5 sm:p-6">
+        <!-- Section header -->
+        <div class="flex items-center justify-between mb-5">
+          <div>
+            <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold mb-0.5">Your Budget Receipt</p>
+            <p class="text-[0.8rem] text-slate-400">Save &amp; share to your story 📲</p>
           </div>
-          <div class="receipt-state-row">
-            <span id="r-handle" style="color:#22d3ee;"></span>
-            <span id="r-housing-meal" style="font-size:9px;"></span>
-          </div>
-
-          <hr class="receipt-divider">
-
-          <!-- Barcode -->
-          <div class="receipt-barcode" id="r-barcode"></div>
-
-          <!-- Footer -->
-          <div class="receipt-footer-brand">spending.college</div>
-          <div class="receipt-cta">calculate yours → spending.college</div>
-
-          <!-- Watermark: always visible on shared image -->
-          <div class="receipt-watermark">@spending.college</div>
+          <div class="w-8 h-8 rounded-xl bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center text-base">🧾</div>
         </div>
 
-        <!-- Action buttons -->
-        <div class="flex gap-3 mt-2">
-          <button class="receipt-btn receipt-btn-save" onclick="downloadReceipt()">
-            <span>⬇</span> Save to Camera Roll
-          </button>
-          <button class="receipt-btn receipt-btn-copy" id="copy-link-btn" onclick="copyLink()">
-            <span>🔗</span> Copy Link
-          </button>
-        </div>
+        <!-- Centered receipt + actions wrapper -->
+        <div class="receipt-wrapper">
 
-        <!-- ── Inline SoFi affiliate CTA (below receipt, above re-generate) ── -->
-        <div class="sofi-cta-banner">
-          <div class="sofi-icon">💰</div>
-          <div class="sofi-text">
-            <div class="sofi-headline">Need a place to keep your <span id="sofi-monthly-cta">$221</span>/mo?</div>
-            <div class="sofi-sub">Get $25 free when you open &amp; fund a SoFi account with $50. Referral link — I may earn a bonus.</div>
+          <!-- The actual receipt card (captured by html2canvas) -->
+          <div id="receipt-card">
+            <div class="receipt-brand">spending.college</div>
+            <div class="receipt-subtitle">monthly spending report</div>
+
+            <div id="r-vibe" class="receipt-vibe vibe-balanced">Balanced Spend</div>
+
+            <div class="receipt-total-label">MONTHLY TOTAL</div>
+            <div id="r-total" class="receipt-total">$221</div>
+            <div id="r-peryear" class="receipt-per-year">/ mo &nbsp;·&nbsp; $2,650 / yr</div>
+
+            <hr class="receipt-divider">
+
+            <!-- Line items -->
+            <div id="r-lineitems"></div>
+
+            <hr class="receipt-divider">
+
+            <!-- Meta row -->
+            <div class="receipt-state-row">
+              <span id="r-state">US Average</span>
+              <span id="r-date"></span>
+            </div>
+            <div class="receipt-state-row">
+              <span id="r-handle" style="color:#22d3ee;"></span>
+              <span id="r-housing-meal"></span>
+            </div>
+
+            <hr class="receipt-divider">
+
+            <!-- Barcode -->
+            <div class="receipt-barcode" id="r-barcode"></div>
+
+            <!-- Footer -->
+            <div class="receipt-footer-brand">spending.college</div>
+            <div class="receipt-cta">calculate yours → spending.college</div>
+
+            <!-- Watermark -->
+            <div class="receipt-watermark">@spending.college</div>
           </div>
-          <a href="https://www.sofi.com/invite/money?gcp=1c331e58-19f2-4da3-8dbc-b74aa836b1e4&isAliasGcp=false"
-             class="sofi-btn"
-             rel="sponsored noopener"
-             target="_blank">Get $25 Free →</a>
-        </div>
+
+          <!-- ── Action buttons ── -->
+          <div class="receipt-actions">
+
+            <!-- Primary: Save to camera roll -->
+            <button class="receipt-btn-save" onclick="downloadReceipt()" id="save-btn">
+              <span>⬇</span> Save to Camera Roll
+            </button>
+
+            <!-- Share row: Instagram + Snapchat -->
+            <div class="receipt-share-row">
+              <button class="receipt-share-btn btn-instagram" onclick="shareToInstagram()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                Instagram
+              </button>
+              <button class="receipt-share-btn btn-snapchat" onclick="shareToSnapchat()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M12.166.006c.12-.008.235-.006.344-.006.96 0 4.37.27 6.013 3.747.48 1.02.36 2.76.288 4.023l-.012.237c-.006.09-.006.18 0 .27.054.006.12.006.198 0 .396-.024.942-.12 1.368-.3a1.2 1.2 0 01.432-.084c.294 0 .6.096.804.3.39.378.33.84-.072 1.11-.03.024-.066.042-.096.06-.432.234-1.068.414-1.746.534a.132.132 0 00-.114.138c.012.102.042.192.06.276.126.504.39 1.398 1.14 2.178.39.402.936.822 1.722 1.05.312.09.492.408.39.72-.156.474-.624.804-1.122.936a7.2 7.2 0 01-.714.138c-.36.054-.504.24-.6.516-.072.21-.162.426-.402.54-.258.12-.612.072-.972-.042-.54-.168-1.038-.252-1.5-.252-.234 0-.456.018-.666.054-.498.084-.93.342-1.35.588-.684.396-1.458.846-2.646.846-.066 0-.138-.006-.204-.006-.066 0-.138.006-.204.006-1.188 0-1.956-.45-2.646-.846-.42-.246-.852-.504-1.35-.588a4.584 4.584 0 00-.666-.054c-.462 0-.96.084-1.5.252-.36.114-.714.162-.972.042-.24-.114-.33-.33-.402-.54-.096-.276-.24-.462-.6-.516a7.26 7.26 0 01-.714-.138C2.03 14.13 1.562 13.8 1.406 13.326c-.102-.312.078-.63.39-.72.786-.228 1.332-.648 1.722-1.05.75-.78 1.014-1.674 1.14-2.178.018-.084.048-.174.06-.276a.132.132 0 00-.114-.138c-.678-.12-1.314-.3-1.746-.534-.03-.018-.066-.036-.096-.06-.402-.27-.462-.732-.072-1.11.204-.204.51-.3.804-.3.15 0 .294.03.432.084.426.18.972.276 1.368.3.078.006.144.006.198 0 .006-.09.006-.18 0-.27l-.012-.237C5.41 5.027 5.29 3.287 5.77 2.267 7.38.866 10.716.018 12.078.006h.088z"/></svg>
+                Snapchat
+              </button>
+            </div>
+
+            <!-- Copy link -->
+            <button class="receipt-btn-copy" id="copy-link-btn" onclick="copyLink()">
+              <span>🔗</span> Copy Link
+            </button>
+
+          </div>
+
+          <!-- Share hint -->
+          <p class="share-hint">💡 Tap <strong style="color:#e2e8f0;">Save to Camera Roll</strong> first, then upload directly from your photos to your story.</p>
+
+          <!-- ── Inline SoFi affiliate CTA ── -->
+          <div class="sofi-cta-banner">
+            <div class="sofi-icon">💰</div>
+            <div class="sofi-text">
+              <div class="sofi-headline">Need a place to keep your <span id="sofi-monthly-cta">$221</span>/mo?</div>
+              <div class="sofi-sub">Get $25 free when you open &amp; fund a SoFi account with $50. Referral link — I may earn a bonus.</div>
+            </div>
+            <a href="https://www.sofi.com/invite/money?gcp=1c331e58-19f2-4da3-8dbc-b74aa836b1e4&isAliasGcp=false"
+               class="sofi-btn"
+               rel="sponsored noopener"
+               target="_blank">Get $25 →</a>
+          </div>
+
+        </div><!-- /.receipt-wrapper -->
 
         <!-- Re-generate / edit -->
-        <button onclick="resetReceipt()" class="w-full text-[0.75rem] text-slate-500 hover:text-slate-300 transition py-1">← Edit handle / regenerate</button>
+        <button onclick="resetReceipt()" class="w-full text-[0.72rem] text-slate-600 hover:text-slate-400 transition py-2 mt-3">← Edit handle / regenerate</button>
+
       </div>
     </div>
 
@@ -1021,7 +1157,6 @@
       { key: "random",   label: "Random stuff",    emoji: "🎲" }
     ];
 
-    // Rough spending split percentages (must sum to 100)
     const CAT_BASE_PCT = {
       food_out: 35,
       rides:    15,
@@ -1038,6 +1173,7 @@
     let currentMonthly = 221;
     let currentYearly  = 2650;
     let receiptTriggered = false;
+    let cachedReceiptBlob = null; // cache the last-generated image blob
 
     const stateSelect       = document.getElementById("stateSelect");
     const selectedStateDiv  = document.getElementById("selectedState");
@@ -1159,7 +1295,6 @@
       if (goToJobHours) goToJobHours.href = `jobs.html?monthly=${monthly}`;
       try { window.parent.postMessage({ type: "monthlyEstimate", value: monthly }, "*"); } catch {}
 
-      // Reveal receipt trigger after first real interaction
       if (!receiptTriggered) {
         receiptTriggered = true;
         receiptTrigger.classList.add("visible");
@@ -1180,7 +1315,6 @@
     function buildBarcode() {
       const bc = document.getElementById("r-barcode");
       bc.innerHTML = "";
-      // Generate pseudo-random bars seeded from monthly total
       const seed = currentMonthly;
       const heights = [18,10,22,14,26,10,18,24,12,20,16,28,10,22,14,18,26,12,20,16,24,10,18,22,14];
       heights.forEach((h, i) => {
@@ -1188,35 +1322,30 @@
         const mod = ((seed * (i + 7)) % 18) + 8;
         bar.style.width  = (i % 3 === 0 ? "3px" : "2px");
         bar.style.height = mod + "px";
-        bar.style.background = i % 5 === 0 ? "#22d3ee" : "#1e293b";
+        bar.style.background = i % 5 === 0 ? "rgba(34,211,238,0.5)" : "rgba(30,41,59,0.9)";
         bc.appendChild(bar);
       });
     }
 
     function generateAndShowReceipt() {
+      cachedReceiptBlob = null; // reset cache on regenerate
       const monthly = currentMonthly;
       const yearly  = currentYearly;
       const handle  = document.getElementById("receipt-handle-input").value.trim();
 
-      // Vibe label
       const vibe = getVibe(monthly);
       const vibeEl = document.getElementById("r-vibe");
       vibeEl.textContent = vibe.label;
       vibeEl.className   = "receipt-vibe " + vibe.cls;
 
-      // Total
       document.getElementById("r-total").textContent   = `$${monthly.toLocaleString()}`;
       document.getElementById("r-peryear").textContent  = `/ mo · $${yearly.toLocaleString()} / yr`;
 
-      // Update inline SoFi CTA with live monthly number
       const sofiCtaEl = document.getElementById("sofi-monthly-cta");
       if (sofiCtaEl) sofiCtaEl.textContent = `$${monthly.toLocaleString()}`;
 
-      // Line items — compute weighted percentages
       const totalWeight = Object.values(weights).reduce((a, b) => a + b, 0);
       let topCat = null, topPct = 0;
-
-      // Build adjusted percentages from slider weights × base pct
       let rawPcts = {};
       let rawSum  = 0;
       categories.forEach(cat => {
@@ -1224,12 +1353,10 @@
         rawPcts[cat.key] = adj;
         rawSum += adj;
       });
-      // Normalize to 100
       const lineitems = categories.map(cat => {
         const pct = Math.round((rawPcts[cat.key] / rawSum) * 100);
         return { ...cat, pct };
       });
-      // Identify top category
       lineitems.forEach(item => {
         if (item.pct > topPct) { topPct = item.pct; topCat = item.key; }
       });
@@ -1244,48 +1371,124 @@
         row.innerHTML = `
           <span class="label">${item.emoji} ${item.label}</span>
           <div class="receipt-pct-bar"><div class="receipt-pct-fill" style="width:${item.pct}%"></div></div>
-          <span class="val">$${amt} <span style="opacity:0.6;font-size:9px;">(${item.pct}%)</span></span>
+          <span class="val">$${amt} <span style="opacity:0.5;font-size:8px;">(${item.pct}%)</span></span>
         `;
         container.appendChild(row);
       });
 
-      // Meta
       document.getElementById("r-state").textContent        = selectedState;
       document.getElementById("r-date").textContent         = new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" });
       document.getElementById("r-handle").textContent       = handle ? (handle.startsWith("@") ? handle : "@" + handle) : "";
       document.getElementById("r-housing-meal").textContent = (housing === "on_campus" ? "on campus" : "commuter") + " · " + (meal === "plan" ? "meal plan" : "no plan");
 
-      // Barcode
       buildBarcode();
 
-      // Show receipt section with animation
       receiptSection.style.display = "block";
-      // Force reflow then animate
       receiptSection.offsetHeight;
       receiptSection.classList.add("visible");
 
-      // Scroll to receipt
       setTimeout(() => {
         receiptSection.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
 
-      // Track in GA
       try { gtag("event", "receipt_generated", { state: selectedState, monthly: monthly }); } catch {}
     }
 
-    function downloadReceipt() {
+    /* ── Capture receipt to canvas, returns a Promise<Blob> ── */
+    function captureReceipt() {
+      if (cachedReceiptBlob) return Promise.resolve(cachedReceiptBlob);
       const card = document.getElementById("receipt-card");
-      html2canvas(card, {
+      return html2canvas(card, {
         scale: 3,
-        backgroundColor: "#0a0a0f",
+        backgroundColor: "#080c14",
         useCORS: true,
         logging: false
       }).then(canvas => {
+        return new Promise(resolve => {
+          canvas.toBlob(blob => {
+            cachedReceiptBlob = blob;
+            resolve(blob);
+          }, "image/png");
+        });
+      });
+    }
+
+    function downloadReceipt() {
+      const btn = document.getElementById("save-btn");
+      btn.textContent = "Saving...";
+      btn.style.opacity = "0.7";
+      captureReceipt().then(blob => {
+        const url  = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.download = `spending-receipt-${selectedState.replace(/\s+/g,"-").toLowerCase()}.png`;
-        link.href = canvas.toDataURL("image/png");
+        link.href = url;
         link.click();
+        URL.revokeObjectURL(url);
+        btn.innerHTML = "<span>✓</span> Saved!";
+        setTimeout(() => { btn.innerHTML = "<span>⬇</span> Save to Camera Roll"; btn.style.opacity = "1"; }, 2000);
         try { gtag("event", "receipt_downloaded", { state: selectedState }); } catch {}
+      }).catch(() => {
+        btn.innerHTML = "<span>⬇</span> Save to Camera Roll";
+        btn.style.opacity = "1";
+      });
+    }
+
+    /* ── Instagram share ── */
+    function shareToInstagram() {
+      captureReceipt().then(blob => {
+        // On mobile with Web Share API supporting files, share directly
+        if (navigator.canShare && navigator.canShare({ files: [new File([blob], "receipt.png", { type: "image/png" })] })) {
+          const file = new File([blob], "spending-receipt.png", { type: "image/png" });
+          navigator.share({
+            files: [file],
+            title: "My College Spending Receipt",
+            text: `I need $${currentMonthly}/mo for college spending — spending.college`
+          }).catch(() => {});
+          try { gtag("event", "receipt_share_instagram", { state: selectedState }); } catch {}
+        } else {
+          // Fallback: download image, then open Instagram
+          const url  = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.download = "spending-receipt.png";
+          link.href = url;
+          link.click();
+          URL.revokeObjectURL(url);
+          setTimeout(() => {
+            window.open("https://www.instagram.com", "_blank");
+          }, 800);
+          try { gtag("event", "receipt_share_instagram_fallback", { state: selectedState }); } catch {}
+        }
+      });
+    }
+
+    /* ── Snapchat share ── */
+    function shareToSnapchat() {
+      captureReceipt().then(blob => {
+        // Snapchat Creative Kit Web — sticker share
+        const imageUrl = URL.createObjectURL(blob);
+        const snapUrl = `https://www.snapchat.com/scan?attachmentUrl=${encodeURIComponent('https://spending.college')}`;
+
+        if (navigator.canShare && navigator.canShare({ files: [new File([blob], "receipt.png", { type: "image/png" })] })) {
+          const file = new File([blob], "spending-receipt.png", { type: "image/png" });
+          navigator.share({
+            files: [file],
+            title: "My College Spending Receipt",
+            text: `I need $${currentMonthly}/mo for college — spending.college`
+          }).catch(() => {});
+          try { gtag("event", "receipt_share_snapchat", { state: selectedState }); } catch {}
+        } else {
+          // Fallback: download + open Snapchat
+          const url  = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.download = "spending-receipt.png";
+          link.href = url;
+          link.click();
+          URL.revokeObjectURL(url);
+          setTimeout(() => {
+            window.open("https://www.snapchat.com", "_blank");
+          }, 800);
+          try { gtag("event", "receipt_share_snapchat_fallback", { state: selectedState }); } catch {}
+        }
       });
     }
 
@@ -1300,7 +1503,6 @@
           btn.classList.remove("copy-flash");
         }, 1800);
       }).catch(() => {
-        // Fallback for older Safari
         const ta = document.createElement("textarea");
         ta.value = url; document.body.appendChild(ta);
         ta.select(); document.execCommand("copy");
@@ -1310,6 +1512,7 @@
 
     function resetReceipt() {
       receiptSection.classList.remove("visible");
+      cachedReceiptBlob = null;
       setTimeout(() => { receiptSection.style.display = "none"; }, 350);
       receiptTrigger.scrollIntoView({ behavior: "smooth", block: "center" });
     }
