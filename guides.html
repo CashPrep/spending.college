@@ -97,6 +97,47 @@ nav{
   transition:color .2s,background .2s;
 }
 .nav-links a:hover{color:#fff;background:rgba(255,255,255,0.06);}
+/* NAV DROPDOWN */
+.nav-dropdown{position:relative;}
+.nav-dropdown-btn{
+  display:flex;align-items:center;gap:8px;
+  color:var(--secondary);
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.875rem;font-weight:600;
+  padding:7px 14px;
+  cursor:pointer;
+  transition:color .2s,background .2s,border-color .2s;
+}
+.nav-dropdown-btn:hover{color:#fff;background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);}
+.nav-dropdown-btn svg{width:14px;height:14px;transition:transform .2s;}
+.nav-dropdown.open .nav-dropdown-btn svg{transform:rotate(180deg);}
+.nav-dropdown-menu{
+  display:none;
+  position:absolute;right:0;top:calc(100% + 8px);
+  background:rgba(10,14,30,0.98);
+  border:1px solid var(--border-accent);
+  border-radius:var(--radius-sm);
+  padding:6px;
+  min-width:160px;
+  z-index:200;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  backdrop-filter:blur(16px);
+}
+.nav-dropdown.open .nav-dropdown-menu{display:block;}
+.nav-dropdown-menu a{
+  display:block;
+  color:var(--secondary);
+  text-decoration:none;
+  font-size:0.875rem;font-weight:500;
+  padding:9px 14px;
+  border-radius:10px;
+  transition:color .2s,background .2s;
+}
+.nav-dropdown-menu a:hover{color:#fff;background:rgba(255,255,255,0.06);}
+.nav-dropdown-menu a.active{color:#fff;background:rgba(124,58,237,0.18);border:1px solid var(--border-accent);}
 .nav-links a.active{color:#fff;background:rgba(124,58,237,0.18);border:1px solid var(--border-accent);}
 .section{max-width:780px;margin:0 auto;padding:0 24px;}
 .card{
@@ -254,14 +295,22 @@ footer{
     <span class="nav-logo-dot"></span>
     spending.college
   </a>
-  <ul class="nav-links">
-    <li><a href="/">Calculator</a></li>
-    <li><a href="/jobs.html">Job Hours</a></li>
-    <li><a href="/find-jobs.html">Find Jobs</a></li>
-    <li><a href="/guides.html" class="active">Guides</a></li>
-    <li><a href="/faq.html">FAQ</a></li>
-  </ul>
+  <div class="nav-dropdown" id="navDropdown">
+    <button class="nav-dropdown-btn" onclick="document.getElementById('navDropdown').classList.toggle('open')" aria-label="Menu">
+      Menu
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+    <div class="nav-dropdown-menu">
+      <a href="/">Calculator</a>
+      <a href="/jobs.html">Job Hours</a>
+      <a href="/find-jobs.html">Find Jobs</a>
+      <a href="/guides.html" class="active">Guides</a>
+    </div>
+  </div>
 </nav>
+<script>
+document.addEventListener('click',function(e){if(!document.getElementById('navDropdown').contains(e.target))document.getElementById('navDropdown').classList.remove('open');});
+</script>
 
 <div class="hero">
   <div class="hero-badge">
