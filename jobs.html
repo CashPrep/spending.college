@@ -53,18 +53,24 @@ body::before{
   z-index:0;
 }
 .page-wrap{position:relative;z-index:1;}
-nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:20px 40px;
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(6,8,15,0.75);
-}
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-dot"></span>
+    spending.college
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <a href="/" class="nav-drop-toggle">Menu ▾</a>
+      <ul class="nav-drop-menu">
+        <li><a href="/">Calculator</a></li>
+        <li><a href="/jobs.html">Job Hours</a></li>
+        <li><a href="/find-jobs.html">Find Jobs</a></li>
+        <li><a href="/guides.html">Guides</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 .nav-logo{
   font-size:1.1rem;
   font-weight:700;
