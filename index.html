@@ -267,41 +267,43 @@
     #receipt-handle-input:focus { border-color: #22d3ee; box-shadow: 0 0 0 3px rgba(34,211,238,0.1); }
     #receipt-handle-input::placeholder { color: #1e293b; }
 
-    /* ── SoFi — SINGLE high-converting card ── */
-    .sofi-single-card {
-      background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(34,211,238,0.08));
+    /* ── SoFi bank card — standalone below receipt (glass style, no outer text) ── */
+    .sofi-bank-card {
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border: 1px solid rgba(16,185,129,0.35);
-      border-radius: 18px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
+      border-radius: 24px;
       padding: 20px 20px 18px;
-      width: 320px;
     }
-    .sofi-single-card .sofi-top {
+    .sofi-bank-card .sofi-top {
       display: flex;
       align-items: flex-start;
       gap: 12px;
       margin-bottom: 14px;
     }
-    .sofi-single-card .sofi-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
-    .sofi-single-card .sofi-headline {
+    .sofi-bank-card .sofi-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
+    .sofi-bank-card .sofi-headline {
       font-family: 'DM Sans', sans-serif;
       font-size: 0.92rem;
       font-weight: 800;
       color: #f0fdf4;
       line-height: 1.3;
     }
-    .sofi-single-card .sofi-sub {
+    .sofi-bank-card .sofi-sub {
       font-size: 0.72rem;
       color: #6b7280;
       margin-top: 4px;
       line-height: 1.4;
     }
-    .sofi-single-card .sofi-features {
+    .sofi-bank-card .sofi-features {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
       margin-bottom: 14px;
     }
-    .sofi-single-card .sofi-pill {
+    .sofi-bank-card .sofi-pill {
       font-size: 0.68rem;
       font-weight: 700;
       padding: 3px 9px;
@@ -310,7 +312,18 @@
       border: 1px solid rgba(16,185,129,0.3);
       color: #6ee7b7;
     }
-    .sofi-single-card .sofi-cta-btn {
+    .sofi-bank-card .sofi-pill.neutral {
+      background: rgba(51,65,85,0.6);
+      border-color: rgba(71,85,105,0.5);
+      color: #94a3b8;
+    }
+    .sofi-bank-card .sofi-desc {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .sofi-bank-card .sofi-cta-btn {
       display: block;
       width: 100%;
       text-align: center;
@@ -324,10 +337,98 @@
       text-decoration: none;
       transition: opacity 0.15s, transform 0.15s;
       letter-spacing: 0.01em;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .sofi-single-card .sofi-cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-    .sofi-single-card .sofi-cta-btn:active { transform: scale(0.98); }
-    .sofi-single-card .sofi-disclaimer {
+    .sofi-bank-card .sofi-cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .sofi-bank-card .sofi-cta-btn:active { transform: scale(0.98); }
+    .sofi-bank-card .sofi-disclaimer {
+      font-size: 0.65rem;
+      color: #374151;
+      margin-top: 8px;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ── SoFi invest card ── */
+    .sofi-invest-card {
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(129,140,248,0.35);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
+      border-radius: 24px;
+      padding: 20px 20px 18px;
+    }
+    .sofi-invest-card .sofi-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .sofi-invest-card .sofi-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
+    .sofi-invest-card .sofi-headline {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #eef2ff;
+      line-height: 1.3;
+    }
+    .sofi-invest-card .sofi-sub {
+      font-size: 0.72rem;
+      color: #6b7280;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    .sofi-invest-card .sofi-features {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .sofi-invest-card .sofi-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: rgba(129,140,248,0.15);
+      border: 1px solid rgba(129,140,248,0.3);
+      color: #a5b4fc;
+    }
+    .sofi-invest-card .sofi-pill.neutral {
+      background: rgba(51,65,85,0.6);
+      border-color: rgba(71,85,105,0.5);
+      color: #94a3b8;
+    }
+    .sofi-invest-card .sofi-desc {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .sofi-invest-card .sofi-cta-btn {
+      display: flex;
+      width: 100%;
+      text-align: center;
+      background: linear-gradient(135deg, #6366f1, #818cf8);
+      color: #f8fafc;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 900;
+      font-size: 0.9rem;
+      border-radius: 12px;
+      padding: 12px 16px;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+      letter-spacing: 0.01em;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+    }
+    .sofi-invest-card .sofi-cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .sofi-invest-card .sofi-cta-btn:active { transform: scale(0.98); }
+    .sofi-invest-card .sofi-disclaimer {
       font-size: 0.65rem;
       color: #374151;
       margin-top: 8px;
@@ -561,6 +662,34 @@
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════
+         SOFI BANK CARD — right below receipt, no outer text
+    ═══════════════════════════════════════════════ -->
+    <div class="sofi-bank-card">
+      <div class="sofi-top">
+        <div class="sofi-icon">💰</div>
+        <div>
+          <div class="sofi-headline">SoFi Checking &amp; Savings — Get $25 Free</div>
+          <div class="sofi-sub">Best free bank account for college students</div>
+        </div>
+      </div>
+      <div class="sofi-features">
+        <span class="sofi-pill">$25 Free Bonus</span>
+        <span class="sofi-pill neutral">No Fees</span>
+        <span class="sofi-pill neutral">No Minimums</span>
+        <span class="sofi-pill neutral">FDIC Insured</span>
+      </div>
+      <div class="sofi-desc">
+        Open and fund a SoFi Checking &amp; Savings account with at least <strong style="color:#f0fdf4;">$50</strong> (funds must settle within 21 days) and get <strong style="color:#6ee7b7;">$25 free</strong> deposited via this referral link.
+      </div>
+      <a href="https://www.sofi.com/invite/money?gcp=1c331e58-19f2-4da3-8dbc-b74aa836b1e4&isAliasGcp=false"
+         rel="sponsored noopener" target="_blank"
+         class="sofi-cta-btn">
+        Claim $25 Free with SoFi →
+      </a>
+      <div class="sofi-disclaimer">Referral link — I may earn a bonus if you open and fund an account. Offers can change; always check SoFi's latest terms.</div>
+    </div>
+
     <!-- Guides callout -->
     <section class="glass rounded-3xl p-4 sm:p-5 space-y-2">
       <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">How to Save Money in College</p>
@@ -586,45 +715,32 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════
-         SOFI — SINGLE HIGH-CONVERTING CARD
+         SOFI INVEST CARD — original position (where bank section was)
     ═══════════════════════════════════════════════ -->
-    <section class="mt-8 space-y-4 text-sm text-slate-200">
-      <p class="uppercase tracking-[0.2em] text-cyan-400 text-[0.62rem] font-semibold">Best Free Bank Account for College Students</p>
-      <h2 class="text-[0.95rem] font-semibold text-sky-100">Get $25 free — put your College Cash somewhere it works</h2>
-      <p class="text-[0.82rem] text-slate-300">
-        You've got your monthly number. Open a separate free SoFi Checking &amp; Savings account just for your College Cash — so you always know exactly how much you have left for the month.
-      </p>
-
-      <div class="glass rounded-2xl p-5 space-y-4">
-        <div class="flex items-start gap-3">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-400/20 to-cyan-400/20 border border-emerald-400/25 flex items-center justify-center text-2xl shrink-0">💰</div>
-          <div>
-            <h3 class="text-[0.95rem] font-bold text-sky-100">SoFi Checking &amp; Savings</h3>
-            <div class="flex flex-wrap gap-2 mt-1.5">
-              <span class="text-[0.68rem] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">$25 Free Bonus</span>
-              <span class="text-[0.68rem] font-bold px-2 py-0.5 rounded-full bg-slate-700/60 border border-slate-600/50 text-slate-300">No Fees</span>
-              <span class="text-[0.68rem] font-bold px-2 py-0.5 rounded-full bg-slate-700/60 border border-slate-600/50 text-slate-300">No Minimums</span>
-              <span class="text-[0.68rem] font-bold px-2 py-0.5 rounded-full bg-slate-700/60 border border-slate-600/50 text-slate-300">FDIC Insured</span>
-            </div>
-          </div>
+    <div class="sofi-invest-card">
+      <div class="sofi-top">
+        <div class="sofi-icon">📈</div>
+        <div>
+          <div class="sofi-headline">SoFi Invest — Start Investing for Free</div>
+          <div class="sofi-sub">Turn your College Cash into long-term wealth</div>
         </div>
-
-        <p class="text-[0.82rem] text-slate-300">
-          Open and fund a SoFi Checking &amp; Savings account with at least <strong class="text-white">$50</strong> (funds must settle within 21 days) and get <strong class="text-emerald-300">$25 free</strong> deposited into your account via this referral link.
-        </p>
-
-        <a href="https://www.sofi.com/invite/money?gcp=1c331e58-19f2-4da3-8dbc-b74aa836b1e4&isAliasGcp=false"
-           rel="sponsored noopener" target="_blank"
-           class="flex items-center justify-center gap-2 w-full rounded-2xl py-3.5 px-5 font-black text-[0.92rem] text-slate-900 transition hover:opacity-90 active:scale-[0.99]"
-           style="background:linear-gradient(135deg,#10b981,#22d3ee);min-height:52px;">
-          <span>Claim $25 Free with SoFi →</span>
-        </a>
-
-        <p class="text-[0.7rem] text-slate-500 text-center">
-          Referral link — I may earn a bonus if you open and fund an account. Offers can change; always check SoFi's latest terms.
-        </p>
       </div>
-    </section>
+      <div class="sofi-features">
+        <span class="sofi-pill">$0 Commission</span>
+        <span class="sofi-pill neutral">Fractional Shares</span>
+        <span class="sofi-pill neutral">Stocks &amp; ETFs</span>
+        <span class="sofi-pill neutral">No Minimums</span>
+      </div>
+      <div class="sofi-desc">
+        Even putting away <strong style="color:#eef2ff;">$10–$20/month</strong> while in college can compound into thousands by graduation. SoFi Invest lets you start with any amount — no commissions, no minimums, fractional shares available.
+      </div>
+      <a href="https://www.sofi.com/invite/invest?gcp=1c331e58-19f2-4da3-8dbc-b74aa836b1e4&isAliasGcp=false"
+         rel="sponsored noopener" target="_blank"
+         class="sofi-cta-btn">
+        Start Investing with SoFi →
+      </a>
+      <div class="sofi-disclaimer">Referral link — I may earn a bonus if you open an account. Investing involves risk. Not financial advice.</div>
+    </div>
 
     <!-- FAQ -->
     <section class="glass rounded-3xl p-4 sm:p-5 space-y-3">
@@ -657,343 +773,3 @@
       <summary class="flex items-center justify-between cursor-pointer"><span class="font-semibold text-[0.95rem]">About the data</span><span class="text-slate-400 text-xs">tap to expand</span></summary>
       <div class="pt-3 text-[0.82rem] text-slate-300 space-y-2">
         <p>College Cash focuses on day‑to‑day spending money only — not tuition, not rent. The baseline is built from national "other expenses" data and typically lands around $2,400–$2,600 per year for a full‑time student.</p>
-        <p>We scale that baseline using each state's cost‑of‑living index so high‑cost states show higher estimates than lower‑cost states.</p>
-        <p>This tool is for planning only. It is not financial advice, and no estimate here is a guarantee of your actual future spending.</p>
-      </div>
-    </details>
-
-    <!-- Privacy -->
-    <details class="glass rounded-3xl p-4 sm:p-5">
-      <summary class="flex items-center justify-between cursor-pointer"><span class="font-semibold text-[0.95rem]">Privacy policy</span><span class="text-slate-400 text-xs">tap to expand</span></summary>
-      <div class="pt-3 text-[0.82rem] text-slate-300 space-y-2">
-        <p>This page is a static calculator. All inputs are processed in your browser only and are not stored on a server.</p>
-        <p>We use Google AdSense to show ads. AdSense may collect technical data like your IP address, device information, and cookies to serve and measure ads according to Google's own policies.</p>
-        <p>Contact: <a href="mailto:andrew.spending.college@gmail.com" class="text-cyan-300 underline">andrew.spending.college@gmail.com</a></p>
-      </div>
-    </details>
-
-    <!-- Bottom AdSense -->
-    <div class="mt-4 flex justify-center overflow-hidden rounded-2xl">
-      <ins class="adsbygoogle" style="display:block;width:100%;max-width:336px;" data-ad-client="ca-pub-5702568182016225" data-ad-slot="YOUR_SLOT_ID_BOTTOM" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <footer class="mt-10 mb-6 text-[0.7rem] text-slate-500 text-center leading-relaxed">
-      <p><a href="/about.html" class="text-slate-400 hover:text-cyan-300">About</a> &nbsp;·&nbsp; <a href="/contact.html" class="text-slate-400 hover:text-cyan-300">Contact</a> &nbsp;·&nbsp; <a href="/privacy.html" class="text-slate-400 hover:text-cyan-300">Privacy</a> &nbsp;·&nbsp; <a href="/terms.html" class="text-slate-400 hover:text-cyan-300">Terms</a> &nbsp;·&nbsp; <a href="/faq.html" class="text-slate-400 hover:text-cyan-300">FAQ</a> &nbsp;·&nbsp; <a href="/guides.html" class="text-slate-400 hover:text-cyan-300">Guides</a></p>
-      <p class="mt-2">spending.college · Independent project · Information only, not financial advice · Estimates only.</p>
-      <p class="mt-1">Some pages may include referral or affiliate links. If you sign up through those links, I may earn a bonus at no extra cost to you.</p>
-    </footer>
-  </div>
-
-  <script>
-    const NATIONAL_BASELINE = 2500;
-    const stateCOLIndex = {
-      "US Average": 100, "Alabama": 88, "Alaska": 125, "Arizona": 104,
-      "Arkansas": 90, "California": 142, "Colorado": 110, "Connecticut": 121,
-      "Delaware": 103, "Florida": 102, "Georgia": 94, "Hawaii": 180,
-      "Idaho": 101, "Illinois": 101, "Indiana": 92, "Iowa": 90,
-      "Kansas": 89, "Kentucky": 90, "Louisiana": 91, "Maine": 107,
-      "Maryland": 118, "Massachusetts": 135, "Michigan": 93, "Minnesota": 102,
-      "Mississippi": 86, "Missouri": 90, "Montana": 105, "Nebraska": 91,
-      "Nevada": 107, "New Hampshire": 114, "New Jersey": 125, "New Mexico": 93,
-      "New York": 148, "North Carolina": 94, "North Dakota": 96, "Ohio": 92,
-      "Oklahoma": 88, "Oregon": 128, "Pennsylvania": 102, "Rhode Island": 113,
-      "South Carolina": 92, "South Dakota": 92, "Tennessee": 90, "Texas": 93,
-      "Utah": 104, "Vermont": 115, "Virginia": 104, "Washington": 118,
-      "West Virginia": 88, "Wisconsin": 96, "Wyoming": 96
-    };
-    const categories = [
-      { key: "food_out", label: "Food & coffee",  emoji: "☕" },
-      { key: "rides",    label: "Rides & travel", emoji: "🚗" },
-      { key: "fun",      label: "Fun & events",   emoji: "🎉" },
-      { key: "shopping", label: "Shopping",       emoji: "🛍" },
-      { key: "random",   label: "Random stuff",   emoji: "🎲" }
-    ];
-    const CAT_BASE_PCT = { food_out: 35, rides: 15, fun: 20, shopping: 18, random: 12 };
-    let selectedState = "US Average", housing = "on_campus", meal = "plan";
-    const weights = { food_out: 2, rides: 2, fun: 2, shopping: 2, random: 2 };
-    const LIFESTYLE_STRENGTH = 0.25;
-    let currentMonthly = 221, currentYearly = 2650, receiptTriggered = false, cachedReceiptBlob = null;
-
-    const stateSelect      = document.getElementById("stateSelect");
-    const selectedStateDiv = document.getElementById("selectedState");
-    const estimateEl       = document.getElementById("estimate");
-    const estimateMobileEl = document.getElementById("estimateMobile");
-    const monthlyLineEl    = document.getElementById("monthlyLine");
-    const monthlyMobileEl  = document.getElementById("monthlyMobile");
-    const scenarioLabelEl  = document.getElementById("scenarioLabel");
-    const scenarioMobileEl = document.getElementById("scenarioMobile");
-    const housingNoteEl    = document.getElementById("housingNote");
-    const mealNoteEl       = document.getElementById("mealNote");
-    const weightsContainer = document.getElementById("weights");
-    const handoffTextEl    = document.getElementById("handoffText");
-    const goToJobHours     = document.getElementById("goToJobHours");
-    const receiptTrigger   = document.getElementById("receipt-trigger-wrap");
-    const receiptSection   = document.getElementById("receipt-section");
-
-    function initStates() {
-      Object.keys(stateCOLIndex).forEach(state => {
-        const opt = document.createElement("option");
-        opt.value = state; opt.textContent = state;
-        stateSelect.appendChild(opt);
-      });
-      stateSelect.value = selectedState;
-      updateSelectedStateCopy();
-    }
-    function updateSelectedStateCopy() {
-      const idx = stateCOLIndex[selectedState];
-      selectedStateDiv.textContent = `${selectedState}: cost-of-living index ${idx} (100 = U.S. average).`;
-    }
-    function initChips() {
-      const housingChips = document.querySelectorAll("[data-housing]");
-      const mealChips    = document.querySelectorAll("[data-meal]");
-      housingChips.forEach(btn => {
-        btn.addEventListener("click", () => {
-          housing = btn.dataset.housing;
-          housingChips.forEach(b => b.classList.toggle("active", b === btn));
-          updateHousingNote(); recalc();
-        });
-      });
-      mealChips.forEach(btn => {
-        btn.addEventListener("click", () => {
-          meal = btn.dataset.meal;
-          mealChips.forEach(b => b.classList.toggle("active", b === btn));
-          updateMealNote(); recalc();
-        });
-      });
-      housingChips.forEach(b => { if (b.dataset.housing === housing) b.classList.add("active"); });
-      mealChips.forEach(b => { if (b.dataset.meal === meal) b.classList.add("active"); });
-      updateHousingNote(); updateMealNote();
-    }
-    function updateHousingNote() {
-      housingNoteEl.textContent = housing === "on_campus"
-        ? "On-campus students often spend more on food out and social stuff near campus."
-        : "Living with family usually lowers day-to-day spending but may increase commuting.";
-    }
-    function updateMealNote() {
-      mealNoteEl.textContent = meal === "plan"
-        ? "Full meal plan = less cash needed for groceries, but still some for snacks and eating out."
-        : "No meal plan = more grocery and eating-out money needed.";
-    }
-    function initSliders() {
-      categories.forEach(cat => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "space-y-1";
-        const label = document.createElement("div");
-        label.className = "flex items-center justify-between text-[0.82rem]";
-        label.innerHTML = `<span class="font-medium">${cat.label}</span><span id="${cat.key}Value" class="text-slate-400">2 / 4</span>`;
-        const input = document.createElement("input");
-        input.type = "range"; input.min = "1"; input.max = "4";
-        input.value = weights[cat.key]; input.className = "w-full";
-        input.addEventListener("input", () => {
-          weights[cat.key] = Number(input.value);
-          document.getElementById(`${cat.key}Value`).textContent = `${input.value} / 4`;
-          recalc();
-        });
-        wrapper.appendChild(label); wrapper.appendChild(input);
-        weightsContainer.appendChild(wrapper);
-      });
-    }
-    function computeBaseForState() { return NATIONAL_BASELINE * ((stateCOLIndex[selectedState] || 100) / 100); }
-    function computeHousingMealAdjustment(base) {
-      let f = 1;
-      if (housing === "on_campus")       f += 0.12;
-      else if (housing === "with_family") f -= 0.07;
-      if (meal === "plan")               f -= 0.06;
-      else if (meal === "no_plan")       f += 0.18;
-      return base * f;
-    }
-    function applyLifestyleToTotal(adjustedBase) {
-      const avg = Object.values(weights).reduce((a, b) => a + b, 0) / Object.values(weights).length;
-      return adjustedBase * (1 + (avg - 2) * LIFESTYLE_STRENGTH / 2);
-    }
-    function recalc() {
-      const yearly  = Math.round(applyLifestyleToTotal(computeHousingMealAdjustment(computeBaseForState())));
-      const monthly = Math.round(yearly / 12);
-      currentYearly = yearly; currentMonthly = monthly;
-      estimateEl.textContent       = `$${yearly.toLocaleString()}`;
-      estimateMobileEl.textContent = `$${yearly.toLocaleString()}`;
-      monthlyLineEl.textContent    = `≈ $${monthly.toLocaleString()} per month for day-to-day spending.`;
-      monthlyMobileEl.textContent  = `≈ $${monthly.toLocaleString()} per month.`;
-      const scene = `${selectedState}, ${housing === "on_campus" ? "on campus" : "with family"}, ${meal === "plan" ? "with meal plan" : "no meal plan"}.`;
-      scenarioLabelEl.textContent  = scene;
-      scenarioMobileEl.textContent = scene;
-      handoffTextEl.textContent    = `Use your ~$${monthly.toLocaleString()}/month target in College Job Hours.`;
-      if (goToJobHours) goToJobHours.href = `jobs.html?monthly=${monthly}`;
-      try { window.parent.postMessage({ type: "monthlyEstimate", value: monthly }, "*"); } catch {}
-      if (!receiptTriggered) { receiptTriggered = true; receiptTrigger.classList.add("visible"); }
-    }
-    function getVibe(monthly) {
-      if (monthly < 200) return { label: "Frugal Mode 🌿",          cls: "vibe-frugal" };
-      if (monthly < 350) return { label: "Balanced Spend ✨",       cls: "vibe-balanced" };
-      if (monthly < 500) return { label: "Big Spender 💸",          cls: "vibe-bigspend" };
-      return                     { label: "Broke Mode Activated 💀", cls: "vibe-broke" };
-    }
-    function buildBarcode() {
-      const bc = document.getElementById("r-barcode");
-      bc.innerHTML = "";
-      const seed = currentMonthly;
-      const heights = [18,10,22,14,26,10,18,24,12,20,16,28,10,22,14,18,26,12,20,16,24,10,18,22,14];
-      heights.forEach((h, i) => {
-        const bar = document.createElement("span");
-        const mod = ((seed * (i + 7)) % 18) + 8;
-        bar.style.width  = (i % 3 === 0 ? "3px" : "2px");
-        bar.style.height = mod + "px";
-        bar.style.background = i % 5 === 0 ? "rgba(34,211,238,0.5)" : "rgba(30,41,59,0.9)";
-        bc.appendChild(bar);
-      });
-    }
-    function generateAndShowReceipt() {
-      cachedReceiptBlob = null;
-      const monthly = currentMonthly, yearly = currentYearly;
-      const handle  = document.getElementById("receipt-handle-input").value.trim();
-      const vibe = getVibe(monthly);
-      const vibeEl = document.getElementById("r-vibe");
-      vibeEl.textContent = vibe.label; vibeEl.className = "receipt-vibe " + vibe.cls;
-      document.getElementById("r-total").textContent  = `$${monthly.toLocaleString()}`;
-      document.getElementById("r-peryear").textContent = `/ mo · $${yearly.toLocaleString()} / yr`;
-      const sofiCtaEl = document.getElementById("sofi-monthly-cta");
-      if (sofiCtaEl) sofiCtaEl.textContent = `$${monthly.toLocaleString()}`;
-      let rawPcts = {}, rawSum = 0;
-      categories.forEach(cat => { const adj = (CAT_BASE_PCT[cat.key] / 100) * (weights[cat.key] / 2.5); rawPcts[cat.key] = adj; rawSum += adj; });
-      const lineitems = categories.map(cat => { const pct = Math.round((rawPcts[cat.key] / rawSum) * 100); return { ...cat, pct }; });
-      let topCat = null, topPct = 0;
-      lineitems.forEach(item => { if (item.pct > topPct) { topPct = item.pct; topCat = item.key; } });
-      const container = document.getElementById("r-lineitems");
-      container.innerHTML = "";
-      lineitems.forEach(item => {
-        const amt = Math.round((item.pct / 100) * monthly);
-        const isTop = item.key === topCat;
-        const row = document.createElement("div");
-        row.className = "receipt-row" + (isTop ? " top-cat" : "");
-        row.innerHTML = `<span class="label">${item.emoji} ${item.label}</span><div class="receipt-pct-bar"><div class="receipt-pct-fill" style="width:${item.pct}%"></div></div><span class="val">$${amt} <span style="opacity:0.5;font-size:8px;">(${item.pct}%)</span></span>`;
-        container.appendChild(row);
-      });
-      document.getElementById("r-state").textContent        = selectedState;
-      document.getElementById("r-date").textContent         = new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" });
-      document.getElementById("r-handle").textContent       = handle ? (handle.startsWith("@") ? handle : "@" + handle) : "";
-      document.getElementById("r-housing-meal").textContent = (housing === "on_campus" ? "on campus" : "commuter") + " · " + (meal === "plan" ? "meal plan" : "no plan");
-      buildBarcode();
-      receiptSection.style.display = "block";
-      receiptSection.offsetHeight;
-      receiptSection.classList.add("visible");
-      setTimeout(() => { receiptSection.scrollIntoView({ behavior: "smooth", block: "start" }); }, 100);
-      try { gtag("event", "receipt_generated", { state: selectedState, monthly: monthly }); } catch {}
-    }
-    function captureReceipt() {
-      if (cachedReceiptBlob) return Promise.resolve(cachedReceiptBlob);
-      const card = document.getElementById("receipt-card");
-      return html2canvas(card, { scale: 3, backgroundColor: "#080c14", useCORS: true, logging: false })
-        .then(canvas => new Promise(resolve => {
-          canvas.toBlob(blob => { cachedReceiptBlob = blob; resolve(blob); }, "image/png");
-        }));
-    }
-
-    /* ── Save to Camera Roll: Web Share API on mobile → saves to Photos ── */
-    function saveToPhotos() {
-      const btn = document.getElementById("save-btn");
-      btn.innerHTML = "<span>⏳</span> Saving...";
-      btn.style.opacity = "0.75";
-      captureReceipt().then(blob => {
-        const file = new File([blob], `spending-receipt-${selectedState.replace(/\s+/g,"-").toLowerCase()}.png`, { type: "image/png" });
-        // Web Share API with files — on iOS/Android this goes straight to Camera Roll / Photos
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          navigator.share({ files: [file], title: "My College Spending Receipt" })
-            .then(() => {
-              btn.innerHTML = "<span>✅</span> Saved!";
-              setTimeout(() => { btn.innerHTML = "<span>📸</span> Save to Camera Roll"; btn.style.opacity = "1"; }, 2000);
-            })
-            .catch(err => {
-              // User cancelled — reset button silently
-              btn.innerHTML = "<span>📸</span> Save to Camera Roll";
-              btn.style.opacity = "1";
-            });
-        } else {
-          // Desktop fallback — trigger download
-          const url  = URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.download = file.name;
-          link.href = url;
-          link.click();
-          URL.revokeObjectURL(url);
-          btn.innerHTML = "<span>✅</span> Downloaded!";
-          setTimeout(() => { btn.innerHTML = "<span>📸</span> Save to Camera Roll"; btn.style.opacity = "1"; }, 2000);
-        }
-        try { gtag("event", "receipt_saved", { state: selectedState }); } catch {}
-      }).catch(() => { btn.innerHTML = "<span>📸</span> Save to Camera Roll"; btn.style.opacity = "1"; });
-    }
-
-    /* ── Instagram: deep link to app on mobile, fall back to web ── */
-    function shareToInstagram() {
-      captureReceipt().then(blob => {
-        const file = new File([blob], "spending-receipt.png", { type: "image/png" });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          // Mobile: share sheet includes Instagram in the list
-          navigator.share({
-            files: [file],
-            title: "My College Spending Receipt",
-            text: `I need $${currentMonthly}/mo for college — spending.college`
-          }).catch(() => {});
-        } else {
-          // Desktop: download then open Instagram web
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.download = "spending-receipt.png";
-          link.href = url; link.click();
-          URL.revokeObjectURL(url);
-          setTimeout(() => { window.open("https://www.instagram.com", "_blank"); }, 800);
-        }
-        try { gtag("event", "receipt_share_instagram", { state: selectedState }); } catch {}
-      });
-    }
-
-    /* ── Snapchat: deep link to app on mobile, fall back to web ── */
-    function shareToSnapchat() {
-      captureReceipt().then(blob => {
-        const file = new File([blob], "spending-receipt.png", { type: "image/png" });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          // Mobile: share sheet includes Snapchat in the list
-          navigator.share({
-            files: [file],
-            title: "My College Spending Receipt",
-            text: `I need $${currentMonthly}/mo for college — spending.college`
-          }).catch(() => {});
-        } else {
-          // Desktop: download then open Snapchat web
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.download = "spending-receipt.png";
-          link.href = url; link.click();
-          URL.revokeObjectURL(url);
-          setTimeout(() => { window.open("https://www.snapchat.com", "_blank"); }, 800);
-        }
-        try { gtag("event", "receipt_share_snapchat", { state: selectedState }); } catch {}
-      });
-    }
-
-    function copyLink() {
-      const url = `https://spending.college/?state=${encodeURIComponent(selectedState)}&total=${currentMonthly}`;
-      navigator.clipboard.writeText(url).then(() => {
-        const btn = document.getElementById("copy-link-btn");
-        btn.textContent = "✓ Copied!";
-        btn.classList.add("copy-flash");
-        setTimeout(() => { btn.innerHTML = "<span>🔗</span> Copy Link"; btn.classList.remove("copy-flash"); }, 1800);
-      }).catch(() => {
-        const ta = document.createElement("textarea");
-        ta.value = url; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
-      });
-    }
-    function resetReceipt() {
-      receiptSection.classList.remove("visible");
-      cachedReceiptBlob = null;
-      setTimeout(() => { receiptSection.style.display = "none"; }, 350);
-      receiptTrigger.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-    document.addEventListener("DOMContentLoaded", () => {
-      initStates(); initChips(); initSliders();
-      stateSelect.addEventListener("change", () => { selectedState = stateSelect.value; updateSelectedStateCopy(); recalc(); });
-      recalc();
-    });
-  </script>
-</body>
-</html>
