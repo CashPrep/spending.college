@@ -555,21 +555,36 @@ input[type="range"]::-webkit-slider-thumb {
 .insight-bar p { font-size: 0.875rem; color: var(--secondary); line-height: 1.6; }
 .insight-bar strong { color: #fff; }
 
-/* ── Referral Card ── */
+/* ── Referral Cards ── */
 .referral-card {
-  margin-top: 24px;
+  margin-top: 16px;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid rgba(6,182,212,0.22);
-  background: linear-gradient(135deg, rgba(6,182,212,0.07) 0%, rgba(124,58,237,0.07) 100%);
   position: relative;
 }
-.referral-card::before {
+/* Banking card — cyan */
+.referral-card.banking {
+  border: 1px solid rgba(6,182,212,0.22);
+  background: linear-gradient(135deg, rgba(6,182,212,0.07) 0%, rgba(124,58,237,0.07) 100%);
+}
+.referral-card.banking::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(6,182,212,0.4), rgba(124,58,237,0.4), transparent);
+}
+/* Loans card — purple */
+.referral-card.loans {
+  border: 1px solid rgba(124,58,237,0.28);
+  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(109,40,217,0.06) 100%);
+}
+.referral-card.loans::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.5), rgba(167,139,250,0.4), transparent);
 }
 .referral-inner {
   padding: 28px 32px;
@@ -585,12 +600,13 @@ input[type="range"]::-webkit-slider-thumb {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent2);
   margin-bottom: 6px;
   display: flex;
   align-items: center;
   gap: 6px;
 }
+.banking .referral-eyebrow { color: var(--accent2); }
+.loans .referral-eyebrow { color: var(--accent-light); }
 .referral-eyebrow svg { width: 12px; height: 12px; }
 .referral-title {
   font-size: 1.1rem;
@@ -600,21 +616,26 @@ input[type="range"]::-webkit-slider-thumb {
   margin-bottom: 6px;
 }
 .referral-title span {
-  background: linear-gradient(90deg, #67e8f9, #a78bfa);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+.banking .referral-title span {
+  background: linear-gradient(90deg, #67e8f9, #a78bfa);
+}
+.loans .referral-title span {
+  background: linear-gradient(90deg, #a78bfa, #c4b5fd);
 }
 .referral-desc {
   font-size: 0.85rem;
   color: var(--secondary);
   line-height: 1.55;
 }
+/* CTA buttons */
 .referral-cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--accent2) 0%, #0891b2 100%);
   color: #fff;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
@@ -623,11 +644,19 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: var(--radius);
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 4px 20px rgba(6,182,212,0.30);
   transition: transform .2s, box-shadow .2s;
   flex-shrink: 0;
 }
-.referral-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(6,182,212,0.45); }
+.banking .referral-cta {
+  background: linear-gradient(135deg, var(--accent2) 0%, #0891b2 100%);
+  box-shadow: 0 4px 20px rgba(6,182,212,0.30);
+}
+.banking .referral-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(6,182,212,0.45); }
+.loans .referral-cta {
+  background: linear-gradient(135deg, var(--accent) 0%, #6d28d9 100%);
+  box-shadow: 0 4px 20px rgba(124,58,237,0.30);
+}
+.loans .referral-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(124,58,237,0.45); }
 .referral-cta svg { width: 16px; height: 16px; }
 .referral-disclaimer {
   padding: 10px 32px 16px;
@@ -1061,13 +1090,13 @@ footer {
       <p id="insight-text"></p>
     </div>
 
-    <!-- SoFi Referral Card -->
-    <div class="referral-card">
+    <!-- SoFi Banking Referral Card -->
+    <div class="referral-card banking">
       <div class="referral-inner">
         <div class="referral-left">
           <div class="referral-eyebrow">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
-            Recommended for Students
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            Free Banking for Students
           </div>
           <div class="referral-title">Get <span>$25 free</span> with SoFi Bank</div>
           <div class="referral-desc">Open a SoFi Checking &amp; Savings account and deposit $50 — they'll add $25 to your balance. No monthly fees, no minimum balance, and up to 4.00% APY on savings.</div>
@@ -1078,6 +1107,25 @@ footer {
         </a>
       </div>
       <div class="referral-disclaimer">Referral offer. Terms apply — see SoFi's site for full details. spending.college may earn a referral bonus if you sign up.</div>
+    </div>
+
+    <!-- SoFi Private Student Loans Referral Card -->
+    <div class="referral-card loans">
+      <div class="referral-inner">
+        <div class="referral-left">
+          <div class="referral-eyebrow">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            Private Student Loans
+          </div>
+          <div class="referral-title">Finance tuition with <span>SoFi Student Loans</span></div>
+          <div class="referral-desc">Competitive rates with no origination fees, no prepayment penalties, and flexible repayment options. Covers up to 100% of your school-certified cost of attendance.</div>
+        </div>
+        <a href="https://www.sofi.com/invite/private-student-loans?gcp=0b1e5229-a885-47e1-9c93-9a8667a4f633&isAliasGcp=false" target="_blank" rel="noopener sponsored" class="referral-cta">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Check My Rate →
+        </a>
+      </div>
+      <div class="referral-disclaimer">Referral link. Subject to credit approval. Not a guarantee of loan terms. spending.college may earn a referral bonus if you apply.</div>
     </div>
 
     <!-- Action Buttons -->
