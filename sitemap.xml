@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://spending.college/</loc>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-
-  <url>
-    <loc>https://spending.college/find-jobs.html</loc>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-
-  <url>
-    <loc>https://spending.college/guides.html</loc>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-
-  <url>
-    <loc>https://spending.college/jobs.html</loc>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-
-  <!-- Utility / verification pages - you can include or skip these -->
-  <url>
-    <loc>https://spending.college/fo-verify.html</loc>
-    <lastmod>2026-04-26</lastmod>
-  </url>
+  <url><loc>https://spending.college/</loc><lastmod>2026-05-04</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://spending.college/about.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/contact.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/privacy.html</loc><lastmod>2026-05-04</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://spending.college/terms.html</loc><lastmod>2026-05-04</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://spending.college/faq.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/guides.html</loc><lastmod>2026-05-04</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://spending.college/find-jobs.html</loc><lastmod>2026-05-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/jobs.html</loc><lastmod>2026-05-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/guides/</loc><lastmod>2026-05-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/guides/college-spending-money-by-state.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://spending.college/guides/college-student-monthly-expenses-breakdown.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://spending.college/guides/first-time-college-student-budget-guide.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://spending.college/guides/how-much-should-college-student-spend.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/guides/how-to-save-money-in-college.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/guides/how-to-use-college-spending-calculator.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/on-campus-vs-off-campus-cost.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/guides/part-time-jobs-college-students-guide.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/guides/college-student-budget-template.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/guides/california-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/texas-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/new-york-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/florida-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/illinois-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/pennsylvania-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/ohio-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/georgia-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/north-carolina-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/michigan-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/massachusetts-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/washington-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/virginia-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/colorado-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/arizona-college-budget.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spending.college/guides/student-side-hustles-guide.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/guides/college-grocery-budget-guide.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spending.college/guides/financial-aid-guide-college-students.html</loc><lastmod>2026-05-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
