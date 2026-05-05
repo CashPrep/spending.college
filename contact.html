@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact the Spending.College team. Send us questions, feedback, or partnership inquiries.">
+<title>Contact Us | Spending.College</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ContactPage","name":"Contact Spending.College","url":"https://spending.college/contact.html","publisher":{"@type":"Organization","name":"Spending.College","email":"hello@spending.college"}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;color:#333;background:#f8f9fa}
+.container{max-width:700px;margin:0 auto;padding:20px}
+header{background:#2c3e50;color:white;padding:24px 20px;text-align:center;margin-bottom:30px}
+header h1{font-size:2em;margin-bottom:8px}
+header p{font-size:1.1em;opacity:.9}
+.card{background:white;padding:28px;border-radius:8px;margin-bottom:24px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.card h2{color:#2c3e50;border-bottom:3px solid #3498db;padding-bottom:10px;margin-bottom:18px;font-size:1.3em}
+.card p{margin-bottom:14px}
+form label{display:block;font-weight:600;margin:14px 0 4px;font-size:.95em}
+form input,form select,form textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-size:1em;font-family:inherit;background:#fafafa}
+form textarea{height:130px;resize:vertical}
+form button{margin-top:18px;background:#3498db;color:white;border:none;padding:12px 30px;border-radius:6px;font-size:1.05em;font-weight:600;cursor:pointer;width:100%}
+form button:hover{background:#2980b9}
+.contact-option{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.icon{font-size:1.5em;margin-top:2px}
+nav{background:#34495e;padding:10px 20px;display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+nav a{color:#fff;text-decoration:none;font-size:.95em;padding:4px 8px;border-radius:4px}
+nav a:hover{background:#3498db}
+footer{text-align:center;padding:30px 20px;color:#666;font-size:.85em}
+footer a{color:#3498db;text-decoration:none}
+.success-note{background:#d4edda;border-left:4px solid #28a745;padding:14px;border-radius:6px;display:none}
+</style>
+</head>
+<body>
+<header>
+<h1>Contact Us</h1>
+<p>Questions, feedback, or just want to say hi — we're here</p>
+</header>
+<nav>
+<a href="/">Calculator</a>
+<a href="/guides/">Guides</a>
+<a href="/jobs.html">Jobs</a>
+<a href="/faq.html">FAQ</a>
+<a href="/about.html">About</a>
+<a href="/contact.html">Contact</a>
+</nav>
+<div class="container">
+
+<div class="card">
+<h2>Get In Touch</h2>
+<p>We're a small team and we genuinely read every message. Whether you have a data correction, a feature idea, or a question about the calculator — send it our way.</p>
+
+<div class="contact-option"><span class="icon">&#x2709;&#xFE0F;</span><div><strong>Email</strong><br><a href="mailto:hello@spending.college">hello@spending.college</a><br><small>We reply within 1&ndash;2 business days.</small></div></div>
+<div class="contact-option"><span class="icon">&#x1F4CA;</span><div><strong>Data &amp; Corrections</strong><br>If you spot an error in our state cost estimates, let us know and we'll update it.</div></div>
+<div class="contact-option"><span class="icon">&#x1F91D;</span><div><strong>Partnerships &amp; Press</strong><br>College financial aid offices, student newspapers, and student organizations are welcome to reach out about partnerships or data usage.</div></div>
+</div>
+
+<div class="card">
+<h2>Send a Message</h2>
+<form name="contact" method="POST" action="/" onsubmit="document.getElementById('success').style.display='block';this.style.display='none'">
+<div class="success-note" id="success">Thanks! We'll get back to you within 1&ndash;2 business days.</div>
+<label for="name">Your Name</label>
+<input type="text" id="name" name="name" placeholder="Jane Smith" required>
+<label for="email">Email Address</label>
+<input type="email" id="email" name="email" placeholder="you@school.edu" required>
+<label for="subject">Subject</label>
+<select id="subject" name="subject">
+<option>General question</option>
+<option>Data correction or update</option>
+<option>Bug report</option>
+<option>Partnership / press inquiry</option>
+<option>Other</option>
+</select>
+<label for="message">Message</label>
+<textarea id="message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
+<button type="submit">Send Message &rarr;</button>
+</form>
+</div>
+
+<div class="card">
+<h2>Frequently Asked Questions</h2>
+<p>Before sending us a message, check our <a href="/faq.html">FAQ page</a> &mdash; it answers the most common questions about the calculator, our data sources, and how we estimate costs.</p>
+</div>
+
+</div>
+<footer>
+<p><a href="/">Spending.College</a> &nbsp;|&nbsp; <a href="/about.html">About</a> &nbsp;|&nbsp; <a href="/contact.html">Contact</a> &nbsp;|&nbsp; <a href="/privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="/terms.html">Terms</a></p>
+<p style="margin-top:8px">&copy; 2026 Spending.College</p>
+</footer>
+</body>
+</html>
