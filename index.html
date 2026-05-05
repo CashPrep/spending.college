@@ -555,6 +555,86 @@ input[type="range"]::-webkit-slider-thumb {
 .insight-bar p { font-size: 0.875rem; color: var(--secondary); line-height: 1.6; }
 .insight-bar strong { color: #fff; }
 
+/* ── Referral Card ── */
+.referral-card {
+  margin-top: 24px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(6,182,212,0.22);
+  background: linear-gradient(135deg, rgba(6,182,212,0.07) 0%, rgba(124,58,237,0.07) 100%);
+  position: relative;
+}
+.referral-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(6,182,212,0.4), rgba(124,58,237,0.4), transparent);
+}
+.referral-inner {
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.referral-left { flex: 1; min-width: 200px; }
+.referral-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.referral-eyebrow svg { width: 12px; height: 12px; }
+.referral-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.referral-title span {
+  background: linear-gradient(90deg, #67e8f9, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.referral-desc {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  line-height: 1.55;
+}
+.referral-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--accent2) 0%, #0891b2 100%);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 13px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(6,182,212,0.30);
+  transition: transform .2s, box-shadow .2s;
+  flex-shrink: 0;
+}
+.referral-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(6,182,212,0.45); }
+.referral-cta svg { width: 16px; height: 16px; }
+.referral-disclaimer {
+  padding: 10px 32px 16px;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
 /* ── How It Works ── */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 80px; }
 @media (max-width: 640px) { .steps { grid-template-columns: 1fr; } }
@@ -661,6 +741,8 @@ footer {
   .receipt-amount-big { text-align: left; }
   .receipt-body, .receipt-totals, .receipt-footer { padding: 20px 22px; }
   .receipt-divider { margin: 0 22px; }
+  .referral-inner { padding: 22px 20px; }
+  .referral-disclaimer { padding: 8px 20px 14px; }
 }
 </style>
 </head>
@@ -977,6 +1059,25 @@ footer {
     <div class="insight-bar" id="insight-bar">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
       <p id="insight-text"></p>
+    </div>
+
+    <!-- SoFi Referral Card -->
+    <div class="referral-card">
+      <div class="referral-inner">
+        <div class="referral-left">
+          <div class="referral-eyebrow">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
+            Recommended for Students
+          </div>
+          <div class="referral-title">Get <span>$25 free</span> with SoFi Bank</div>
+          <div class="referral-desc">Open a SoFi Checking &amp; Savings account and deposit $50 — they'll add $25 to your balance. No monthly fees, no minimum balance, and up to 4.00% APY on savings.</div>
+        </div>
+        <a href="https://www.sofi.com/invite/money?gcp=1c331e58-19f2-4da3-8dbc-b74aa836b1e4&isAliasGcp=false" target="_blank" rel="noopener sponsored" class="referral-cta">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Claim $25 →
+        </a>
+      </div>
+      <div class="referral-disclaimer">Referral offer. Terms apply — see SoFi's site for full details. spending.college may earn a referral bonus if you sign up.</div>
     </div>
 
     <!-- Action Buttons -->
