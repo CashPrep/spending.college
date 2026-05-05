@@ -13,7 +13,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5702568182016225" crossorigin="anonymous"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -174,24 +173,24 @@ select:focus,input:focus{
 @media(max-width:560px){.grid-2,.grid-3{grid-template-columns:1fr;}}
 .hint-text{font-size:0.78rem;color:var(--muted);margin-top:6px;}
 .btn-calculate{
-  width:100%;
+  width:auto;
   background:linear-gradient(135deg,var(--accent) 0%,#6d28d9 100%);
   color:#fff;
   font-family:'Space Grotesk',sans-serif;
-  font-size:1rem;
+  font-size:0.9rem;
   font-weight:700;
   letter-spacing:-0.01em;
-  padding:17px 32px;
+  padding:12px 28px;
   border:none;
   border-radius:var(--radius);
   cursor:pointer;
-  display:flex;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
+  gap:8px;
   box-shadow:0 4px 24px rgba(124,58,237,0.35);
   transition:transform .2s,box-shadow .2s;
-  margin-bottom:32px;
+  margin-bottom:20px;
 }
 .btn-calculate:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,58,237,0.5);}
 .job-card{
@@ -305,6 +304,7 @@ footer{
   .nav-links{display:none;}
   .hero{padding:48px 20px 32px;}
   .card{padding:24px 20px;}
+  .btn-calculate{width:100%;}
 }
 </style>
 </head>
@@ -381,7 +381,7 @@ footer{
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         Search Jobs
       </button>
-      <p style="font-size:0.78rem;color:var(--muted);margin-top:-16px;">Job listings are from Adzuna. Salary estimates are rough and may not match the actual offer.</p>
+      <p style="font-size:0.78rem;color:var(--muted);margin-top:-8px;">Job listings are from Adzuna. Salary estimates are rough and may not match the actual offer.</p>
     </form>
   </div>
 
