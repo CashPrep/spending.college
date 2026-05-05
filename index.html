@@ -23,7 +23,7 @@
 
 <!-- Schema.org -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"College Spending Money Calculator","description":"A free data-driven calculator that estimates how much spending money college students need per month, using a state-by-state cost-of-living index and lifestyle inputs.","url":"https://www.spending.college/","applicationCategory":"FinanceApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["State-by-state cost-of-living index","Instant monthly spending estimate","Housing and meal plan adjustment","Lifestyle spending data breakdown","Shareable budget receipt"],"audience":{"@type":"Audience","audienceType":"College students"},"provider":{"@type":"Organization","name":"spending.college","url":"https://www.spending.college/"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much spending money does a college student need per month?","acceptedAnswer":{"@type":"Answer","text":"On average, college students need between $200 and $500 per month for day-to-day expenses. However, this varies significantly based on the state's cost of living, whether you commute, and your lifestyle choices. Our calculator uses a state-by-state cost-of-living index to give you a data-driven estimate for your specific location."}},{"@type":"Question","name":"What is included in day-to-day college expenses?","acceptedAnswer":{"@type":"Answer","text":"Day-to-day spending money covers personal expenses like eating out, coffee, snacks, laundry, toiletries, entertainment, and local transportation or commuting costs. It does not include major fixed costs like tuition, dorm rent, or your primary university meal plan."}},{"@type":"Question","name":"How does this college spending calculator work?","acceptedAnswer":{"@type":"Answer","text":"We start with the national average for student 'other expenses' (typically $2,400–$2,600 per year). Then, we scale that baseline using your college state's cost-of-living index from our state-by-state data. Finally, we adjust the estimate based on your housing situation, meal plan, and personal lifestyle habits."}},{"@type":"Question","name":"Which state has the highest college spending money estimate?","acceptedAnswer":{"@type":"Answer","text":"Based on our state-by-state cost-of-living index, Hawaii (index: 180) and California (index: 142) have the highest estimates, while Mississippi (index: 86) and Alabama (index: 88) have the lowest. Use the calculator to get a precise monthly estimate for your state."}},{"@type":"Question","name":"Should I use this calculator for student loan planning?","acceptedAnswer":{"@type":"Answer","text":"This calculator is designed for personal budgeting and planning your day-to-day cash needs. While it gives a realistic data-driven estimate for living expenses, you should always consult your university's official Cost of Attendance (COA) for exact financial aid and loan borrowing limits."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much spending money does a college student need per month?","acceptedAnswer":{"@type":"Answer","text":"On average, college students need between $200 and $500 per month for day-to-day expenses. However, this varies significantly based on the state's cost of living, whether you commute, and your lifestyle choices. Our calculator uses a state-by-state cost-of-living index to give you a data-driven estimate for your specific location."}},{"@type":"Question","name":"What is included in day-to-day college expenses?","acceptedAnswer":{"@type":"Answer","text":"Day-to-day spending money covers personal expenses like eating out, coffee, snacks, laundry, toiletries, entertainment, and local transportation or commuting costs. It does not include major fixed costs like tuition, dorm rent, or your primary university meal plan."}},{"@type":"Question","name":"How does this college spending calculator work?","acceptedAnswer":{"@type":"Answer","text":"We start with the national average for student 'other expenses' (typically $2,400–$2,600 per year, per College Board data). Then, we scale that baseline using your college state's cost-of-living index sourced from the 2025 MERIC/C2ER Cost of Living Data Series. Finally, we adjust the estimate based on your housing situation, meal plan, and personal lifestyle habits."}},{"@type":"Question","name":"Which state has the highest college spending money estimate?","acceptedAnswer":{"@type":"Answer","text":"Based on our 2025 state-by-state cost-of-living index (sourced from MERIC/C2ER), Hawaii (index: 184) and Massachusetts (index: 149) have the highest estimates, while Oklahoma (index: 85) and Mississippi (index: 86) have the lowest. Use the calculator to get a precise monthly estimate for your state."}},{"@type":"Question","name":"Should I use this calculator for student loan planning?","acceptedAnswer":{"@type":"Answer","text":"This calculator is designed for personal budgeting and planning your day-to-day cash needs. While it gives a realistic data-driven estimate for living expenses, you should always consult your university's official Cost of Attendance (COA) for exact financial aid and loan borrowing limits."}}]}</script>
 
 <style>
 /* ── Reset ── */
@@ -876,56 +876,56 @@ document.addEventListener('click',function(e){if(!document.getElementById('navDr
       <select id="state">
         <option value="">— Select your state —</option>
         <option value="Alabama">Alabama (Cost Index: 88)</option>
-        <option value="Alaska">Alaska (Cost Index: 128)</option>
-        <option value="Arizona">Arizona (Cost Index: 102)</option>
-        <option value="Arkansas">Arkansas (Cost Index: 89)</option>
-        <option value="California">California (Cost Index: 142)</option>
-        <option value="Colorado">Colorado (Cost Index: 110)</option>
-        <option value="Connecticut">Connecticut (Cost Index: 122)</option>
-        <option value="Delaware">Delaware (Cost Index: 108)</option>
-        <option value="Florida">Florida (Cost Index: 103)</option>
-        <option value="Georgia">Georgia (Cost Index: 95)</option>
-        <option value="Hawaii">Hawaii (Cost Index: 180)</option>
-        <option value="Idaho">Idaho (Cost Index: 95)</option>
-        <option value="Illinois">Illinois (Cost Index: 107)</option>
+        <option value="Alaska">Alaska (Cost Index: 127)</option>
+        <option value="Arizona">Arizona (Cost Index: 110)</option>
+        <option value="Arkansas">Arkansas (Cost Index: 90)</option>
+        <option value="California">California (Cost Index: 143)</option>
+        <option value="Colorado">Colorado (Cost Index: 103)</option>
+        <option value="Connecticut">Connecticut (Cost Index: 114)</option>
+        <option value="Delaware">Delaware (Cost Index: 103)</option>
+        <option value="Florida">Florida (Cost Index: 101)</option>
+        <option value="Georgia">Georgia (Cost Index: 92)</option>
+        <option value="Hawaii">Hawaii (Cost Index: 184)</option>
+        <option value="Idaho">Idaho (Cost Index: 99)</option>
+        <option value="Illinois">Illinois (Cost Index: 95)</option>
         <option value="Indiana">Indiana (Cost Index: 91)</option>
         <option value="Iowa">Iowa (Cost Index: 90)</option>
-        <option value="Kansas">Kansas (Cost Index: 91)</option>
-        <option value="Kentucky">Kentucky (Cost Index: 90)</option>
+        <option value="Kansas">Kansas (Cost Index: 88)</option>
+        <option value="Kentucky">Kentucky (Cost Index: 92)</option>
         <option value="Louisiana">Louisiana (Cost Index: 93)</option>
-        <option value="Maine">Maine (Cost Index: 110)</option>
-        <option value="Maryland">Maryland (Cost Index: 120)</option>
-        <option value="Massachusetts">Massachusetts (Cost Index: 135)</option>
-        <option value="Michigan">Michigan (Cost Index: 94)</option>
-        <option value="Minnesota">Minnesota (Cost Index: 104)</option>
+        <option value="Maine">Maine (Cost Index: 114)</option>
+        <option value="Maryland">Maryland (Cost Index: 117)</option>
+        <option value="Massachusetts">Massachusetts (Cost Index: 149)</option>
+        <option value="Michigan">Michigan (Cost Index: 92)</option>
+        <option value="Minnesota">Minnesota (Cost Index: 94)</option>
         <option value="Mississippi">Mississippi (Cost Index: 86)</option>
-        <option value="Missouri">Missouri (Cost Index: 91)</option>
-        <option value="Montana">Montana (Cost Index: 100)</option>
-        <option value="Nebraska">Nebraska (Cost Index: 93)</option>
-        <option value="Nevada">Nevada (Cost Index: 105)</option>
-        <option value="New Hampshire">New Hampshire (Cost Index: 118)</option>
-        <option value="New Jersey">New Jersey (Cost Index: 125)</option>
-        <option value="New Mexico">New Mexico (Cost Index: 93)</option>
-        <option value="New York">New York (Cost Index: 139)</option>
-        <option value="North Carolina">North Carolina (Cost Index: 96)</option>
-        <option value="North Dakota">North Dakota (Cost Index: 96)</option>
-        <option value="Ohio">Ohio (Cost Index: 92)</option>
-        <option value="Oklahoma">Oklahoma (Cost Index: 90)</option>
-        <option value="Oregon">Oregon (Cost Index: 115)</option>
-        <option value="Pennsylvania">Pennsylvania (Cost Index: 101)</option>
-        <option value="Rhode Island">Rhode Island (Cost Index: 119)</option>
-        <option value="South Carolina">South Carolina (Cost Index: 96)</option>
-        <option value="South Dakota">South Dakota (Cost Index: 96)</option>
-        <option value="Tennessee">Tennessee (Cost Index: 92)</option>
-        <option value="Texas">Texas (Cost Index: 95)</option>
-        <option value="Utah">Utah (Cost Index: 103)</option>
-        <option value="Vermont">Vermont (Cost Index: 116)</option>
-        <option value="Virginia">Virginia (Cost Index: 107)</option>
-        <option value="Washington">Washington (Cost Index: 118)</option>
+        <option value="Missouri">Missouri (Cost Index: 89)</option>
+        <option value="Montana">Montana (Cost Index: 97)</option>
+        <option value="Nebraska">Nebraska (Cost Index: 92)</option>
+        <option value="Nevada">Nevada (Cost Index: 100)</option>
+        <option value="New Hampshire">New Hampshire (Cost Index: 111)</option>
+        <option value="New Jersey">New Jersey (Cost Index: 115)</option>
+        <option value="New Mexico">New Mexico (Cost Index: 94)</option>
+        <option value="New York">New York (Cost Index: 126)</option>
+        <option value="North Carolina">North Carolina (Cost Index: 98)</option>
+        <option value="North Dakota">North Dakota (Cost Index: 91)</option>
+        <option value="Ohio">Ohio (Cost Index: 95)</option>
+        <option value="Oklahoma">Oklahoma (Cost Index: 85)</option>
+        <option value="Oregon">Oregon (Cost Index: 113)</option>
+        <option value="Pennsylvania">Pennsylvania (Cost Index: 97)</option>
+        <option value="Rhode Island">Rhode Island (Cost Index: 111)</option>
+        <option value="South Carolina">South Carolina (Cost Index: 93)</option>
+        <option value="South Dakota">South Dakota (Cost Index: 92)</option>
+        <option value="Tennessee">Tennessee (Cost Index: 90)</option>
+        <option value="Texas">Texas (Cost Index: 91)</option>
+        <option value="Utah">Utah (Cost Index: 100)</option>
+        <option value="Vermont">Vermont (Cost Index: 114)</option>
+        <option value="Virginia">Virginia (Cost Index: 102)</option>
+        <option value="Washington">Washington (Cost Index: 113)</option>
         <option value="West Virginia">West Virginia (Cost Index: 88)</option>
-        <option value="Wisconsin">Wisconsin (Cost Index: 96)</option>
-        <option value="Wyoming">Wyoming (Cost Index: 98)</option>
-        <option value="Washington D.C.">Washington D.C. (Cost Index: 158)</option>
+        <option value="Wisconsin">Wisconsin (Cost Index: 99)</option>
+        <option value="Wyoming">Wyoming (Cost Index: 95)</option>
+        <option value="Washington D.C.">Washington D.C. (Cost Index: 138)</option>
       </select>
     </div>
   </div>
@@ -1215,7 +1215,7 @@ document.addEventListener('click',function(e){if(!document.getElementById('navDr
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
       </div>
       <h3>National Baseline</h3>
-      <p>We start from the $2,400–$2,600/yr national average for student "other expenses" reported in college COA data.</p>
+      <p>We start from the $2,400–$2,600/yr national average for student "other expenses" per College Board Trends in College Pricing data.</p>
     </div>
     <div class="step">
       <div class="step-num">02</div>
@@ -1223,7 +1223,7 @@ document.addEventListener('click',function(e){if(!document.getElementById('navDr
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
       </div>
       <h3>State Cost Index</h3>
-      <p>The baseline is scaled by your state's cost-of-living index — from Mississippi (86) to Hawaii (180).</p>
+      <p>The baseline is scaled by your state's 2025 cost-of-living index sourced from the MERIC/C2ER Cost of Living Data Series — from Oklahoma (85) to Hawaii (184).</p>
     </div>
     <div class="step">
       <div class="step-num">03</div>
@@ -1256,19 +1256,19 @@ document.addEventListener('click',function(e){if(!document.getElementById('navDr
 <script>
 document.addEventListener('click',function(e){if(!document.getElementById('navDropdown').contains(e.target))document.getElementById('navDropdown').classList.remove('open');});
 
-// ── State cost index data ──
+// ── State cost index data — 2025 MERIC/C2ER Cost of Living Data Series ──
 const STATE_INDEX = {
-  "Alabama":88,"Alaska":128,"Arizona":102,"Arkansas":89,"California":142,
-  "Colorado":110,"Connecticut":122,"Delaware":108,"Florida":103,"Georgia":95,
-  "Hawaii":180,"Idaho":95,"Illinois":107,"Indiana":91,"Iowa":90,"Kansas":91,
-  "Kentucky":90,"Louisiana":93,"Maine":110,"Maryland":120,"Massachusetts":135,
-  "Michigan":94,"Minnesota":104,"Mississippi":86,"Missouri":91,"Montana":100,
-  "Nebraska":93,"Nevada":105,"New Hampshire":118,"New Jersey":125,
-  "New Mexico":93,"New York":139,"North Carolina":96,"North Dakota":96,
-  "Ohio":92,"Oklahoma":90,"Oregon":115,"Pennsylvania":101,"Rhode Island":119,
-  "South Carolina":96,"South Dakota":96,"Tennessee":92,"Texas":95,"Utah":103,
-  "Vermont":116,"Virginia":107,"Washington":118,"West Virginia":88,
-  "Wisconsin":96,"Wyoming":98,"Washington D.C.":158
+  "Alabama":88,"Alaska":127,"Arizona":110,"Arkansas":90,"California":143,
+  "Colorado":103,"Connecticut":114,"Delaware":103,"Florida":101,"Georgia":92,
+  "Hawaii":184,"Idaho":99,"Illinois":95,"Indiana":91,"Iowa":90,"Kansas":88,
+  "Kentucky":92,"Louisiana":93,"Maine":114,"Maryland":117,"Massachusetts":149,
+  "Michigan":92,"Minnesota":94,"Mississippi":86,"Missouri":89,"Montana":97,
+  "Nebraska":92,"Nevada":100,"New Hampshire":111,"New Jersey":115,
+  "New Mexico":94,"New York":126,"North Carolina":98,"North Dakota":91,
+  "Ohio":95,"Oklahoma":85,"Oregon":113,"Pennsylvania":97,"Rhode Island":111,
+  "South Carolina":93,"South Dakota":92,"Tennessee":90,"Texas":91,"Utah":100,
+  "Vermont":114,"Virginia":102,"Washington":113,"West Virginia":88,
+  "Wisconsin":99,"Wyoming":95,"Washington D.C.":138
 };
 
 // Pill radio behavior
@@ -1308,8 +1308,10 @@ function calculate() {
   const housingAdj = { dorm: 0, offcampus: 40, commuter: -20 };
   monthly += housingAdj[housing] || 0;
 
-  // Meal plan modifier (eating out budget)
-  const mealAdj = { full: 0, partial: 80, none: 180 };
+  // Meal plan modifier (eating out / grocery budget added on top of base)
+  // partial: adds ~$120/mo for supplemental groceries/dining
+  // none: adds ~$320/mo reflecting full self-funded food costs (USDA moderate food plan)
+  const mealAdj = { full: 0, partial: 120, none: 320 };
   monthly += mealAdj[mealplan] || 0;
 
   // Lifestyle multiplier
