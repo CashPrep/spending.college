@@ -1,1 +1,714 @@
-PLACEHOLDER_jobs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Job Hours Calculator – spending.college</title>
+<meta name="description" content="Know if your college job actually covers your spending money goal. Plug in your pay, hours, and weeks worked to see if your job hits your College Cash target.">
+<link rel="canonical" href="https://www.spending.college/jobs.html">
+<link rel="icon" href="/favicon.ico">
+<meta name='impact-site-verification' value='63c8b781-4885-438f-883a-8ea87f9822f9'>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBBZR62R5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PJBBZR62R5');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:#06080f;
+  color:#e2e8f0;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+:root{
+  --accent:#7c3aed;
+  --accent-light:#a78bfa;
+  --accent2:#06b6d4;
+  --accent2-light:#67e8f9;
+  --glow-v:rgba(124,58,237,0.15);
+  --glow-c:rgba(6,182,212,0.10);
+  --surface:rgba(13,17,32,0.95);
+  --surface2:rgba(20,25,48,0.80);
+  --border:rgba(148,163,184,0.10);
+  --border-accent:rgba(124,58,237,0.30);
+  --muted:#64748b;
+  --secondary:#94a3b8;
+  --radius-sm:12px;
+  --radius:20px;
+  --radius-lg:28px;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 70% 45% at 8% 0%, var(--glow-v) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 35% at 92% 85%, var(--glow-c) 0%, transparent 60%),
+    linear-gradient(175deg,#06080f 0%,#090d1c 100%);
+  pointer-events:none;
+  z-index:0;
+}
+.page-wrap{position:relative;z-index:1;}
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 40px;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(6,8,15,0.75);
+}
+.nav-logo{
+  font-size:1.1rem;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  color:#fff;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.nav-logo-dot{
+  width:8px;height:8px;
+  background:var(--accent-light);
+  border-radius:50%;
+  display:inline-block;
+  box-shadow:0 0 8px var(--accent-light);
+}
+.nav-links{
+  display:flex;
+  gap:6px;
+  list-style:none;
+}
+.nav-links a{
+  color:var(--secondary);
+  text-decoration:none;
+  font-size:0.875rem;
+  font-weight:500;
+  padding:7px 14px;
+  border-radius:var(--radius-sm);
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.06);}
+.nav-links a.active{color:#fff;background:rgba(124,58,237,0.18);border:1px solid var(--border-accent);}
+.section{max-width:780px;margin:0 auto;padding:0 24px;}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:40px;
+  margin-bottom:32px;
+  backdrop-filter:blur(16px);
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-accent),transparent);
+}
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:1.2rem;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  margin-bottom:28px;
+  color:#fff;
+}
+.card-title-icon{
+  width:40px;height:40px;
+  background:rgba(124,58,237,0.15);
+  border:1px solid var(--border-accent);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.card-title-icon svg{width:18px;height:18px;color:var(--accent-light);}
+.field{margin-bottom:24px;}
+.field:last-child{margin-bottom:0;}
+label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:0.875rem;
+  font-weight:600;
+  color:var(--secondary);
+  margin-bottom:10px;
+  letter-spacing:0.01em;
+}
+label svg{width:15px;height:15px;color:var(--accent-light);opacity:0.8;}
+select,input[type="number"]{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  color:#fff;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.95rem;
+  font-weight:500;
+  padding:13px 16px;
+  outline:none;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+  -webkit-appearance:none;
+  appearance:none;
+}
+select:focus,input[type="number"]:focus{
+  border-color:var(--accent);
+  background:rgba(124,58,237,0.08);
+  box-shadow:0 0 0 3px rgba(124,58,237,0.12);
+}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:560px){.grid-2{grid-template-columns:1fr;}}
+input[type="range"]{
+  -webkit-appearance:none;
+  appearance:none;
+  width:100%;
+  height:4px;
+  background:var(--border);
+  border-radius:99px;
+  outline:none;
+  cursor:pointer;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:20px;height:20px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 10px rgba(124,58,237,0.5);
+  cursor:pointer;
+  border:2px solid rgba(255,255,255,0.2);
+}
+.slider-labels{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  font-size:0.75rem;
+  color:var(--muted);
+  font-weight:500;
+}
+.mode-toggle{
+  display:flex;
+  gap:8px;
+  margin-bottom:20px;
+}
+.mode-btn{
+  flex:1;
+  padding:10px 16px;
+  border-radius:var(--radius-sm);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.875rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .2s;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.04);
+  color:var(--secondary);
+}
+.mode-btn.active{
+  background:rgba(124,58,237,0.18);
+  border-color:var(--accent);
+  color:#fff;
+  box-shadow:0 0 12px rgba(124,58,237,0.2);
+}
+.preset-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 14px;
+  border-radius:var(--radius-sm);
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  color:var(--secondary);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.8rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .2s;
+}
+.preset-btn:hover{border-color:var(--border-accent);color:#fff;background:rgba(124,58,237,0.08);}
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:14px 20px;
+  margin-top:8px;
+}
+.status-dot{width:10px;height:10px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.status-dot.green{background:#34d399;box-shadow:0 0 8px rgba(52,211,153,0.5);}
+.status-dot.red{background:#f87171;box-shadow:0 0 8px rgba(248,113,113,0.5);}
+.status-dot.cyan{background:var(--accent2);box-shadow:0 0 8px rgba(6,182,212,0.5);}
+.result-lines{margin-top:16px;space-y:8px;}
+.result-lines p{font-size:0.9rem;color:var(--secondary);margin-bottom:8px;line-height:1.6;}
+.result-lines p strong{color:#fff;}
+.warning-line{color:#fbbf24!important;}
+.note-line{font-size:0.8rem!important;color:var(--muted)!important;}
+.btn-group{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:12px 22px;
+  border-radius:var(--radius-sm);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.875rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .2s;
+  border:1px solid transparent;
+  text-decoration:none;
+}
+.btn svg{width:16px;height:16px;}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+  box-shadow:0 2px 16px rgba(124,58,237,0.3);
+}
+.btn-primary:hover{background:#6d28d9;box-shadow:0 4px 24px rgba(124,58,237,0.45);}
+.btn-secondary{
+  background:rgba(255,255,255,0.05);
+  color:var(--secondary);
+  border-color:var(--border);
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.15);}
+.hero{
+  max-width:760px;
+  margin:0 auto;
+  padding:72px 24px 48px;
+}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(124,58,237,0.12);
+  border:1px solid var(--border-accent);
+  border-radius:999px;
+  padding:6px 16px;
+  font-size:0.8rem;
+  font-weight:600;
+  color:var(--accent-light);
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+.hero h1{
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-0.035em;
+  margin-bottom:16px;
+  background:linear-gradient(135deg,#fff 0%,#c4b5fd 55%,var(--accent2-light) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero p{
+  font-size:1rem;
+  color:var(--secondary);
+  max-width:520px;
+  line-height:1.7;
+  margin-bottom:0;
+}
+.section-label{
+  font-size:0.75rem;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--accent-light);
+  margin-bottom:6px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.section-label::before{
+  content:'';
+  width:20px;height:2px;
+  background:var(--accent);
+  border-radius:2px;
+}
+footer{
+  border-top:1px solid var(--border);
+  padding:40px;
+  text-align:center;
+  margin-top:80px;
+}
+.footer-links{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;margin-bottom:16px;}
+.footer-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:0.85rem;
+  padding:6px 12px;
+  border-radius:var(--radius-sm);
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--secondary);}
+.footer-copy{font-size:0.8rem;color:var(--muted);}
+@media(max-width:640px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  .hero{padding:48px 20px 32px;}
+  .card{padding:24px 20px;}
+}
+.hint-text{font-size:0.78rem;color:var(--muted);margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-dot"></span>
+    spending.college
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Calculator</a></li>
+    <li><a href="/jobs.html" class="active">Job Hours</a></li>
+    <li><a href="/find-jobs.html">Find Jobs</a></li>
+    <li><a href="/guides.html">Guides</a></li>
+    <li><a href="/faq.html">FAQ</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+    Step 2
+  </div>
+  <h1>College Job Hours</h1>
+  <p>Turn your monthly spending target into hours per week you actually need to work. Check if your current job covers it, or plan one that does.</p>
+</div>
+
+<div class="section" style="margin-bottom:80px;">
+
+  <!-- Monthly target -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-title-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      </div>
+      Monthly Spending Target
+    </div>
+    <div class="field">
+      <label>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        Target ($/month)
+      </label>
+      <input id="monthlyInput" type="number" min="0" step="10" placeholder="e.g. 400" />
+      <p class="hint-text" id="monthlyHint">Tip: use your monthly number from the College Cash calculator.</p>
+    </div>
+  </div>
+
+  <!-- Mode toggle + job inputs -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-title-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      </div>
+      How Do You Want to Use This?
+    </div>
+    <div class="mode-toggle">
+      <button type="button" id="modeHaveJob" class="mode-btn active">I already have a job</button>
+      <button type="button" id="modePlanJob" class="mode-btn">Help me plan a job</button>
+    </div>
+    <p id="modeHint" style="font-size:0.85rem;color:var(--secondary);margin-bottom:20px;">Enter your monthly target and job details to see if it covers your spending.</p>
+
+    <!-- Mode 1 -->
+    <div id="haveJobSection">
+      <div class="grid-2">
+        <div class="field">
+          <label>Hourly pay (before taxes)</label>
+          <input id="wageInput" type="number" step="0.5" min="0" placeholder="e.g. 15" />
+          <p class="hint-text">$13–$20/hr is common for campus jobs.</p>
+        </div>
+        <div class="field">
+          <label>Paid weeks / year</label>
+          <input id="weeksInput" type="number" min="1" max="52" placeholder="e.g. 32" />
+          <p class="hint-text">~32 weeks school-year, ~10 weeks summer.</p>
+        </div>
+      </div>
+      <div class="field">
+        <label>Hours per week — <span id="hoursPerWeekLabel" style="color:#fff;">15 hrs/week</span></label>
+        <input id="hoursSlider" type="range" min="5" max="40" step="1" value="15" />
+        <div class="slider-labels"><span>5 hrs</span><span>40 hrs</span></div>
+      </div>
+      <div class="btn-group" style="margin-top:8px;">
+        <button type="button" class="preset-btn" onclick="applyPreset('campus')">Campus job · $15 · 12 hrs · 32 wks</button>
+        <button type="button" class="preset-btn" onclick="applyPreset('summer')">Summer job · $18 · 30 hrs · 10 wks</button>
+      </div>
+    </div>
+
+    <!-- Mode 2 -->
+    <div id="planJobSection" class="hidden" style="display:none;">
+      <p style="font-size:0.875rem;color:var(--secondary);margin-bottom:16px;">Here are rough hours/week you'd need at common pay rates (assumes ~32 working weeks/year).</p>
+      <ul id="suggestionsList" style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;"></ul>
+      <hr style="border-color:rgba(148,163,184,0.1);margin-bottom:24px;">
+      <p style="font-size:0.875rem;font-weight:600;color:#fff;margin-bottom:4px;">Try your own numbers</p>
+      <p style="font-size:0.8rem;color:var(--secondary);margin-bottom:16px;">Assumes ~32 working weeks/year.</p>
+      <div class="grid-2">
+        <div class="field">
+          <label>Hourly pay (before taxes)</label>
+          <input id="planWageInput" type="number" step="0.5" min="0" value="15" />
+        </div>
+        <div class="field">
+          <label>Hours per week</label>
+          <input id="planHoursInput" type="number" min="1" max="40" value="12" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-title-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+      </div>
+      Result
+    </div>
+    <div class="status-badge">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusText" style="font-size:0.9rem;color:#fff;">Enter numbers to see if a job setup could cover your target.</span>
+    </div>
+    <div class="result-lines">
+      <p id="resultLine"></p>
+      <p id="shortfallLine"></p>
+      <p id="warningLine" class="warning-line"></p>
+      <p class="note-line">All earnings are gross pay (before taxes). Take-home will be lower.</p>
+    </div>
+    <div class="btn-group">
+      <button type="button" id="goFindJobs" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        Use this in Find Jobs
+      </button>
+      <a href="/" class="btn btn-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        Get spending number first
+      </a>
+    </div>
+  </div>
+
+  <!-- About -->
+  <details style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:24px;">
+    <summary style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:1rem;font-weight:700;color:#fff;">About <span style="font-size:0.8rem;color:var(--muted);font-weight:400;">tap to read</span></summary>
+    <div style="margin-top:16px;font-size:0.875rem;color:var(--secondary);line-height:1.7;display:flex;flex-direction:column;gap:12px;">
+      <p>College Job Hours pairs with College Cash. It compares your yearly spending target to what you might earn from a job. It is a planning tool only — not a guarantee of any specific income.</p>
+      <p>In "I already have a job" mode, yearly earnings are calculated as hourly pay × hours per week × paid weeks. In "Help me plan" mode, suggestions assume about 32 working weeks per year.</p>
+    </div>
+  </details>
+
+  <details style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:24px;">
+    <summary style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:1rem;font-weight:700;color:#fff;">Privacy <span style="font-size:0.8rem;color:var(--muted);font-weight:400;">tap to read</span></summary>
+    <div style="margin-top:16px;font-size:0.875rem;color:var(--secondary);line-height:1.7;display:flex;flex-direction:column;gap:12px;">
+      <p>This is a static calculator. Inputs stay in your browser and are not stored on a server.</p>
+      <p>Contact: <a href="mailto:unbanked123@gmail.com" style="color:var(--accent-light);">unbanked123@gmail.com</a></p>
+    </div>
+  </details>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Calculator</a>
+    <a href="/jobs.html">Job Hours</a>
+    <a href="/find-jobs.html">Find Jobs</a>
+    <a href="/guides.html">Guides</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <p class="footer-copy">&copy; 2025 spending.college — Estimates only. Not financial advice.</p>
+</footer>
+
+</div>
+
+<script>
+  const monthlyInput=document.getElementById('monthlyInput');
+  const wageInput=document.getElementById('wageInput');
+  const weeksInput=document.getElementById('weeksInput');
+  const hoursSlider=document.getElementById('hoursSlider');
+  const hoursPerWeekLabel=document.getElementById('hoursPerWeekLabel');
+  const resultLine=document.getElementById('resultLine');
+  const shortfallLine=document.getElementById('shortfallLine');
+  const monthlyHint=document.getElementById('monthlyHint');
+  const warningLine=document.getElementById('warningLine');
+  const statusDot=document.getElementById('statusDot');
+  const statusText=document.getElementById('statusText');
+  const modeHaveJobBtn=document.getElementById('modeHaveJob');
+  const modePlanJobBtn=document.getElementById('modePlanJob');
+  const haveJobSection=document.getElementById('haveJobSection');
+  const planJobSection=document.getElementById('planJobSection');
+  const modeHint=document.getElementById('modeHint');
+  const suggestionsList=document.getElementById('suggestionsList');
+  const planWageInput=document.getElementById('planWageInput');
+  const planHoursInput=document.getElementById('planHoursInput');
+  const goFindJobsBtn=document.getElementById('goFindJobs');
+  const PLAN_WEEKS=32;
+  let mode='haveJob';
+  let lastWeeklyMin=null;
+
+  function getMonthlyFromQuery(){
+    const url=new URL(window.location.href);
+    const m=url.searchParams.get('monthly');
+    const num=m?Number(m):NaN;
+    return Number.isFinite(num)&&num>0?num:null;
+  }
+
+  function initDefaults(){
+    const qMonthly=getMonthlyFromQuery();
+    if(qMonthly){
+      monthlyInput.value=qMonthly;
+      monthlyHint.textContent='Loaded from your College Cash estimate.';
+    } else {
+      monthlyInput.value=400;
+      monthlyHint.textContent='Tip: use your monthly number from College Cash.';
+    }
+    wageInput.value=15;
+    weeksInput.value=32;
+    hoursSlider.value=15;
+    hoursPerWeekLabel.textContent='15 hrs/week';
+    planWageInput.value=15;
+    planHoursInput.value=12;
+    setMode('haveJob');
+  }
+
+  function applyPreset(type){
+    if(type==='campus'){wageInput.value=15;hoursSlider.value=12;weeksInput.value=32;}
+    else if(type==='summer'){wageInput.value=18;hoursSlider.value=30;weeksInput.value=10;}
+    recalc();
+  }
+
+  function setMode(newMode){
+    mode=newMode;
+    if(mode==='haveJob'){
+      modeHaveJobBtn.classList.add('active');
+      modePlanJobBtn.classList.remove('active');
+      haveJobSection.style.display='';
+      planJobSection.style.display='none';
+      modeHint.textContent='Enter your monthly target and your job details to see if it covers your spending.';
+    } else {
+      modePlanJobBtn.classList.add('active');
+      modeHaveJobBtn.classList.remove('active');
+      haveJobSection.style.display='none';
+      planJobSection.style.display='';
+      modeHint.textContent='See suggested hours/week at different pay rates, then try your own numbers.';
+    }
+    recalc();
+  }
+
+  function recalcHaveJob(){
+    const monthly=Number(monthlyInput.value)||0;
+    const wage=Number(wageInput.value)||0;
+    const weeks=Number(weeksInput.value)||0;
+    const hoursPerWeek=Number(hoursSlider.value)||0;
+    hoursPerWeekLabel.textContent=hoursPerWeek+' hrs/week';
+    warningLine.textContent='';
+    resultLine.textContent='';
+    shortfallLine.textContent='';
+    lastWeeklyMin=monthly>0?monthly/4:null;
+    if(monthly<=0||wage<=0||weeks<=0||hoursPerWeek<=0){
+      statusDot.className='status-dot';
+      statusText.textContent='Enter positive values to see if your job covers it.';
+      return;
+    }
+    if(hoursPerWeek>40||wage>60||weeks>52)warningLine.textContent='Heads up: these numbers are higher than what most college students work.';
+    const yearlyNeed=monthly*12;
+    const yearlyEarn=wage*hoursPerWeek*weeks;
+    const diff=yearlyEarn-yearlyNeed;
+    const absDiff=Math.abs(diff);
+    const monthlyDiff=absDiff/12;
+    resultLine.textContent='This setup earns about $'+yearlyEarn.toLocaleString()+'/year (~$'+Math.round(yearlyEarn/12).toLocaleString()+'/month).';
+    if(diff>=0){
+      statusDot.className='status-dot green';
+      statusText.textContent='This setup covers your target.';
+      shortfallLine.textContent='Target: ~$'+yearlyNeed.toLocaleString()+'/year. You are ahead by about $'+absDiff.toLocaleString()+' (approx $'+monthlyDiff.toFixed(0)+'/month).';
+    } else {
+      statusDot.className='status-dot red';
+      statusText.textContent="This setup doesn't fully cover your target.";
+      shortfallLine.textContent='Target: ~$'+yearlyNeed.toLocaleString()+'/year. You are short by about $'+absDiff.toLocaleString()+' (approx $'+monthlyDiff.toFixed(0)+'/month).';
+    }
+  }
+
+  function recalcPlanJob(){
+    const monthly=Number(monthlyInput.value)||0;
+    suggestionsList.innerHTML='';
+    resultLine.textContent='';
+    shortfallLine.textContent='';
+    warningLine.textContent='';
+    lastWeeklyMin=monthly>0?monthly/4:null;
+    if(monthly<=0){
+      statusDot.className='status-dot';
+      statusText.textContent='Enter a monthly target to see suggested hours.';
+      return;
+    }
+    const yearlyNeed=monthly*12;
+    [13,15,18].forEach(w=>{
+      const hpw=yearlyNeed/(w*PLAN_WEEKS);
+      if(!Number.isFinite(hpw)||hpw<=0)return;
+      const li=document.createElement('li');
+      li.style.cssText='padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(148,163,184,0.1);border-radius:12px;font-size:0.875rem;color:var(--secondary);';
+      li.innerHTML='$'+w.toFixed(2)+'/hour &rarr; about <strong style="color:#fff;">'+hpw.toFixed(1)+' hours/week</strong> for '+PLAN_WEEKS+' weeks';
+      suggestionsList.appendChild(li);
+    });
+    const wCustom=Number(planWageInput.value)||0;
+    const hCustom=Number(planHoursInput.value)||0;
+    if(wCustom>0&&hCustom>0){
+      const yearlyEarn=wCustom*hCustom*PLAN_WEEKS;
+      const diff=yearlyEarn-yearlyNeed;
+      const absDiff=Math.abs(diff);
+      resultLine.textContent='That setup is about $'+Math.round(yearlyEarn/12).toLocaleString()+'/month before taxes.';
+      if(diff>=0){
+        statusDot.className='status-dot green';
+        statusText.textContent='This setup covers your target.';
+        shortfallLine.textContent="You'd be ahead by about $"+absDiff.toLocaleString()+'/year (approx $'+(absDiff/12).toFixed(0)+'/month).';
+      } else {
+        statusDot.className='status-dot red';
+        statusText.textContent="This setup doesn't fully cover your target.";
+        shortfallLine.textContent="You'd be short by about $"+absDiff.toLocaleString()+'/year (approx $'+(absDiff/12).toFixed(0)+'/month).';
+      }
+    } else {
+      statusDot.className='status-dot cyan';
+      statusText.textContent='Here are some possible job setups to cover your target.';
+    }
+  }
+
+  function recalc(){
+    if(mode==='haveJob')recalcHaveJob();
+    else recalcPlanJob();
+  }
+
+  initDefaults();
+  modeHaveJobBtn.addEventListener('click',()=>setMode('haveJob'));
+  modePlanJobBtn.addEventListener('click',()=>setMode('planJob'));
+  monthlyInput.addEventListener('input',recalc);
+  wageInput.addEventListener('input',recalc);
+  weeksInput.addEventListener('input',recalc);
+  hoursSlider.addEventListener('input',recalc);
+  planWageInput.addEventListener('input',recalc);
+  planHoursInput.addEventListener('input',recalc);
+  recalc();
+
+  goFindJobsBtn.addEventListener('click',()=>{
+    const weekly=lastWeeklyMin?Math.round(lastWeeklyMin):0;
+    const url=new URL(window.location.origin+'/find-jobs.html');
+    if(weekly>0)url.searchParams.set('weekly_min',weekly);
+    window.location.href=url.toString();
+  });
+</script>
+</body>
+</html>
