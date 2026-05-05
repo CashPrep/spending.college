@@ -103,21 +103,84 @@ nav {
   display: inline-block;
   box-shadow: 0 0 8px var(--accent-light);
 }
-.nav-links {
-  display: flex;
-  gap: 6px;
-  list-style: none;
+
+/* ── Menu Dropdown ── */
+.nav-menu {
+  position: relative;
 }
-.nav-links a {
+.nav-menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--secondary);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: color .2s, background .2s, border-color .2s;
+  user-select: none;
+}
+.nav-menu-btn:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15);
+}
+.nav-menu-btn svg {
+  width: 14px; height: 14px;
+  transition: transform .25s;
+}
+.nav-menu.open .nav-menu-btn svg {
+  transform: rotate(180deg);
+}
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 180px;
+  background: rgba(13,17,32,0.97);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,58,237,0.08);
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  z-index: 200;
+  animation: dropIn .18s ease;
+}
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.nav-menu.open .nav-dropdown {
+  display: block;
+}
+.nav-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
   color: var(--secondary);
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 500;
-  padding: 7px 14px;
-  border-radius: var(--radius-sm);
-  transition: color .2s, background .2s;
+  border-bottom: 1px solid var(--border);
+  transition: color .15s, background .15s;
 }
-.nav-links a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.nav-dropdown a:last-child { border-bottom: none; }
+.nav-dropdown a:hover {
+  color: #fff;
+  background: rgba(124,58,237,0.10);
+}
+.nav-dropdown a svg {
+  width: 15px; height: 15px;
+  color: var(--accent-light);
+  opacity: 0.75;
+  flex-shrink: 0;
+}
 
 /* ── Hero ── */
 .hero {
@@ -763,7 +826,6 @@ footer {
 /* ── Responsive nav ── */
 @media (max-width: 640px) {
   nav { padding: 16px 20px; }
-  .nav-links { display: none; }
   .hero { padding: 64px 20px 48px; }
   .card { padding: 28px 22px; }
   .receipt-header { flex-direction: column; gap: 16px; padding: 24px 22px; }
@@ -784,11 +846,26 @@ footer {
     <span class="nav-logo-dot"></span>
     spending.college
   </a>
-  <ul class="nav-links">
-    <li><a href="/guides.html">Guides</a></li>
-    <li><a href="/find-jobs.html">Find Jobs</a></li>
-    <li><a href="/faq.html">FAQ</a></li>
-  </ul>
+  <div class="nav-menu" id="navMenu">
+    <button class="nav-menu-btn" onclick="toggleMenu()" aria-expanded="false" aria-haspopup="true">
+      Menu
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+    <div class="nav-dropdown" role="menu">
+      <a href="/guides.html" role="menuitem">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        Guides
+      </a>
+      <a href="/find-jobs.html" role="menuitem">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        Find Jobs
+      </a>
+      <a href="/faq.html" role="menuitem">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        FAQ
+      </a>
+    </div>
+  </div>
 </nav>
 
 <!-- ── HERO ── -->
@@ -1202,6 +1279,32 @@ footer {
 </div><!-- end page-wrap -->
 
 <script>
+// ── Menu dropdown toggle ──
+function toggleMenu() {
+  const menu = document.getElementById('navMenu');
+  const btn = menu.querySelector('.nav-menu-btn');
+  const isOpen = menu.classList.toggle('open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('navMenu');
+  if (!menu.contains(e.target)) {
+    menu.classList.remove('open');
+    menu.querySelector('.nav-menu-btn').setAttribute('aria-expanded', 'false');
+  }
+});
+
+// Close dropdown when a link is clicked
+document.querySelectorAll('.nav-dropdown a').forEach(link => {
+  link.addEventListener('click', () => {
+    const menu = document.getElementById('navMenu');
+    menu.classList.remove('open');
+    menu.querySelector('.nav-menu-btn').setAttribute('aria-expanded', 'false');
+  });
+});
+
 // ── State cost index data ──
 const STATE_INDEX = {
   "Alabama":88,"Alaska":128,"Arizona":102,"Arkansas":89,"California":142,
