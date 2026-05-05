@@ -1,1 +1,476 @@
-PLACEHOLDER_find-jobs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find College Jobs Near Campus – spending.college</title>
+<meta name="description" content="Search part-time jobs near your college and instantly see which listings can cover your weekly spending money goal.">
+<link rel="canonical" href="https://www.spending.college/find-jobs.html">
+<link rel="icon" href="/favicon.ico">
+<meta name='impact-site-verification' value='63c8b781-4885-438f-883a-8ea87f9822f9'>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBBZR62R5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PJBBZR62R5');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:#06080f;
+  color:#e2e8f0;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+:root{
+  --accent:#7c3aed;
+  --accent-light:#a78bfa;
+  --accent2:#06b6d4;
+  --accent2-light:#67e8f9;
+  --glow-v:rgba(124,58,237,0.15);
+  --glow-c:rgba(6,182,212,0.10);
+  --surface:rgba(13,17,32,0.95);
+  --surface2:rgba(20,25,48,0.80);
+  --border:rgba(148,163,184,0.10);
+  --border-accent:rgba(124,58,237,0.30);
+  --muted:#64748b;
+  --secondary:#94a3b8;
+  --radius-sm:12px;
+  --radius:20px;
+  --radius-lg:28px;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 70% 45% at 8% 0%, var(--glow-v) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 35% at 92% 85%, var(--glow-c) 0%, transparent 60%),
+    linear-gradient(175deg,#06080f 0%,#090d1c 100%);
+  pointer-events:none;
+  z-index:0;
+}
+.page-wrap{position:relative;z-index:1;}
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 40px;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(6,8,15,0.75);
+}
+.nav-logo{
+  font-size:1.1rem;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  color:#fff;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.nav-logo-dot{
+  width:8px;height:8px;
+  background:var(--accent-light);
+  border-radius:50%;
+  display:inline-block;
+  box-shadow:0 0 8px var(--accent-light);
+}
+.nav-links{
+  display:flex;
+  gap:6px;
+  list-style:none;
+}
+.nav-links a{
+  color:var(--secondary);
+  text-decoration:none;
+  font-size:0.875rem;
+  font-weight:500;
+  padding:7px 14px;
+  border-radius:var(--radius-sm);
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.06);}
+.nav-links a.active{color:#fff;background:rgba(124,58,237,0.18);border:1px solid var(--border-accent);}
+.section{max-width:780px;margin:0 auto;padding:0 24px;}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:40px;
+  margin-bottom:32px;
+  backdrop-filter:blur(16px);
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-accent),transparent);
+}
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:1.2rem;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  margin-bottom:28px;
+  color:#fff;
+}
+.card-title-icon{
+  width:40px;height:40px;
+  background:rgba(124,58,237,0.15);
+  border:1px solid var(--border-accent);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.card-title-icon svg{width:18px;height:18px;color:var(--accent-light);}
+.field{margin-bottom:24px;}
+.field:last-child{margin-bottom:0;}
+label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:0.875rem;
+  font-weight:600;
+  color:var(--secondary);
+  margin-bottom:10px;
+}
+select,input[type="text"],input[type="number"]{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  color:#fff;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.95rem;
+  font-weight:500;
+  padding:13px 16px;
+  outline:none;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+  -webkit-appearance:none;
+  appearance:none;
+}
+select:focus,input:focus{
+  border-color:var(--accent);
+  background:rgba(124,58,237,0.08);
+  box-shadow:0 0 0 3px rgba(124,58,237,0.12);
+}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+@media(max-width:560px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+.hint-text{font-size:0.78rem;color:var(--muted);margin-top:6px;}
+.btn-calculate{
+  width:auto;
+  background:linear-gradient(135deg,var(--accent) 0%,#6d28d9 100%);
+  color:#fff;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.9rem;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  padding:12px 28px;
+  border:none;
+  border-radius:var(--radius);
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  box-shadow:0 4px 24px rgba(124,58,237,0.35);
+  transition:transform .2s,box-shadow .2s;
+  margin-bottom:20px;
+}
+.btn-calculate:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,58,237,0.5);}
+.job-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px 28px;
+  margin-bottom:16px;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.job-card:hover{border-color:var(--border-accent);}
+.job-card.meets-target{border-color:rgba(52,211,153,0.3);}
+.job-card.meets-target::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(52,211,153,0.6),transparent);}
+.meets-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(52,211,153,0.12);
+  border:1px solid rgba(52,211,153,0.3);
+  border-radius:999px;
+  padding:3px 10px;
+  font-size:0.75rem;
+  font-weight:600;
+  color:#34d399;
+  margin-left:8px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 18px;
+  border-radius:var(--radius-sm);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.875rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .2s;
+  border:1px solid transparent;
+  text-decoration:none;
+}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+  box-shadow:0 2px 16px rgba(124,58,237,0.3);
+}
+.btn-primary:hover{background:#6d28d9;}
+.btn-secondary{
+  background:rgba(255,255,255,0.05);
+  color:var(--secondary);
+  border-color:var(--border);
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.08);color:#fff;}
+.hero{
+  max-width:760px;
+  margin:0 auto;
+  padding:72px 24px 48px;
+}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(124,58,237,0.12);
+  border:1px solid var(--border-accent);
+  border-radius:999px;
+  padding:6px 16px;
+  font-size:0.8rem;
+  font-weight:600;
+  color:var(--accent-light);
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+.hero h1{
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-0.035em;
+  margin-bottom:16px;
+  background:linear-gradient(135deg,#fff 0%,#c4b5fd 55%,var(--accent2-light) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero p{
+  font-size:1rem;
+  color:var(--secondary);
+  max-width:520px;
+  line-height:1.7;
+}
+footer{
+  border-top:1px solid var(--border);
+  padding:40px;
+  text-align:center;
+  margin-top:80px;
+}
+.footer-links{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;margin-bottom:16px;}
+.footer-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:0.85rem;
+  padding:6px 12px;
+  border-radius:var(--radius-sm);
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--secondary);}
+.footer-copy{font-size:0.8rem;color:var(--muted);}
+@media(max-width:640px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  .hero{padding:48px 20px 32px;}
+  .card{padding:24px 20px;}
+  .btn-calculate{width:100%;}
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-dot"></span>
+    spending.college
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Calculator</a></li>
+    <li><a href="/jobs.html">Job Hours</a></li>
+    <li><a href="/find-jobs.html" class="active">Find Jobs</a></li>
+    <li><a href="/guides.html">Guides</a></li>
+    <li><a href="/faq.html">FAQ</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    Step 3
+  </div>
+  <h1>Find College Jobs Near Campus</h1>
+  <p>Search part-time jobs near your college and instantly see which listings are likely to cover your weekly spending goal. Powered by Adzuna.</p>
+</div>
+
+<div class="section" style="margin-bottom:80px;">
+
+  <!-- Context card -->
+  <div style="background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.18);border-radius:var(--radius-sm);padding:16px 20px;display:flex;align-items:flex-start;gap:12px;margin-bottom:32px;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;color:var(--accent2);flex-shrink:0;margin-top:2px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+    <p style="font-size:0.875rem;color:var(--secondary);line-height:1.6;">Not sure how much you need to earn? <a href="/" style="color:var(--accent-light);">Get your spending number</a> first, then use <a href="/jobs.html" style="color:var(--accent-light);">Job Hours</a> to turn it into a weekly target — then search here.</p>
+  </div>
+
+  <!-- Search form -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-title-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+      Search Jobs
+    </div>
+    <form id="job-search-form">
+      <div class="grid-2" style="margin-bottom:20px;">
+        <div class="field">
+          <label>College town</label>
+          <input type="text" id="town" required placeholder="e.g. Boston" />
+        </div>
+        <div class="field">
+          <label>State</label>
+          <input type="text" id="state" required maxlength="2" placeholder="MA" style="text-transform:uppercase;letter-spacing:0.1em;" />
+        </div>
+      </div>
+      <div class="grid-3" style="margin-bottom:28px;">
+        <div class="field">
+          <label>Weekly spending goal ($)</label>
+          <input type="number" id="targetMin" min="0" step="1" placeholder="e.g. 100" />
+          <p class="hint-text">We'll highlight jobs likely to meet this.</p>
+        </div>
+        <div class="field">
+          <label>Max hours per week</label>
+          <input type="number" id="maxHours" min="0" step="1" placeholder="e.g. 15" />
+          <p class="hint-text">Used to estimate the hourly pay you'd need.</p>
+        </div>
+        <div class="field">
+          <label>Job keyword (optional)</label>
+          <input type="text" id="keyword" placeholder="barista, campus, retail…" />
+        </div>
+      </div>
+      <button type="submit" class="btn-calculate">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        Search Jobs
+      </button>
+      <p style="font-size:0.78rem;color:var(--muted);margin-top:-8px;">Job listings are from Adzuna. Salary estimates are rough and may not match the actual offer.</p>
+    </form>
+  </div>
+
+  <!-- Results -->
+  <div id="job-results">
+    <p style="font-size:0.875rem;color:var(--muted);">Enter your town and state above to find jobs near your college.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Calculator</a>
+    <a href="/jobs.html">Job Hours</a>
+    <a href="/find-jobs.html">Find Jobs</a>
+    <a href="/guides.html">Guides</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <p class="footer-copy">&copy; 2025 spending.college — Information only. Not financial advice.</p>
+</footer>
+
+</div>
+
+<script>
+  function getWeeklyMinFromQuery(){
+    const url=new URL(window.location.href);
+    const w=url.searchParams.get('weekly_min');
+    const num=w?Number(w):NaN;
+    return Number.isFinite(num)&&num>0?num:null;
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    const weeklyFromUrl=getWeeklyMinFromQuery();
+    if(weeklyFromUrl)document.getElementById('targetMin').value=weeklyFromUrl;
+
+    const jobForm=document.getElementById('job-search-form');
+    const jobResults=document.getElementById('job-results');
+
+    jobForm.addEventListener('submit',async(event)=>{
+      event.preventDefault();
+      const town=document.getElementById('town').value.trim();
+      const state=document.getElementById('state').value.trim().toUpperCase();
+      const targetMin=Number(document.getElementById('targetMin').value||0);
+      const maxHours=Number(document.getElementById('maxHours').value||0);
+      const keywordRaw=document.getElementById('keyword').value.trim();
+      if(!town||!state){jobResults.innerHTML='<p style="color:#f87171;">Please enter your college town and state.</p>';return;}
+      jobResults.innerHTML='<p style="color:var(--secondary);">Searching jobs near your college...</p>';
+      const params=new URLSearchParams({town,state,targetMin:targetMin?String(targetMin):'',maxHours:maxHours?String(maxHours):'',keyword:keywordRaw||''});
+      try{
+        const response=await fetch('/api/jobs?'+params.toString(),{method:'GET',headers:{Accept:'application/json'}});
+        if(!response.ok){jobResults.innerHTML='<p style="color:#f87171;">Could not load jobs right now. Please try again later.</p>';return;}
+        const data=await response.json();
+        renderJobs(jobResults,data,data.hourlyTarget||null);
+      } catch(err){
+        jobResults.innerHTML='<p style="color:#f87171;">Network error. Please try again.</p>';
+      }
+    });
+  });
+
+  function renderJobs(jobResults,data,hourlyTarget){
+    if(!data||!Array.isArray(data.results)){jobResults.innerHTML='<p style="color:#f87171;">Could not load jobs right now.</p>';return;}
+    const jobs=data.results;
+    if(!jobs.length){jobResults.innerHTML='<p style="color:var(--muted);">No jobs found for that location. Try a nearby town or a different keyword.</p>';return;}
+    const html=jobs.map((job)=>{
+      const title=esc(job.title||'Job');
+      const company=esc(job.company&&job.company.display_name?job.company.display_name:'Company');
+      const location=esc(job.location&&job.location.display_name?job.location.display_name:'');
+      const snippet=esc(job.description?job.description.substring(0,220)+'...':'');
+      const applyUrl=job.redirect_url||'#';
+      let hourlyEstimateText='Pay not listed';
+      let meetsTarget=false;
+      if(typeof job.salary_min==='number'&&Number.isFinite(job.salary_min)){
+        const he=job.salary_min/2000;
+        hourlyEstimateText='$'+he.toFixed(2)+'/hr (estimate)';
+        if(hourlyTarget&&he>=hourlyTarget)meetsTarget=true;
+      }
+      const badgeClass=meetsTarget?' meets-target':'';
+      const badge=meetsTarget?'<span class="meets-badge">Meets your target</span>':'';
+      return '<div class="job-card'+badgeClass+'">'+'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:12px;">'+'<div>'+'<p style="font-size:1rem;font-weight:700;color:#fff;">'+title+badge+'</p>'+'<p style="font-size:0.8rem;color:var(--secondary);margin-top:4px;">'+company+(location?' &middot; '+location:'')+'</p>'+'</div>'+'<p style="font-size:0.875rem;font-weight:700;color:#34d399;white-space:nowrap;">'+hourlyEstimateText+'</p>'+'</div>'+'<p style="font-size:0.8rem;color:var(--secondary);line-height:1.6;margin-bottom:16px;">'+snippet+'</p>'+'<a href="'+applyUrl+'" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size:0.8rem;">View &amp; apply &nearr;</a>'+'</div>';
+    }).join('');
+    jobResults.innerHTML=html;
+  }
+
+  function esc(str){
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+  }
+</script>
+</body>
+</html>
