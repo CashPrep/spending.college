@@ -237,8 +237,10 @@ nav {
   position: relative;
   overflow: visible;
 }
-/* Top-edge gradient line replicated via border-image on a pseudo-element
-   that is clipped to the card's rounded corners using clip-path */
+/* When the state dropdown is open, lift this card above its siblings */
+.card.state-searching {
+  z-index: 50;
+}
 .card::before {
   content: '';
   position: absolute;
@@ -954,7 +956,7 @@ document.addEventListener('click',function(e){if(!document.getElementById('navDr
 <div class="section mb-80" id="calculator">
 
   <!-- Card 1: Location -->
-  <div class="card">
+  <div class="card" id="locationCard">
     <div class="card-title">
       <div class="card-title-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -1333,11 +1335,15 @@ const ALL_STATES = Object.keys(STATE_INDEX);
 
 // ── State Autocomplete ──
 (function() {
-  const input     = document.getElementById('stateInput');
-  const dropdown  = document.getElementById('stateDropdown');
-  const hidden    = document.getElementById('state');
-  let highlightIdx = -1;
+  const input       = document.getElementById('stateInput');
+  const dropdown    = document.getElementById('stateDropdown');
+  const hidden      = document.getElementById('state');
+  const locationCard = document.getElementById('locationCard');
+  let highlightIdx  = -1;
   let filteredStates = [];
+
+  function openCard()  { locationCard.classList.add('state-searching'); }
+  function closeCard() { locationCard.classList.remove('state-searching'); }
 
   function renderDropdown(states) {
     filteredStates = states;
@@ -1345,6 +1351,7 @@ const ALL_STATES = Object.keys(STATE_INDEX);
     if (!states.length) {
       dropdown.innerHTML = '<div class="state-dropdown-empty">No states found</div>';
       dropdown.classList.add('open');
+      openCard();
       return;
     }
     dropdown.innerHTML = states.map((s, i) =>
@@ -1354,6 +1361,7 @@ const ALL_STATES = Object.keys(STATE_INDEX);
       </div>`
     ).join('');
     dropdown.classList.add('open');
+    openCard();
 
     dropdown.querySelectorAll('.state-dropdown-item').forEach(item => {
       item.addEventListener('mousedown', function(e) {
@@ -1369,13 +1377,14 @@ const ALL_STATES = Object.keys(STATE_INDEX);
     dropdown.classList.remove('open');
     dropdown.innerHTML = '';
     highlightIdx = -1;
+    closeCard();
   }
 
   function closeDropdown() {
     dropdown.classList.remove('open');
     dropdown.innerHTML = '';
     highlightIdx = -1;
-    // If text doesn't exactly match a state, clear the hidden value
+    closeCard();
     if (!STATE_INDEX[input.value]) {
       hidden.value = '';
     }
@@ -1458,43 +1467,25 @@ function calculate() {
   const transport = document.getElementById('transport').value;
   const health = document.getElementById('health').value;
 
-  // ── Step 1: cost-of-living scaled baseline (monthly) ──
   const BASE = 2500 / 12;
   const scaledBase = BASE * (idx / 100);
-
-  // ── Step 2: housing modifier ──
   const housingAdj = { dorm: 0, offcampus: 40, commuter: -20 };
   const hAdj = housingAdj[housing] || 0;
-
-  // ── Step 3: meal plan add-on ──
   const mealAdj = { full: 0, partial: 120, none: 320 };
   const mAdj = mealAdj[mealplan] || 0;
-
-  // ── Step 4: lifestyle multiplier ──
   const lifestyleMult = { frugal: 0.82, moderate: 1.0, social: 1.28 };
   const lMult = lifestyleMult[lifestyle] || 1.0;
   const lifestyleBase = (scaledBase + hAdj) * lMult;
-
-  // ── Step 5: fixed add-ons ──
   const transportCost = { walk: 0, transit: 60, rideshare: 80, car: 200 };
   const tCost = transportCost[transport] || 0;
-
   const healthCost = { basic: 0, gym: 30, premium: 80 };
   const hCost = healthCost[health] || 0;
-
-  // ── Step 6: line items ──
-  const foodCost = (lifestyleBase * 0.35) + mAdj;
-  const personalCost = lifestyleBase * 0.10;
-
-  // ── Step 7: totals ──
   const monthlyTotal = lifestyleBase + mAdj + tCost + entertainment + hCost;
-
   const foodLine     = (lifestyleBase * 0.35) + mAdj;
   const personalLine = lifestyleBase * 0.10;
   const subtotal = foodLine + tCost + entertainment + hCost + personalLine;
   const annual = monthlyTotal * 12;
 
-  // Populate receipt
   document.getElementById('receipt-title').textContent = state + ' Student Budget';
   document.getElementById('receipt-subtitle').textContent = housing.charAt(0).toUpperCase()+housing.slice(1) + ' · ' + lifestyle.charAt(0).toUpperCase()+lifestyle.slice(1) + ' lifestyle';
   document.getElementById('receipt-total-big').textContent = fmt(monthlyTotal);
@@ -1509,7 +1500,6 @@ function calculate() {
   document.getElementById('r-annual').textContent = fmt(annual) + ' / yr';
   document.getElementById('r-date').textContent = new Date().toLocaleDateString('en-US', {month:'long', year:'numeric'});
 
-  // Insight
   let insight = '';
   if (idx >= 130) {
     insight = `<strong>${state}</strong> has a high cost index of ${idx}. Consider community college savings, campus jobs, or finding roommates to offset the premium.`;
@@ -1523,12 +1513,10 @@ function calculate() {
   }
   document.getElementById('insight-text').innerHTML = insight;
 
-  // Show result
   const resultEl = document.getElementById('result');
   resultEl.style.display = 'block';
   resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-  // GA event
   if (typeof gtag !== 'undefined') {
     gtag('event', 'calculate', { event_category: 'calculator', event_label: state, value: Math.round(monthlyTotal) });
   }
