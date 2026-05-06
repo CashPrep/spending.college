@@ -313,6 +313,95 @@ select:focus, input[type="number"]:focus {
 }
 select option { background: #0d111f; color: #e2e8f0; }
 
+/* ── State Autocomplete ── */
+.state-autocomplete-wrap {
+  position: relative;
+}
+.state-autocomplete-wrap input[type="text"] {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 13px 44px 13px 16px;
+  outline: none;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.state-autocomplete-wrap input[type="text"]::placeholder {
+  color: var(--muted);
+}
+.state-autocomplete-wrap input[type="text"]:focus {
+  border-color: var(--accent);
+  background: rgba(124,58,237,0.08);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+}
+.state-autocomplete-wrap .state-search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+}
+.state-autocomplete-wrap .state-search-icon svg {
+  width: 16px; height: 16px;
+}
+.state-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0; right: 0;
+  background: rgba(10,14,30,0.98);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-sm);
+  z-index: 300;
+  max-height: 240px;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.55);
+  backdrop-filter: blur(16px);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(124,58,237,0.4) transparent;
+}
+.state-dropdown::-webkit-scrollbar { width: 4px; }
+.state-dropdown::-webkit-scrollbar-track { background: transparent; }
+.state-dropdown::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 4px; }
+.state-dropdown.open { display: block; }
+.state-dropdown-item {
+  padding: 11px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--secondary);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.state-dropdown-item:hover,
+.state-dropdown-item.highlighted {
+  background: rgba(124,58,237,0.15);
+  color: #fff;
+}
+.state-dropdown-item .state-index-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent-light);
+  opacity: 0.75;
+}
+.state-dropdown-empty {
+  padding: 14px 16px;
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-align: center;
+}
+
 /* ── Grid ── */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 @media (max-width: 560px) { .grid-2 { grid-template-columns: 1fr; } }
@@ -873,60 +962,25 @@ document.addEventListener('click',function(e){if(!document.getElementById('navDr
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
         State
       </label>
-      <select id="state">
-        <option value="">— Select your state —</option>
-        <option value="Alabama">Alabama (Cost Index: 88)</option>
-        <option value="Alaska">Alaska (Cost Index: 127)</option>
-        <option value="Arizona">Arizona (Cost Index: 110)</option>
-        <option value="Arkansas">Arkansas (Cost Index: 90)</option>
-        <option value="California">California (Cost Index: 143)</option>
-        <option value="Colorado">Colorado (Cost Index: 103)</option>
-        <option value="Connecticut">Connecticut (Cost Index: 114)</option>
-        <option value="Delaware">Delaware (Cost Index: 103)</option>
-        <option value="Florida">Florida (Cost Index: 101)</option>
-        <option value="Georgia">Georgia (Cost Index: 92)</option>
-        <option value="Hawaii">Hawaii (Cost Index: 184)</option>
-        <option value="Idaho">Idaho (Cost Index: 99)</option>
-        <option value="Illinois">Illinois (Cost Index: 95)</option>
-        <option value="Indiana">Indiana (Cost Index: 91)</option>
-        <option value="Iowa">Iowa (Cost Index: 90)</option>
-        <option value="Kansas">Kansas (Cost Index: 88)</option>
-        <option value="Kentucky">Kentucky (Cost Index: 92)</option>
-        <option value="Louisiana">Louisiana (Cost Index: 93)</option>
-        <option value="Maine">Maine (Cost Index: 114)</option>
-        <option value="Maryland">Maryland (Cost Index: 117)</option>
-        <option value="Massachusetts">Massachusetts (Cost Index: 149)</option>
-        <option value="Michigan">Michigan (Cost Index: 92)</option>
-        <option value="Minnesota">Minnesota (Cost Index: 94)</option>
-        <option value="Mississippi">Mississippi (Cost Index: 86)</option>
-        <option value="Missouri">Missouri (Cost Index: 89)</option>
-        <option value="Montana">Montana (Cost Index: 97)</option>
-        <option value="Nebraska">Nebraska (Cost Index: 92)</option>
-        <option value="Nevada">Nevada (Cost Index: 100)</option>
-        <option value="New Hampshire">New Hampshire (Cost Index: 111)</option>
-        <option value="New Jersey">New Jersey (Cost Index: 115)</option>
-        <option value="New Mexico">New Mexico (Cost Index: 94)</option>
-        <option value="New York">New York (Cost Index: 126)</option>
-        <option value="North Carolina">North Carolina (Cost Index: 98)</option>
-        <option value="North Dakota">North Dakota (Cost Index: 91)</option>
-        <option value="Ohio">Ohio (Cost Index: 95)</option>
-        <option value="Oklahoma">Oklahoma (Cost Index: 85)</option>
-        <option value="Oregon">Oregon (Cost Index: 113)</option>
-        <option value="Pennsylvania">Pennsylvania (Cost Index: 97)</option>
-        <option value="Rhode Island">Rhode Island (Cost Index: 111)</option>
-        <option value="South Carolina">South Carolina (Cost Index: 93)</option>
-        <option value="South Dakota">South Dakota (Cost Index: 92)</option>
-        <option value="Tennessee">Tennessee (Cost Index: 90)</option>
-        <option value="Texas">Texas (Cost Index: 91)</option>
-        <option value="Utah">Utah (Cost Index: 100)</option>
-        <option value="Vermont">Vermont (Cost Index: 114)</option>
-        <option value="Virginia">Virginia (Cost Index: 102)</option>
-        <option value="Washington">Washington (Cost Index: 113)</option>
-        <option value="West Virginia">West Virginia (Cost Index: 88)</option>
-        <option value="Wisconsin">Wisconsin (Cost Index: 99)</option>
-        <option value="Wyoming">Wyoming (Cost Index: 95)</option>
-        <option value="Washington D.C.">Washington D.C. (Cost Index: 138)</option>
-      </select>
+      <!-- ── Autocomplete State Search ── -->
+      <div class="state-autocomplete-wrap" id="stateAutocompleteWrap">
+        <input
+          type="text"
+          id="stateInput"
+          placeholder="Type your state…"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="State search"
+          aria-autocomplete="list"
+          aria-controls="stateDropdown"
+        >
+        <span class="state-search-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
+        <div class="state-dropdown" id="stateDropdown" role="listbox"></div>
+      </div>
+      <!-- Hidden field stores the confirmed state value for calculate() -->
+      <input type="hidden" id="state" value="">
     </div>
   </div>
 
@@ -1271,6 +1325,106 @@ const STATE_INDEX = {
   "Wisconsin":99,"Wyoming":95,"Washington D.C.":138
 };
 
+const ALL_STATES = Object.keys(STATE_INDEX);
+
+// ── State Autocomplete ──
+(function() {
+  const input     = document.getElementById('stateInput');
+  const dropdown  = document.getElementById('stateDropdown');
+  const hidden    = document.getElementById('state');
+  let highlightIdx = -1;
+  let filteredStates = [];
+
+  function renderDropdown(states) {
+    filteredStates = states;
+    highlightIdx = -1;
+    if (!states.length) {
+      dropdown.innerHTML = '<div class="state-dropdown-empty">No states found</div>';
+      dropdown.classList.add('open');
+      return;
+    }
+    dropdown.innerHTML = states.map((s, i) =>
+      `<div class="state-dropdown-item" data-state="${s}" data-idx="${i}">
+        <span>${s}</span>
+        <span class="state-index-badge">Index: ${STATE_INDEX[s]}</span>
+      </div>`
+    ).join('');
+    dropdown.classList.add('open');
+
+    dropdown.querySelectorAll('.state-dropdown-item').forEach(item => {
+      item.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        selectState(this.dataset.state);
+      });
+    });
+  }
+
+  function selectState(name) {
+    input.value  = name;
+    hidden.value = name;
+    dropdown.classList.remove('open');
+    dropdown.innerHTML = '';
+    highlightIdx = -1;
+  }
+
+  function closeDropdown() {
+    dropdown.classList.remove('open');
+    dropdown.innerHTML = '';
+    highlightIdx = -1;
+    // If text doesn't exactly match a state, clear the hidden value
+    if (!STATE_INDEX[input.value]) {
+      hidden.value = '';
+    }
+  }
+
+  input.addEventListener('input', function() {
+    hidden.value = '';
+    const q = this.value.trim().toLowerCase();
+    if (!q) { closeDropdown(); return; }
+    const matches = ALL_STATES.filter(s => s.toLowerCase().startsWith(q));
+    const secondary = ALL_STATES.filter(s => !s.toLowerCase().startsWith(q) && s.toLowerCase().includes(q));
+    renderDropdown([...matches, ...secondary]);
+  });
+
+  input.addEventListener('focus', function() {
+    if (this.value.trim()) {
+      const q = this.value.trim().toLowerCase();
+      const matches = ALL_STATES.filter(s => s.toLowerCase().startsWith(q));
+      const secondary = ALL_STATES.filter(s => !s.toLowerCase().startsWith(q) && s.toLowerCase().includes(q));
+      renderDropdown([...matches, ...secondary]);
+    }
+  });
+
+  input.addEventListener('keydown', function(e) {
+    const items = dropdown.querySelectorAll('.state-dropdown-item');
+    if (!items.length) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      highlightIdx = Math.min(highlightIdx + 1, items.length - 1);
+      items.forEach((el, i) => el.classList.toggle('highlighted', i === highlightIdx));
+      items[highlightIdx] && items[highlightIdx].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      highlightIdx = Math.max(highlightIdx - 1, 0);
+      items.forEach((el, i) => el.classList.toggle('highlighted', i === highlightIdx));
+      items[highlightIdx] && items[highlightIdx].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (highlightIdx >= 0 && items[highlightIdx]) {
+        selectState(items[highlightIdx].dataset.state);
+      } else if (filteredStates.length === 1) {
+        selectState(filteredStates[0]);
+      }
+    } else if (e.key === 'Escape') {
+      closeDropdown();
+    }
+  });
+
+  input.addEventListener('blur', function() {
+    setTimeout(closeDropdown, 150);
+  });
+})();
+
 // Pill radio behavior
 document.querySelectorAll('#lifestyle-group .pill').forEach(pill => {
   pill.addEventListener('click', () => {
@@ -1309,14 +1463,10 @@ function calculate() {
   const hAdj = housingAdj[housing] || 0;
 
   // ── Step 3: meal plan add-on ──
-  // full: covered by meal plan — $0 extra
-  // partial: ~$120/mo supplemental groceries/dining out
-  // none: ~$320/mo full self-funded food (USDA moderate food plan)
   const mealAdj = { full: 0, partial: 120, none: 320 };
   const mAdj = mealAdj[mealplan] || 0;
 
-  // ── Step 4: lifestyle multiplier applied to the COL-scaled base + housing adj only ──
-  // (meal plan, transport, health, entertainment are fixed costs — not lifestyle-scaled)
+  // ── Step 4: lifestyle multiplier ──
   const lifestyleMult = { frugal: 0.82, moderate: 1.0, social: 1.28 };
   const lMult = lifestyleMult[lifestyle] || 1.0;
   const lifestyleBase = (scaledBase + hAdj) * lMult;
@@ -1328,25 +1478,15 @@ function calculate() {
   const healthCost = { basic: 0, gym: 30, premium: 80 };
   const hCost = healthCost[health] || 0;
 
-  // ── Step 6: build accurate line items ──
-  // Food = lifestyle-scaled base portion attributed to food (35%) + meal plan add-on
+  // ── Step 6: line items ──
   const foodCost = (lifestyleBase * 0.35) + mAdj;
-  // Personal/Misc = remaining lifestyle base after food (65% * 10% = ~6.5% for toiletries, laundry, etc.)
   const personalCost = lifestyleBase * 0.10;
 
-  // ── Step 7: monthly total = all line items summed ──
-  const monthly = foodCost + tCost + entertainment + hCost + personalCost
-                  + (lifestyleBase * 0.55); // remaining base (non-food, non-personal)
-
-  // Recalculate as clean sum to avoid floating point drift:
-  // lifestyleBase = food(35%) + personal(10%) + other(55%)
-  // monthly = lifestyleBase + mAdj + tCost + entertainment + hCost
+  // ── Step 7: totals ──
   const monthlyTotal = lifestyleBase + mAdj + tCost + entertainment + hCost;
 
-  // Line items that sum to monthlyTotal:
   const foodLine     = (lifestyleBase * 0.35) + mAdj;
   const personalLine = lifestyleBase * 0.10;
-  // subtotal = all named line items
   const subtotal = foodLine + tCost + entertainment + hCost + personalLine;
   const annual = monthlyTotal * 12;
 
