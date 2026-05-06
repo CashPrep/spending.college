@@ -1300,55 +1300,68 @@ function calculate() {
   const transport = document.getElementById('transport').value;
   const health = document.getElementById('health').value;
 
-  // National baseline monthly
+  // ── Step 1: cost-of-living scaled baseline (monthly) ──
   const BASE = 2500 / 12;
-  let monthly = BASE * (idx / 100);
+  const scaledBase = BASE * (idx / 100);
 
-  // Housing modifier (extra day-to-day costs)
+  // ── Step 2: housing modifier ──
   const housingAdj = { dorm: 0, offcampus: 40, commuter: -20 };
-  monthly += housingAdj[housing] || 0;
+  const hAdj = housingAdj[housing] || 0;
 
-  // Meal plan modifier (eating out / grocery budget added on top of base)
-  // partial: adds ~$120/mo for supplemental groceries/dining
-  // none: adds ~$320/mo reflecting full self-funded food costs (USDA moderate food plan)
+  // ── Step 3: meal plan add-on ──
+  // full: covered by meal plan — $0 extra
+  // partial: ~$120/mo supplemental groceries/dining out
+  // none: ~$320/mo full self-funded food (USDA moderate food plan)
   const mealAdj = { full: 0, partial: 120, none: 320 };
-  monthly += mealAdj[mealplan] || 0;
+  const mAdj = mealAdj[mealplan] || 0;
 
-  // Lifestyle multiplier
+  // ── Step 4: lifestyle multiplier applied to the COL-scaled base + housing adj only ──
+  // (meal plan, transport, health, entertainment are fixed costs — not lifestyle-scaled)
   const lifestyleMult = { frugal: 0.82, moderate: 1.0, social: 1.28 };
-  monthly *= lifestyleMult[lifestyle] || 1.0;
+  const lMult = lifestyleMult[lifestyle] || 1.0;
+  const lifestyleBase = (scaledBase + hAdj) * lMult;
 
-  // Entertainment
-  monthly += entertainment;
-
-  // Transport
+  // ── Step 5: fixed add-ons ──
   const transportCost = { walk: 0, transit: 60, rideshare: 80, car: 200 };
   const tCost = transportCost[transport] || 0;
-  monthly += tCost;
 
-  // Health
   const healthCost = { basic: 0, gym: 30, premium: 80 };
   const hCost = healthCost[health] || 0;
-  monthly += hCost;
 
-  // Breakdown estimates
-  const foodBase = (BASE * (idx/100) * (lifestyleMult[lifestyle]||1)) * 0.35 + (mealAdj[mealplan]||0);
-  const personal = monthly * 0.10;
-  const subtotal = monthly;
-  const annual = monthly * 12;
+  // ── Step 6: build accurate line items ──
+  // Food = lifestyle-scaled base portion attributed to food (35%) + meal plan add-on
+  const foodCost = (lifestyleBase * 0.35) + mAdj;
+  // Personal/Misc = remaining lifestyle base after food (65% * 10% = ~6.5% for toiletries, laundry, etc.)
+  const personalCost = lifestyleBase * 0.10;
+
+  // ── Step 7: monthly total = all line items summed ──
+  const monthly = foodCost + tCost + entertainment + hCost + personalCost
+                  + (lifestyleBase * 0.55); // remaining base (non-food, non-personal)
+
+  // Recalculate as clean sum to avoid floating point drift:
+  // lifestyleBase = food(35%) + personal(10%) + other(55%)
+  // monthly = lifestyleBase + mAdj + tCost + entertainment + hCost
+  const monthlyTotal = lifestyleBase + mAdj + tCost + entertainment + hCost;
+
+  // Line items that sum to monthlyTotal:
+  const foodLine     = (lifestyleBase * 0.35) + mAdj;
+  const personalLine = lifestyleBase * 0.10;
+  // subtotal = all named line items
+  const subtotal = foodLine + tCost + entertainment + hCost + personalLine;
+  const annual = monthlyTotal * 12;
 
   // Populate receipt
   document.getElementById('receipt-title').textContent = state + ' Student Budget';
   document.getElementById('receipt-subtitle').textContent = housing.charAt(0).toUpperCase()+housing.slice(1) + ' · ' + lifestyle.charAt(0).toUpperCase()+lifestyle.slice(1) + ' lifestyle';
-  document.getElementById('receipt-total-big').textContent = fmt(monthly);
+  document.getElementById('receipt-total-big').textContent = fmt(monthlyTotal);
   document.getElementById('r-state').textContent = state + ' — ' + idx;
-  document.getElementById('r-food').textContent = fmt(foodBase);
+  document.getElementById('r-food').textContent = fmt(foodLine);
   document.getElementById('r-transport').textContent = tCost === 0 ? 'Free' : fmt(tCost);
   document.getElementById('r-entertainment').textContent = entertainment === 0 ? 'None' : fmt(entertainment);
   document.getElementById('r-health').textContent = hCost === 0 ? 'Basic' : fmt(hCost);
-  document.getElementById('r-personal').textContent = fmt(personal);
+  document.getElementById('r-personal').textContent = fmt(personalLine);
   document.getElementById('r-subtotal').textContent = fmt(subtotal);
-  document.getElementById('r-monthly').textContent = fmt(monthly);
+  document.getElementById('r-monthly').textContent = fmt(monthlyTotal);
   document.getElementById('r-annual').textContent = fmt(annual) + ' / yr';
   document.getElementById('r-date').textContent = new Date().toLocaleDateString('en-US', {month:'long', year:'numeric'});
 
@@ -1362,7 +1375,7 @@ function calculate() {
     insight = `<strong>${state}</strong> sits near the national average (index ${idx}). A part-time campus job of ~10 hrs/week typically covers this budget comfortably.`;
   }
   if (lifestyle === 'social') {
-    insight += ` Your social lifestyle adds roughly <strong>${fmt(monthly * 0.22)}/mo</strong> vs. a frugal approach — worth planning for.`;
+    insight += ` Your social lifestyle adds roughly <strong>${fmt(monthlyTotal * 0.22)}/mo</strong> vs. a frugal approach — worth planning for.`;
   }
   document.getElementById('insight-text').innerHTML = insight;
 
@@ -1373,7 +1386,7 @@ function calculate() {
 
   // GA event
   if (typeof gtag !== 'undefined') {
-    gtag('event', 'calculate', { event_category: 'calculator', event_label: state, value: Math.round(monthly) });
+    gtag('event', 'calculate', { event_category: 'calculator', event_label: state, value: Math.round(monthlyTotal) });
   }
 }
 
