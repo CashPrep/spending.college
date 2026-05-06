@@ -213,6 +213,24 @@ details .detail-body{margin-top:20px;}
 .detail-body ul,.detail-body ol{padding-left:20px;display:flex;flex-direction:column;gap:8px;}
 .detail-body li{font-size:0.875rem;color:var(--secondary);line-height:1.6;}
 .detail-body a{color:var(--accent-light);text-decoration:underline;}
+/* STATE CALCULATOR PAGES GRID */
+.state-calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px;}
+@media(max-width:580px){.state-calc-grid{grid-template-columns:repeat(2,1fr);}}
+.state-calc-link{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  padding:12px 14px;
+  background:rgba(124,58,237,0.06);
+  border:1px solid var(--border-accent);
+  border-radius:var(--radius-sm);
+  text-decoration:none;
+  transition:border-color .2s,background .2s;
+}
+.state-calc-link:hover{border-color:rgba(124,58,237,0.6);background:rgba(124,58,237,0.12);}
+.state-calc-link span:first-child{font-size:0.85rem;font-weight:700;color:#fff;}
+.state-calc-link span:last-child{font-size:0.72rem;color:var(--accent-light);}
+/* BUDGET GUIDE GRID */
 .state-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px;}
 @media(max-width:480px){.state-grid{grid-template-columns:repeat(2,1fr);}}
 .state-link{
@@ -230,6 +248,30 @@ details .detail-body{margin-top:20px;}
 .state-link span:first-child{font-size:0.85rem;font-weight:600;color:#fff;}
 .state-link span:last-child{font-size:0.75rem;color:var(--muted);}
 .state-link.all-states span:first-child{color:var(--accent-light);}
+/* STATE SEARCH */
+.state-search-wrap{position:relative;margin-bottom:16px;}
+.state-search-input{
+  width:100%;
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  color:#fff;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.9rem;
+  padding:11px 16px 11px 40px;
+  outline:none;
+  transition:border-color .2s;
+}
+.state-search-input::placeholder{color:var(--muted);}
+.state-search-input:focus{border-color:var(--border-accent);}
+.state-search-icon{
+  position:absolute;
+  left:13px;top:50%;
+  transform:translateY(-50%);
+  color:var(--muted);
+  pointer-events:none;
+}
+.state-item-hidden{display:none !important;}
 .hero{
   max-width:760px;
   margin:0 auto;
@@ -323,7 +365,32 @@ document.addEventListener('click',function(e){if(!document.getElementById('navDr
 
 <div class="section" style="margin-bottom:80px;">
 
-  <!-- State guides -->
+  <!-- ===== STATE CALCULATOR PAGES (pre-filled) ===== -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-title-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polyline></svg>
+      </div>
+      College Budget Calculator by State
+    </div>
+    <p style="font-size:0.875rem;color:var(--secondary);margin-bottom:16px;">Search your state — each page pre-fills the calculator and shows a real cost of living breakdown for college students.</p>
+
+    <div class="state-search-wrap">
+      <svg class="state-search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input class="state-search-input" type="text" id="stateCalcSearch" placeholder="Search your state…" oninput="filterStateCalc(this.value)" autocomplete="off">
+    </div>
+
+    <div class="state-calc-grid" id="stateCalcGrid">
+      <a href="/california/" class="state-calc-link" data-state="california"><span>📍 California</span><span>Pre-filled calculator →</span></a>
+      <a href="/texas/" class="state-calc-link" data-state="texas"><span>📍 Texas</span><span>Pre-filled calculator →</span></a>
+      <a href="/florida/" class="state-calc-link" data-state="florida"><span>📍 Florida</span><span>Pre-filled calculator →</span></a>
+      <a href="/new-york/" class="state-calc-link" data-state="new york"><span>📍 New York</span><span>Pre-filled calculator →</span></a>
+      <a href="/massachusetts/" class="state-calc-link" data-state="massachusetts"><span>📍 Massachusetts</span><span>Pre-filled calculator →</span></a>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:14px;">More states coming soon.</p>
+  </div>
+
+  <!-- ===== STATE BUDGET GUIDES (detailed breakdown pages) ===== -->
   <div class="card">
     <div class="card-title">
       <div class="card-title-icon">
@@ -451,26 +518,4 @@ document.addEventListener('click',function(e){if(!document.getElementById('navDr
     <div class="detail-body">
       <p>These guides are written to give students simple, practical ideas for saving money, finding work, and using the College Cash tools. They are based on common patterns in student budgets, not any one school's rules.</p>
       <p>None of this is personal financial advice, legal advice, or tax advice. Always check details like tuition, fees, and financial aid on official school and government websites.</p>
-      <p>spending.college is an independent project and is not affiliated with any college, university, bank, or government agency. Contact: <a href="mailto:unbanked123@gmail.com">unbanked123@gmail.com</a></p>
-    </div>
-  </details>
-
-</div>
-
-<footer>
-  <div class="footer-links">
-    <a href="/">Calculator</a>
-    <a href="/jobs.html">Job Hours</a>
-    <a href="/find-jobs.html">Find Jobs</a>
-    <a href="/guides.html">Guides</a>
-    <a href="/faq.html">FAQ</a>
-    <a href="/privacy.html">Privacy</a>
-    <a href="/terms.html">Terms</a>
-    <a href="/contact.html">Contact</a>
-  </div>
-  <p class="footer-copy">&copy; 2025 spending.college — Information only. Not financial advice.</p>
-</footer>
-
-</div>
-</body>
-</html>
+      <p>spending.college is an independent project and is not affiliated with any college, university, bank, or government agency. Co
